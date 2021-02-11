@@ -34,14 +34,17 @@ public class IndexController {
     }
 
     @GetMapping("/execute")
-    public String execute(Model model, HttpServletRequest request) {
+    public ModelAndView execute(HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("execute");
         Cookie cookie = Arrays.stream(request.getCookies())
                 .filter(x -> StringUtils.equalsIgnoreCaseAndEmpty(x.getName(), "SELECTED_TASK"))
                 .findFirst()
                 .orElseThrow(SelectedTaskNotFound::new);
 
-        model.addAttribute("selectedTask", taskService.findById(Long.parseLong(cookie.getValue())));
-        return "execute";
+        indexComponent.setAuthorize(mav);
+        mav.addObject("selectedTask", taskService.findById(Long.parseLong(cookie.getValue())));
+
+        return mav;
     }
 
     @GetMapping("/login")

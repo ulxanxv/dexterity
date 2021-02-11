@@ -24,16 +24,14 @@ public class IndexControllerAdvice {
         rv.setExposeModelAttributes(false);
 
         ModelAndView mav = new ModelAndView(rv);
-
         indexComponent.setTaskList(mav);
         indexComponent.setAuthorize(mav);
 
-        mav.addObject("taskError", "error");
         return mav;
     }
 
     private void logError(RuntimeException ex) {
-        log.error(ex.getMessage());
+        log.error("Error : {}", ex.toString());
     }
 
 }
