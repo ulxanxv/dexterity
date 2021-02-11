@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<!--    <link rel="stylesheet" href="../static/css/index.css">-->
+    <link rel="stylesheet" th:href="@{css/index.css}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+    <th:block th:if="${taskError != null and taskError.toString().equals('error')}">
+        <script>
+            alert("Вы не ничего не выбрали!");
+        </script>
+    </th:block>
+</head>
+    <body>
+        <div class="limiter">
+            <div class="wrapper">
+<!--                Верхняя панель-->
+                <div class="top_panel">
+                    <div class="panel_section">
+<!--                    Логотип в верхней панели-->
+                        <div class="logo_container">
+                            <a class="logo_text" href="#">
+                                DEXTERITY
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel_section">
+<!--                    Фото профиля (выпадающий список)-->
+                        <div class="profile">
+                            <img th:if="${!user.toString().equals('anonymousUser')}" th:src="'/images/' + ${user.toString()} + '.jpg'" width="35" height="35" class="profile_photo"/>
+                            <img th:if="${user.toString().equals('anonymousUser')}" th:src="'/images/anon.jpg'" width="35" height="35" class="profile_photo"/>
+                        </div>
+                    </div>
+                </div>
+
+<!--                Блок задач-->
+                <div class="task_main fade_in_down">
+<!--                    Заголовок блока-->
+                    <div class="block_header">
+                        Задания
+                    </div>
+<!--                        Блок самого задания-->
+                    <div class="task_body">
+                        <th:block th:each="x : ${taskList}">
+                            <div class="task comp_hard" th:if="${x.getDifficult() == 1}">
+                                <a class="tb_text"
+                                   href="#"
+                                   th:text="${x.getShortDescription()}"
+                                   onclick="loadLongDescription(this)">
+                                </a>
+                            </div>
+                            <div class="task comp_difficult" th:if="${x.getDifficult() == 2}">
+                                <a class="tb_text"
+                                   href="#"
+                                   th:text="${x.getShortDescription()}"
+                                   onclick="loadLongDescription(this)">
+                                </a>
+                            </div>
+                            <div class="task comp_easy" th:if="${x.getDifficult() == 3}">
+                                <a class="tb_text"
+                                   href="#"
+                                   th:text="${x.getShortDescription()}"
+                                   onclick="loadLongDescription(this)">
+                                </a>
+                            </div>
+                        </th:block>
+                    </div>
+                    <div class="btn_container">
+                        <button class="btn">
+                            Предложить задание
+                        </button>
+                    </div>
+                </div>
+<!--                Блок описания задачи-->
+                <div class="description_main fade_in_down">
+<!--                    Заголовок блока-->
+                    <div class="block_header">
+                        Подробное описание
+                    </div>
+
+                    <div class="description_body">
+                        <div class="description">
+                            <p id="long_description" class="db_text">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="btn_container">
+                        <a href="/execute" class="btn" th:if="${!user.toString().equals('anonymousUser')}">
+                            Приступить к выполнению
+                        </a>
+                        <button class="btn_disable" th:if="${user.toString().equals('anonymousUser')}" disabled>
+                            Приступить к выполнению (неактивна)
+                        </button>
+                    </div>
+                </div>
+<!--                Нижняя панель-->
+                <div class="bottom_panel">
+                    <div class="panel_section">
+                        <span  class="bpanel_text">
+                            © Dexterity 2021
+                        </span>
+                    </div>
+                    <div class="panel_section">
+                        <a class="bpanel_text link" href="#">
+                            О разработчике
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script th:src="@{js/dload.js}"></script>
+    </body>
+</html>

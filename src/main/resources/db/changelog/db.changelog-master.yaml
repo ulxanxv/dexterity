@@ -1,0 +1,107 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ulxanxv
+      changes:
+        - createTable:
+            tableName: credential
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(255)
+        - insert:
+            tableName: credential
+            columns:
+              - column:
+                  name: login
+                  value: "Ulxanxv"
+              - column:
+                  name: password
+                  value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
+              - column:
+                  name: role
+                  value: "USER"
+  - changeSet:
+      id: 2
+      author: ulxanxv
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: short_description
+                  type: varchar(64)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: long_description
+                  type: varchar(1024)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: difficult
+                  type: int
+                  constraints:
+                    nullable: false
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: short_description
+                  value: "Перевести число в строку"
+              - column:
+                  name: long_description
+                  value: "Подробное описание перевода числа в строку"
+              - column:
+                  name: difficult
+                  value: 3
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: short_description
+                  value: "Вычислить палиндром"
+              - column:
+                  name: long_description
+                  value: "Подробное описание вычисления палиндрома"
+              - column:
+                  name: difficult
+                  value: 2
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: short_description
+                  value: "Найти минимальное число"
+              - column:
+                  name: long_description
+                  value: "Подробное описание минимального числа"
+              - column:
+                  name: difficult
+                  value: 1
