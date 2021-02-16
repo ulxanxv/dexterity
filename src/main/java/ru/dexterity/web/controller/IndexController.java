@@ -52,5 +52,10 @@ public class IndexController {
         return "log_in";
     }
 
+    @GetMapping("/sign")
+    public String signIn() {
+        return "sign_in";
+    }
+
 }
 

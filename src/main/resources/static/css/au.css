@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Playfair Display', serif;
 }
 
 /*
@@ -169,7 +168,7 @@
 }
 
 input[type=button], input[type=submit], input[type=reset]  {
-    font-size: 16px;
+    font-size: 14px;
 
     background-color: #262729;
     color: #e4e6e8;
@@ -234,12 +233,12 @@ input:focus {
 }
 
 input::placeholder {
-    font-size: 16px;
+    font-size: 14px;
     color: #696969;
 }
 
 .link {
-    font-size: 14px;
+    font-size: 16px;
 
     color: #e4e6e8;
 

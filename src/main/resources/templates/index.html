@@ -5,17 +5,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-<!--    <link rel="stylesheet" href="../static/css/index.css">-->
-    <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" href="../static/css/index.css">
+<!--    <link rel="stylesheet" th:href="@{css/index.css}">-->
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-
-    <th:block th:if="${taskError != null and taskError.toString().equals('error')}">
-        <script>
-            alert("Вы не ничего не выбрали!");
-        </script>
-    </th:block>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;400;500&display=swap" rel="stylesheet">
 </head>
     <body>
         <div class="limiter">
@@ -43,7 +38,7 @@
                 <div class="task_main fade_in_down">
 <!--                    Заголовок блока-->
                     <div class="block_header">
-                        Задания
+                        Список задач
                     </div>
 <!--                        Блок самого задания-->
                     <div class="task_body">
@@ -81,7 +76,7 @@
                 <div class="description_main fade_in_down">
 <!--                    Заголовок блока-->
                     <div class="block_header">
-                        Подробное описание
+                        Описание
                     </div>
 
                     <div class="description_body">
@@ -94,9 +89,9 @@
                         <a href="/execute" class="btn" th:if="${!user.toString().equals('anonymousUser')}">
                             Приступить к выполнению
                         </a>
-                        <button class="btn_disable" th:if="${user.toString().equals('anonymousUser')}" disabled>
+                        <a class="btn_disable" th:if="${user.toString().equals('anonymousUser')}">
                             Приступить к выполнению (неактивна)
-                        </button>
+                        </a>
                     </div>
                 </div>
 <!--                Нижняя панель-->
