@@ -120,6 +120,8 @@
 
     color: #e4e6e8;
 
+    text-transform: uppercase;
+
     height: 40px;
     user-select: none;
 
@@ -196,13 +198,13 @@
     Оформление текста для сложностей задачи
 */
 .comp_easy {
-    border-bottom: 2px solid rgba(0, 255, 14, 0.2);
+    border-right: 20px solid rgba(0, 255, 14, 0.2);
 }
 .comp_difficult {
-    border-bottom: 2px solid rgba(250, 196, 0, 0.2);
+    border-right: 20px solid rgba(250, 196, 0, 0.2);
 }
 .comp_hard {
-    border-bottom: 2px solid rgba(255, 0, 0, 0.2);
+    border-right: 20px solid rgba(255, 0, 0, 0.2);
 }
 
 /*
@@ -459,6 +461,10 @@
     -webkit-transition: all .1s ease-in-out;
     -moz-transition: all .1s ease-in-out;
     -o-transition: all .1s ease-in-out;
+}
+
+.btn_disable:hover {
+    user-select: none;
 }
 
 .btn:hover {
