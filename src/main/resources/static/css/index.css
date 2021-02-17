@@ -79,18 +79,80 @@
     padding-left: 10px;
     padding-right: 40px;
 
-    opacity: 0.5;
-
     transition: .1s;
 }
 
 .profile_photo {
+    width: 35px;
+    height: 35px;
+
+    margin-right: 5px;
+
     border-radius: 100px;
     -webkit-border-radius: 100px;
 }
 
-.profile:hover {
-    opacity: 1.0;
+/*
+    Выпадающее меню
+*/
+.profile ul,
+.profile ol {
+    list-style: none;
+}
+
+.profile > ul {
+    display: flex;
+    justify-content: center;
+}
+
+.profile > ul li a {
+    display: block;
+    font-size: 16px;
+
+    color: #e4e6e8;
+    text-decoration: none;
+}
+
+.profile > ul li {
+    position: relative;
+}
+
+.profile > ul li > a img {
+    position: absolute;
+    left: -2.75em;
+    top: -50%;
+}
+
+/*
+    Sub menu
+*/
+.profile li ul {
+    position: absolute;
+    left: -4em;
+    top: 2em;
+    width: 200px;
+
+    visibility: hidden;
+
+    transition: all 0.1s ease;
+}
+
+.profile li:hover > ul {
+    visibility: visible;
+}
+
+.profile li > ul li {
+    /*border: 1px solid #303133;*/
+}
+
+.profile li > ul li a {
+    padding: 10px;
+    background: #222222;
+}
+
+.profile li > ul li a:hover {
+    background: #262729;
+    color: #e4e6e8;
 }
 
 /*

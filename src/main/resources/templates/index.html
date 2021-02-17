@@ -27,10 +27,21 @@
                     </div>
                     <div class="panel_section">
 <!--                    Фото профиля (выпадающий список)-->
-                        <div class="profile">
-                            <img th:if="${!user.toString().equals('anonymousUser')}" th:src="'/images/' + ${user.toString()} + '.jpg'" width="35" height="35" class="profile_photo"/>
-                            <img th:if="${user.toString().equals('anonymousUser')}" th:src="'/images/anon.jpg'" width="35" height="35" class="profile_photo"/>
-                        </div>
+                        <nav class="profile">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        Ulxanxv
+                                        <img th:if="${!user.toString().equals('anonymousUser')}" th:src="'/images/' + ${user.toString()} + '.jpg'" class="profile_photo"/>
+                                        <img th:if="${user.toString().equals('anonymousUser')}" th:src="'/images/anon.jpg'" class="profile_photo"/>
+                                    </a>
+                                    <ul>
+                                        <li><a href="#">Личный кабинет</a></li>
+                                        <li><a href="/logout">Выйти</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
 
