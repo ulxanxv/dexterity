@@ -1,4 +1,4 @@
-package ru.dexterity.web.advice;
+package ru.dexterity.web.main;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import ru.dexterity.exception.SelectedTaskNotFound;
-import ru.dexterity.web.component.IndexComponent;
 
 @Slf4j
 @ControllerAdvice
 @RequiredArgsConstructor
-public class IndexControllerAdvice {
+public class MainControllerAdvice {
 
-    private final IndexComponent indexComponent;
+    private final MainComponent indexComponent;
 
     @ExceptionHandler(SelectedTaskNotFound.class)
     public ModelAndView handleSelectedTaskNotFound(SelectedTaskNotFound ex) {
@@ -25,13 +24,13 @@ public class IndexControllerAdvice {
 
         ModelAndView mav = new ModelAndView(rv);
         indexComponent.setTaskList(mav);
-        indexComponent.setAuthorize(mav);
+        indexComponent.setUsernameAndPhoto(mav);
 
         return mav;
     }
 
     private void logError(RuntimeException ex) {
-        log.error("Error : {}", ex.toString());
+        log.error("Error :: {}", ex.toString());
     }
 
 }

@@ -10,35 +10,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <div class="limiter">
         <div class="wrapper fade-in-down">
             <div class="form-content">
-<!--                Лого сайта в форме-->
                 <span id="title" class="title fade-in first">
                     <i class="title-text">
                         DEXTERITY
                     </i>
                 </span>
-<!--                Форма-->
-                <form>
-                    <input style="margin-bottom: 25px" type="email" id="email" class="fade-in second" name="login" placeholder="E-Mail">
-                    <input type="text" id="login" class="fade-in second" name="login" placeholder="Логин">
-                    <input type="password" id="password" class="fade-in second" name="password" placeholder="Пароль">
-                    <input type="password" id="c_password" class="fade-in second" name="password" placeholder="Подтверждение пароля">
+
+                <form action="/sign" method="post" th:object="${credential}">
+                    <input th:field="*{email}" style="margin-bottom: 25px" type="email" class="fade-in second" placeholder="E-Mail"/>
+                    <input th:field="*{login}" type="text" class="fade-in second" placeholder="Логин"/>
+                    <input th:field="*{password}" type="password" class="fade-in second" placeholder="Пароль"/>
+                    <input type="password" class="fade-in second" placeholder="Подтверждение пароля"/>
                     <input type="submit" class="fade-in second" value="Зарегистрироваться">
+
                     <div class="fade-in second">
                         <span class="link">
                             Уже имеете аккаунт?
                         </span>
-                        <a class="link link_a" href="log_in.html">
+                        <a class="link link_a" href="/login">
                             Войти
                         </a>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
 
-    <script src="../static/js/anim.js"></script>
 </body>
 </html>

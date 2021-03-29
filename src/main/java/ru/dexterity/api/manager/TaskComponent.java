@@ -1,10 +1,10 @@
-package ru.dexterity.logic;
+package ru.dexterity.api.manager;
 
 import ru.dexterity.dao.models.Task;
 
 import java.util.List;
 
-public interface TaskManager {
+public interface TaskComponent {
 
     List<Task> findAll();
 

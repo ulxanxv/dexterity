@@ -15,9 +15,14 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: login
-                  type: varchar(255)
+                  type: varchar(32)
                   constraints:
                     unique: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(128)
+                  constraints:
                     nullable: false
               - column:
                   name: password
@@ -26,10 +31,19 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: role
-                  type: varchar(255)
+                  type: varchar(32)
+              - column:
+                  name: image
+                  type: bytea
+              - column:
+                  name: file_name
+                  type: varchar(512)
         - insert:
             tableName: credential
             columns:
+              - column:
+                  name: email
+                  value: "marzpg80@gmail.com"
               - column:
                   name: login
                   value: "Ulxanxv"
@@ -39,6 +53,21 @@ databaseChangeLog:
               - column:
                   name: role
                   value: "USER"
+        - insert:
+            tableName: credential
+            columns:
+              - column:
+                  name: email
+                  value: "marzpg80@gmail.com"
+              - column:
+                  name: login
+                  value: "Qwerty"
+              - column:
+                  name: password
+                  value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
+              - column:
+                  name: role
+                  value: "ADMIN"
   - changeSet:
       id: 2
       author: ulxanxv

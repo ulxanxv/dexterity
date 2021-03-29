@@ -10,7 +10,7 @@ function loadLongDescription(target) {
         .trim()
 
     let url = serverUrl + ':' + port
-        + longDescriptionService + '?shortDescription='
+        + longDescriptionService + '?short_description='
         + chooseTask;
 
     request.open('GET', url);

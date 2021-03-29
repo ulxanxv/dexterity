@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll() // TODO fix permit all
                 .antMatchers("/login*")
                     .permitAll()
-                .antMatchers("/execute")
+                .antMatchers("/execute", "/file/*")
                     .authenticated()
                 .and()
                     .logout()

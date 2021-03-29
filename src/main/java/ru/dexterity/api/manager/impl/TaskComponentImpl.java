@@ -1,6 +1,5 @@
-package ru.dexterity.logic.impl;
+package ru.dexterity.api.manager.impl;
 
-import liquibase.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -8,14 +7,14 @@ import ru.dexterity.dao.models.Task;
 import ru.dexterity.dao.repositories.TaskRepository;
 import ru.dexterity.exception.TaskErrorCode;
 import ru.dexterity.exception.TaskNotFoundException;
-import ru.dexterity.logic.TaskManager;
+import ru.dexterity.api.manager.TaskComponent;
 
 import java.util.List;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class TaskManagerImpl implements TaskManager {
+public class TaskComponentImpl implements TaskComponent {
 
     private final TaskRepository taskRepository;
 

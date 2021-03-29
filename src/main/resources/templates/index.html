@@ -20,7 +20,7 @@
                     <div class="panel_section">
 <!--                    Логотип в верхней панели-->
                         <div class="logo_container">
-                            <a class="logo_text" href="#">
+                            <a class="logo_text" href="/">
                                 DEXTERITY
                             </a>
                         </div>
@@ -31,13 +31,18 @@
                             <ul>
                                 <li>
                                     <a href="#">
-                                        Ulxanxv
-                                        <img th:if="${!user.toString().equals('anonymousUser')}" th:src="'/images/' + ${user.toString()} + '.jpg'" class="profile_photo"/>
-                                        <img th:if="${user.toString().equals('anonymousUser')}" th:src="'/images/anon.jpg'" class="profile_photo"/>
+                                        <th:block th:text="${username.toString()}"></th:block>
+                                        <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
+                                        <img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" class="profile_photo"/>
                                     </a>
                                     <ul>
-                                        <li><a href="#">Личный кабинет</a></li>
-                                        <li><a href="/logout">Выйти</a></li>
+                                        <li><a href="/file/upload">Личный кабинет</a></li>
+                                        <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
+                                          <li><a href="/logout">Выйти</a></li>
+                                        </th:block>
+                                        <th:block th:if="${#strings.equals(username, 'anonymousUser')}">
+                                          <li><a href="/login">Войти</a></li>
+                                        </th:block>
                                     </ul>
                                 </li>
                             </ul>
@@ -53,32 +58,32 @@
                     </div>
 <!--                        Блок самого задания-->
                     <div class="task_body">
-                        <th:block th:each="x : ${taskList}">
-                            <div class="task comp_hard" th:if="${x.getDifficult() == 1}">
+                        <th:block th:each="task : ${taskList}">
+                            <div class="task comp_hard" th:if="${task.getDifficult() == 1}">
                                 <a class="tb_text"
                                    href="#"
-                                   th:text="${x.getShortDescription()}"
+                                   th:text="${task.getShortDescription()}"
                                    onclick="loadLongDescription(this)">
                                 </a>
                             </div>
-                            <div class="task comp_difficult" th:if="${x.getDifficult() == 2}">
+                            <div class="task comp_difficult" th:if="${task.getDifficult() == 2}">
                                 <a class="tb_text"
                                    href="#"
-                                   th:text="${x.getShortDescription()}"
+                                   th:text="${task.getShortDescription()}"
                                    onclick="loadLongDescription(this)">
                                 </a>
                             </div>
-                            <div class="task comp_easy" th:if="${x.getDifficult() == 3}">
+                            <div class="task comp_easy" th:if="${task.getDifficult() == 3}">
                                 <a class="tb_text"
                                    href="#"
-                                   th:text="${x.getShortDescription()}"
+                                   th:text="${task.getShortDescription()}"
                                    onclick="loadLongDescription(this)">
                                 </a>
                             </div>
                         </th:block>
                     </div>
                     <div class="btn_container">
-                        <a class="btn">
+                        <a href="#" class="btn">
                             Предложить задание
                         </a>
                     </div>
@@ -97,10 +102,10 @@
                         </div>
                     </div>
                     <div class="btn_container">
-                        <a href="/execute" class="btn" th:if="${!user.toString().equals('anonymousUser')}">
+                        <a href="/execute" class="btn" th:if="${!username.toString().equals('anonymousUser')}">
                             Приступить к выполнению
                         </a>
-                        <a class="btn_disable" th:if="${user.toString().equals('anonymousUser')}">
+                        <a class="btn_disable" th:if="${username.toString().equals('anonymousUser')}">
                             Приступить к выполнению (неактивна)
                         </a>
                     </div>

@@ -16,17 +16,33 @@
                 <div class="panel_section">
                     <!--                    Логотип в верхней панели-->
                     <div class="logo_container">
-                        <a class="logo_text" href="#">
+                        <a class="logo_text" href="/">
                             DEXTERITY
                         </a>
                     </div>
                 </div>
                 <div class="panel_section">
                     <!--                    Фото профиля (выпадающий список)-->
-                    <div class="profile">
-                        <img th:if="${!user.toString().equals('anonymousUser')}" th:src="'/images/' + ${user.toString()} + '.jpg'" width="35" height="35" class="profile_photo"/>
-                        <img th:if="${user.toString().equals('anonymousUser')}" th:src="'/images/anon.jpg'" width="35" height="35" class="profile_photo"/>
-                    </div>
+                    <nav class="profile">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <th:block th:text="${username.toString()}"></th:block>
+                                    <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
+                                    <img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" class="profile_photo"/>
+                                </a>
+                                <ul>
+                                    <li><a href="/file/upload">Личный кабинет</a></li>
+                                    <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
+                                        <li><a href="/logout">Выйти</a></li>
+                                    </th:block>
+                                    <th:block th:if="${#strings.equals(username, 'anonymousUser')}">
+                                        <li><a href="/login">Войти</a></li>
+                                    </th:block>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <div class="execute_main fade_in_down">

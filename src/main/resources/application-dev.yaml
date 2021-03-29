@@ -1,17 +1,20 @@
-## PostgreSQL
 spring:
+## PostgreSQL
   datasource:
     url: "jdbc:postgresql://localhost:5432/dexterity"
-    username: "postgres"
-    password: "1234"
+    username: postgres
+    password: 1234
     driver-class-name: org.postgresql.Driver
+## Liquibase
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
-  resources:
-    cache:
-      cachecontrol:
-        no-cache: true
+## Web
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          no-cache: true
   thymeleaf:
     cache: false
 
@@ -26,3 +29,8 @@ server:
   error:
     whitelabel:
       enabled: false
+
+## Properties
+upload:
+  path: src/main/resources/static/images/
+  apath: src\main\resources\static\images
