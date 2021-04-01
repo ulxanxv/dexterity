@@ -32,46 +32,18 @@ databaseChangeLog:
               - column:
                   name: role
                   type: varchar(32)
+                  constraints:
+                    nullable: false
               - column:
                   name: image
                   type: bytea
+                  constraints:
+                    nullable: true
               - column:
                   name: file_name
                   type: varchar(512)
-        - insert:
-            tableName: credential
-            columns:
-              - column:
-                  name: email
-                  value: "marzpg80@gmail.com"
-              - column:
-                  name: login
-                  value: "Ulxanxv"
-              - column:
-                  name: password
-                  value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
-              - column:
-                  name: role
-                  value: "USER"
-        - insert:
-            tableName: credential
-            columns:
-              - column:
-                  name: email
-                  value: "marzpg80@gmail.com"
-              - column:
-                  name: login
-                  value: "Qwerty"
-              - column:
-                  name: password
-                  value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
-              - column:
-                  name: role
-                  value: "ADMIN"
-  - changeSet:
-      id: 2
-      author: ulxanxv
-      changes:
+                  constraints:
+                    nullable: true
         - createTable:
             tableName: task
             columns:
@@ -98,6 +70,121 @@ databaseChangeLog:
                   type: int
                   constraints:
                     nullable: false
+        - createTable:
+            tableName: task_test
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: task_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: FK_task_test_task
+                    references: task(id)
+                    unique: true
+                    nullable: false
+              - column:
+                  name: test_code
+                  type: varchar(32768)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_code
+                  type: varchar(32768)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: task_rating
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: credential_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: FK_credential_id
+                    references: credential(id)
+                    nullable: false
+              - column:
+                  name: task_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: FK_task_rating_task
+                    references: task(id)
+                    nullable: false
+              - column:
+                  name: solution
+                  type: varchar(32768)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: brevity
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rapidity
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: resource_consumption
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_score
+                  type: double
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            columnNames: credential_id, task_id
+            constraintName: UNIQUE_TASK_RATING_credential_id_task_id
+            tableName: task_rating
+  - changeSet:
+      id: 2
+      author: ulxanxv
+      changes:
+        - insert:
+            tableName: credential
+            columns:
+              - column:
+                  name: email
+                  value: "marzpg80@gmail.com"
+              - column:
+                  name: login
+                  value: "Ulxanxv"
+              - column:
+                  name: password
+                  value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
+              - column:
+                  name: role
+                  value: "USER"
+        - insert:
+            tableName: credential
+            columns:
+              - column:
+                  name: email
+                  value: "marzpg800@gmail.com"
+              - column:
+                  name: login
+                  value: "Qwerty"
+              - column:
+                  name: password
+                  value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
+              - column:
+                  name: role
+                  value: "ADMIN"
         - insert:
             tableName: task
             columns:

@@ -425,50 +425,6 @@
 }
 
 /*
-    Анимация спуска
-*/
-.fade_in_down {
-    animation-name: fade_in_down;
-    -webkit-animation-name: fade_in_down;
-
-    animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-
-    animation-fill-mode: both;
-    -webkit-animation-fill-mode: both;
-}
-
-@keyframes fade_in_down {
-    0% {
-        opacity: 0;
-
-        transform: translate3d(0, -100%, 0);
-        -webkit-transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-
-        transform: none;
-        -webkit-transform: none;
-    }
-}
-
-@-webkit-keyframes fade_in_down {
-    0% {
-        opacity: 0;
-
-        transform: translate3d(0, -100%, 0);
-        -webkit-transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-
-        transform: none;
-        -webkit-transform: none;
-    }
-}
-
-/*
     Стиль для кнопки
 */
 

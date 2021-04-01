@@ -70,98 +70,19 @@
 .title-text {
     color: #e4e6e8;
 
+    text-decoration: none;
+
     font-style: normal;
     letter-spacing: 5px;
-
-    user-select: none;
 }
 
-.fade-in-down {
-    animation-name: fade-in-down;
-    -webkit-animation-name: fade-in-down;
+.info-about-register {
+    padding: 10px 30px;
+    margin: 10px 0px;
 
-    animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-
-    animation-fill-mode: both;
-    -webkit-animation-fill-mode: both;
-}
-
-/*
-    Fade in — анимация
-*/
-@-webkit-keyframes fade-in-down {
-    0% {
-        opacity: 0;
-
-        transform: translate3d(0, -100%, 0);
-        -webkit-transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-
-        transform: none;
-        -webkit-transform: none;
-    }
-}
-
-@keyframes fade-in-down {
-    0% {
-        opacity: 0;
-
-        transform: translate3d(0, -100%, 0);
-        -webkit-transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        opacity: 1;
-
-        transform: none;
-        -webkit-transform: none;
-    }
-}
-
-@-webkit-keyframes fade-in { from { opacity:0; } to { opacity:1; } }
-@-moz-keyframes fade-in { from { opacity:0; } to { opacity:1; } }
-@keyframes fade-in { from { opacity:0; } to { opacity:1; } }
-
-.fade-in {
-    opacity:0;
-
-    animation: fade-in ease-in 1;
-    -webkit-animation: fade-in ease-in 1;
-    -moz-animation: fade-in ease-in 1;
-
-    animation-fill-mode: forwards;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-fill-mode: forwards;
-
-    animation-duration: 1s;
-    -webkit-animation-duration: 1s;
-    -moz-animation-duration: 1s;
-}
-
-.fade-in.first {
-    animation-delay: 0.4s;
-    -webkit-animation-delay: 0.4s;
-    -moz-animation-delay: 0.4s;
-}
-
-.fade-in.second {
-    animation-delay: 0.6s;
-    -webkit-animation-delay: 0.6s;
-    -moz-animation-delay: 0.6s;
-}
-
-.fade-in.third {
-    animation-delay: 0.8s;
-    -webkit-animation-delay: 0.8s;
-    -moz-animation-delay: 0.8s;
-}
-
-.fade-in.fourth {
-    animation-delay: 1s;
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
+    background-color: darkred;
+    border: 1px solid #222222;
+    color: white;
 }
 
 input[type=button], input[type=submit], input[type=reset]  {

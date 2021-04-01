@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.dexterity.auth.AuthException.AuthError;
 import ru.dexterity.dao.models.Credential;
 
 @Slf4j
@@ -17,22 +19,32 @@ public class AuthController {
     private final AuthComponent authComponent;
 
     @GetMapping("/login")
-    public String loginPage() {
-        return "log";
+    public String loginPage(@RequestParam(value = "error", required = false) Boolean error, Model model) {
+        if (error != null && error) {
+            model.addAttribute("authError", new AuthException(AuthError.CREDENTIAL_INCORRECT, "Неверные данные"));
+        }
+
+        return "login";
     }
 
     @GetMapping("/sign")
     public String signPage(Model model) {
-        Credential credential = new Credential();
-        model.addAttribute("credential", credential);
-
+        model.addAttribute("credential", new Credential());
         return "sign";
     }
 
     @PostMapping("/sign")
-    public String sign(@ModelAttribute("credential") Credential credential) {
-      log.info(authComponent.registerUser(credential).toString());
-      return "redirect:/login";
+    public String sign(@ModelAttribute("credential") Credential credential, Model model) {
+      try {
+          authComponent.registerUser(credential);
+          return "redirect:/login";
+      } catch (AuthException exception) {
+          log.error("USER registration :: {}", exception.getDescription());
+
+          model.addAttribute("credential", credential);
+          model.addAttribute("authError", exception);
+          return "sign";
+      }
     }
 
 }

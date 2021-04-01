@@ -11,9 +11,9 @@ import ru.dexterity.exception.SelectedTaskNotFound;
 @Slf4j
 @ControllerAdvice
 @RequiredArgsConstructor
-public class MainControllerAdvice {
+public class IndexControllerAdvice {
 
-    private final MainComponent indexComponent;
+    private final IndexComponent indexComponent;
 
     @ExceptionHandler(SelectedTaskNotFound.class)
     public ModelAndView handleSelectedTaskNotFound(SelectedTaskNotFound ex) {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import ru.dexterity.dao.models.Credential;
 import ru.dexterity.dao.repositories.CredentialRepository;
 
-@Service("userDetails")
+@Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -28,4 +28,3 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
 }
-

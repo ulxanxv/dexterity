@@ -5,10 +5,6 @@ spring:
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
-## Liquibase
-  liquibase:
-    enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yaml
 ## Web
   web:
     resources:
@@ -17,11 +13,14 @@ spring:
           no-cache: true
   thymeleaf:
     cache: false
+  jpa:
+    hibernate:
+      ddl-auto: none
 
-## DDL
-jpa:
-  hibernate:
-    ddl-auto: none
+## Liquibase
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
 
 ## Server
 server:

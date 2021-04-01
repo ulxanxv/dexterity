@@ -47,11 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             .usernameParameter("login")
                             .passwordParameter("password")
                         .defaultSuccessUrl("/", true)
-                        .failureUrl("/login")
+                        .failureUrl("/login?error=true")
                 .and()
                     .csrf()
                         .disable();
     }
 
 }
-

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class MainComponent {
+public class IndexComponent {
 
     private final TaskComponent taskComponent;
     private final CredentialRepository credentialRepository;

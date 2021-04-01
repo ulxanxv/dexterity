@@ -3,6 +3,7 @@ package ru.dexterity.dao.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,6 +13,9 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne(mappedBy = "task")
+    private TaskTest taskTest;
 
     @Column(unique = true, nullable = false)
     private String shortDescription;

@@ -13,20 +13,21 @@
 <body>
 
     <div class="limiter">
-        <div class="wrapper fade-in-down">
+        <div class="wrapper">
             <div class="form-content">
-                <span id="title" class="title fade-in first">
-                    <i class="title-text">
+                <span id="title" class="title">
+                    <a href="/" class="title-text">
                         DEXTERITY
-                    </i>
+                    </a>
                 </span>
 
                 <form method="post" action="/login">
-                    <input type="text" class="fade-in second" name="login" placeholder="Логин">
-                    <input type="password" class="fade-in second" name="password" placeholder="Пароль">
-                    <input type="submit" class="fade-in second" value="Войти">
+                    <input type="text" name="login" placeholder="Логин">
+                    <input type="password" name="password" placeholder="Пароль">
+                    <p th:if="${authError != null}" th:text="${authError.getDescription()}" class="info-about-register"></p>
+                    <input type="submit" value="Войти">
 
-                    <div class="text-c fade-in second">
+                    <div class="text-c">
                         <span class="link">
                             Не имеете аккаунта?
                         </span>

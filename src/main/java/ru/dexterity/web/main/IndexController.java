@@ -12,10 +12,10 @@ import ru.dexterity.web.domain.SelectedTask;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class MainController {
+public class IndexController {
 
     private final TaskComponent taskComponent;
-    private final MainComponent mainComponent;
+    private final IndexComponent indexComponent;
 
     @Autowired
     private SelectedTask selectedTask;
@@ -24,8 +24,8 @@ public class MainController {
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("index");
 
-        mainComponent.setUsernameAndPhoto(mav);
-        mainComponent.setTaskList(mav);
+        indexComponent.setUsernameAndPhoto(mav);
+        indexComponent.setTaskList(mav);
 
         return mav;
     }
@@ -33,7 +33,7 @@ public class MainController {
     @GetMapping("/execute")
     public ModelAndView execute() {
         ModelAndView mav = new ModelAndView("execute");
-        mainComponent.setUsernameAndPhoto(mav);
+        indexComponent.setUsernameAndPhoto(mav);
 
         mav.addObject("selectedTask", taskComponent.findById(selectedTask.getSelectedTask()));
         return mav;

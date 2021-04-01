@@ -8,5 +8,7 @@ import org.springframework.web.context.annotation.SessionScope;
 @Component
 @SessionScope
 public class SelectedTask {
+
     private Long selectedTask;
+
 }
