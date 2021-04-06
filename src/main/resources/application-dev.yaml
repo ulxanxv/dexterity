@@ -31,5 +31,5 @@ server:
 
 ## Properties
 upload:
-  path: src/main/resources/static/images/
-  apath: src\main\resources\static\images
+  images-path: src/main/resources/static/images/
+  resources-path: src\main\resources\static\images

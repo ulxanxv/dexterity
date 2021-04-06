@@ -17,22 +17,26 @@ public class AuthComponent {
     private final CredentialRepository credentialRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public Credential registerUser(Credential credential) {
+    public void registerUser(Credential credential) {
         if (Strings.isEmpty(credential.getLogin()) || Strings.isEmpty(credential.getPassword())) {
-            throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Данные некорректны");
+            throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Данные некорректны.");
         }
 
         if (credentialRepository.findByLogin(credential.getLogin()).isPresent()) {
-            throw new AuthException(AuthError.CREDENTIAL_EXIST, "Такой пользователь уже существует");
+            throw new AuthException(AuthError.CREDENTIAL_EXIST, "Такой пользователь уже существует.");
         }
 
         if ((credential.getEmail() != null && credentialRepository.findByEmail(credential.getEmail()).isPresent())) {
-            throw new AuthException(AuthError.CREDENTIAL_EXIST, "Пользователь с таким E-Mail уже существует");
+            throw new AuthException(AuthError.CREDENTIAL_EXIST, "Пользователь с таким E-Mail уже существует.");
         }
 
         credential.setRole("USER");
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
 
-        return credentialRepository.save(credential);
+        try {
+            credentialRepository.save(credential);
+        } catch (Exception exception) {
+            throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Данные некорректны.");
+        }
     }
 }

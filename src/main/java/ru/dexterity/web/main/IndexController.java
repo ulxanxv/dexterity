@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ru.dexterity.api.manager.TaskComponent;
+import ru.dexterity.api.TaskComponent;
 import ru.dexterity.web.domain.SelectedTask;
 
 @Slf4j
@@ -17,8 +17,7 @@ public class IndexController {
     private final TaskComponent taskComponent;
     private final IndexComponent indexComponent;
 
-    @Autowired
-    private SelectedTask selectedTask;
+    private final SelectedTask selectedTask;
 
     @GetMapping("/")
     public ModelAndView index() {

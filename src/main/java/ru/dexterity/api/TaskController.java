@@ -2,13 +2,9 @@ package ru.dexterity.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.dexterity.api.manager.TaskComponent;
 import ru.dexterity.dao.models.Task;
 import ru.dexterity.web.domain.SelectedTask;
 
@@ -18,16 +14,53 @@ import ru.dexterity.web.domain.SelectedTask;
 public class TaskController {
 
     private final TaskComponent taskComponent;
-
-    @Autowired
-    private SelectedTask selectedTask;
+    private final SelectedTask selectedTask;
 
     @GetMapping("/task")
-    @ResponseStatus(HttpStatus.OK)
-    public Task taskByShortDescription(@RequestParam(name = "short_description") String shortDescription) {
-        Task task = taskComponent.findByShortDescription(shortDescription);
-        selectedTask.setSelectedTask(task.getId());
-        return task;
+    public TaskResponse taskByShortDescription(@RequestParam(name = "short_description") String shortDescription) {
+        try {
+            Task task = taskComponent.findByShortDescription(shortDescription);
+            selectedTask.setSelectedTask(task.getId());
+            return new TaskResponse("ok", task.getShortDescription(), task.getLongDescription(), task.getDifficult());
+        } catch (TaskNotFoundException exception) {
+            return new TaskResponse("not_found");
+        }
+    }
+
+    public static class TaskResponse {
+
+        private final String status;
+
+        private String shortDescription;
+        private String longDescription;
+        private int difficult;
+
+        public TaskResponse(String status) {
+            this.status = status;
+        }
+
+        public TaskResponse(String status, String shortDescription, String longDescription, int difficult) {
+            this.status = status;
+            this.shortDescription = shortDescription;
+            this.longDescription = longDescription;
+            this.difficult = difficult;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public String getShortDescription() {
+            return shortDescription;
+        }
+
+        public String getLongDescription() {
+            return longDescription;
+        }
+
+        public int getDifficult() {
+            return difficult;
+        }
     }
 
 }

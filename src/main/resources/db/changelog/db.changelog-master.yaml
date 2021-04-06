@@ -41,7 +41,7 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: file_name
-                  type: varchar(512)
+                  type: varchar(1024)
                   constraints:
                     nullable: true
         - createTable:

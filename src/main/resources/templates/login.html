@@ -25,7 +25,7 @@
                     <input type="text" name="login" placeholder="Логин">
                     <input type="password" name="password" placeholder="Пароль">
                     <p th:if="${authError != null}" th:text="${authError.getDescription()}" class="info-about-register"></p>
-                    <input type="submit" value="Войти">
+                    <input style="cursor: pointer;" type="submit" value="Войти">
 
                     <div class="text-c">
                         <span class="link">
@@ -40,7 +40,5 @@
             </div>
         </div>
     </div>
-
-    <script src="../static/js/anim.js"></script>
 </body>
 </html>

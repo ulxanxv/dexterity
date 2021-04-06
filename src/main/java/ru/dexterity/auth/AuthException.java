@@ -18,7 +18,7 @@ public final class AuthException extends RuntimeException {
         return description;
     }
 
-    public static enum AuthError {
+    public enum AuthError {
         CREDENTIAL_EXIST,
         CREDENTIAL_INCORRECT,
     }

@@ -5,9 +5,8 @@ import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
-import ru.dexterity.api.manager.TaskComponent;
+import ru.dexterity.api.TaskComponent;
 import ru.dexterity.dao.models.Credential;
 import ru.dexterity.dao.repositories.CredentialRepository;
 

@@ -1,25 +1,21 @@
-let serverUrl = 'http://localhost';
-let port = 8080;
 
-let longDescriptionService = '/task'
+/*
+  Получение подробного описания задачи
+ */
+$('.tb_text').on('click', function (e) {
 
-function loadLongDescription(target) {
-    let request = new XMLHttpRequest();
-    let chooseTask = target.textContent
-        .replace(/\s+/g, ' ')
-        .trim()
+    $.ajax({
+       type: 'GET',
+       url: '/task',
+       data: {
+           short_description: e.currentTarget.innerText.replace(/\s+/g, ' ').trim()
+       },
 
-    let url = serverUrl + ':' + port
-        + longDescriptionService + '?short_description='
-        + chooseTask;
+       success: function (data) {
+         if (data.status === 'ok') {
+           $('#long_description').text(data.longDescription);
+         }
+       }
+   })
 
-    request.open('GET', url);
-    request.send();
-
-    request.onload = function () {
-        document
-            .getElementById('long_description')
-            .innerHTML = JSON.parse(request.response)['longDescription'];
-    }
-
-}
+})

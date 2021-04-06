@@ -1,4 +1,4 @@
-package ru.dexterity.exception;
+package ru.dexterity.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,5 +8,9 @@ import lombok.Data;
 public class TaskNotFoundException extends RuntimeException {
 
     private TaskErrorCode errorCode;
+
+    public enum TaskErrorCode {
+        TASK_NOT_FOUND
+    }
 
 }

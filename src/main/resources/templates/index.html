@@ -61,25 +61,13 @@
                     <div class="task_body">
                         <th:block th:each="task : ${taskList}">
                             <div class="task comp_hard" th:if="${task.getDifficult() == 1}">
-                                <a class="tb_text"
-                                   href="#"
-                                   th:text="${task.getShortDescription()}"
-                                   onclick="loadLongDescription(this)">
-                                </a>
+                                <a class="tb_text" th:text="${task.getShortDescription()}"></a>
                             </div>
                             <div class="task comp_difficult" th:if="${task.getDifficult() == 2}">
-                                <a class="tb_text"
-                                   href="#"
-                                   th:text="${task.getShortDescription()}"
-                                   onclick="loadLongDescription(this)">
-                                </a>
+                                <a class="tb_text" th:text="${task.getShortDescription()}"></a>
                             </div>
                             <div class="task comp_easy" th:if="${task.getDifficult() == 3}">
-                                <a class="tb_text"
-                                   href="#"
-                                   th:text="${task.getShortDescription()}"
-                                   onclick="loadLongDescription(this)">
-                                </a>
+                                <a class="tb_text" th:text="${task.getShortDescription()}"></a>
                             </div>
                         </th:block>
                     </div>
@@ -129,6 +117,7 @@
             </div>
         </div>
 
-        <script th:src="@{js/dload.js}"></script>
+        <script type="text/javascript" th:src="@{js/jquery.js}"></script>
+        <script type="text/javascript" th:src="@{js/dload.js}"></script>
     </body>
 </html>

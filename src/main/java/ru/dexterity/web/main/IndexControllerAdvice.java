@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import ru.dexterity.exception.SelectedTaskNotFound;
+import ru.dexterity.web.domain.SelectedTaskNotFound;
 
 @Slf4j
 @ControllerAdvice

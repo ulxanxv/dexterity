@@ -1,4 +1,4 @@
-package ru.dexterity.web.main;
+package ru.dexterity.web.attach;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -250,6 +250,8 @@
     color: #e4e6e8;
     text-decoration: none;
     transition: all .1s linear;
+
+    cursor: pointer;
 }
 
 .tb_text:hover {

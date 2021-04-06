@@ -1,4 +1,4 @@
-package ru.dexterity.web.main;
+package ru.dexterity.web.attach;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,11 +10,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import ru.dexterity.dao.models.Credential;
 import ru.dexterity.dao.repositories.CredentialRepository;
+import ru.dexterity.security.AuthorizationAttributes;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 @Slf4j
@@ -22,36 +26,32 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FileComponent {
 
-    @Value("${upload.path}")
+    @Value("${upload.images-path}")
     private String uploadPath;
 
     private final CredentialRepository credentialRepository;
+    private final AuthorizationAttributes authorizationAttributes;
 
-    public void uploadFile(MultipartFile multipartFile) throws IOException {
-        String username = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        Credential credential = credentialRepository.findByLogin(username).orElse(null);
+    public void uploadFile(MultipartFile file) throws IOException {
+        Credential credential = authorizationAttributes.getCredential();
 
-        if (multipartFile != null && credential != null) {
+        if (file != null && credential != null) {
+
             if (!Strings.isEmpty(credential.getFileName())) {
-                new File(uploadPath + credential.getFileName()).delete();
-                log.info("FILE DELETED");
+                Files.deleteIfExists(Paths.get(uploadPath + credential.getFileName()));
             }
 
-            File uploadDir = new File(uploadPath);
-            if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+            Path path = Paths.get(uploadPath);
+            if (Files.notExists(path)) {
+                Files.createDirectory(path);
             }
 
             String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + multipartFile.getOriginalFilename();
-
-            BufferedOutputStream stream =
-                new BufferedOutputStream(new FileOutputStream(new File(uploadPath + resultFilename)));
-            stream.write(multipartFile.getBytes());
-            stream.close();
+            String resultFilename = uuidFile + file.getOriginalFilename();
+            Files.write(Paths.get(uploadPath + resultFilename), file.getBytes());
 
             credential.setFileName(resultFilename);
-            credential.setImage(multipartFile.getBytes());
+            credential.setImage(file.getBytes());
             credentialRepository.save(credential);
         }
     }
