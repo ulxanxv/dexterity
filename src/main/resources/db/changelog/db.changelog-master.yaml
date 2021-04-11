@@ -55,6 +55,11 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
+                  name: in_moderation
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
                   name: short_description
                   type: varchar(64)
                   constraints:
@@ -66,29 +71,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: difficult
-                  type: int
-                  constraints:
-                    nullable: false
-        - createTable:
-            tableName: task_test
-            columns:
-              - column:
-                  name: id
-                  type: bigint
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: task_id
-                  type: bigint
-                  constraints:
-                    foreignKeyName: FK_task_test_task
-                    references: task(id)
-                    unique: true
-                    nullable: false
-              - column:
                   name: test_code
                   type: varchar(32768)
                   constraints:
@@ -96,6 +78,16 @@ databaseChangeLog:
               - column:
                   name: start_code
                   type: varchar(32768)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: solution_code
+                  type: varchar(32768)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: difficult
+                  type: int
                   constraints:
                     nullable: false
         - createTable:
@@ -189,11 +181,23 @@ databaseChangeLog:
             tableName: task
             columns:
               - column:
+                  name: in_moderation
+                  value: false
+              - column:
                   name: short_description
                   value: "Перевести число в строку"
               - column:
                   name: long_description
                   value: "Подробное описание перевода числа в строку"
+              - column:
+                  name: test_code
+                  value: "---"
+              - column:
+                  name: start_code
+                  value: "---"
+              - column:
+                  name: solution_code
+                  value: "---"
               - column:
                   name: difficult
                   value: 3
@@ -201,11 +205,23 @@ databaseChangeLog:
             tableName: task
             columns:
               - column:
+                  name: in_moderation
+                  value: false
+              - column:
                   name: short_description
                   value: "Вычислить палиндром"
               - column:
                   name: long_description
                   value: "Подробное описание вычисления палиндрома"
+              - column:
+                  name: test_code
+                  value: "---"
+              - column:
+                  name: start_code
+                  value: "---"
+              - column:
+                  name: solution_code
+                  value: "---"
               - column:
                   name: difficult
                   value: 2
@@ -213,11 +229,23 @@ databaseChangeLog:
             tableName: task
             columns:
               - column:
+                  name: in_moderation
+                  value: false
+              - column:
                   name: short_description
                   value: "Найти минимальное число"
               - column:
                   name: long_description
                   value: "Подробное описание минимального числа"
+              - column:
+                  name: test_code
+                  value: "---"
+              - column:
+                  name: start_code
+                  value: "---"
+              - column:
+                  name: solution_code
+                  value: "---"
               - column:
                   name: difficult
                   value: 1

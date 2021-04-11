@@ -14,13 +14,15 @@ public class AuthorizationAttributes {
     private final CredentialRepository credentialRepository;
 
     public Credential getCredential() {
-        String username = ((User) SecurityContextHolder.
-            getContext().
-            getAuthentication().
-            getPrincipal()
-        ).getUsername();
+        Object principal = SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal();
 
-        return credentialRepository.findByLogin(username).orElse(null);
+        if (principal.toString().equals("anonymousUser")) {
+            return null;
+        }
+
+        return credentialRepository.findByLogin(((User) principal).getUsername()).orElse(null);
     }
 
 }

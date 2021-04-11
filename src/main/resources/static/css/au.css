@@ -2,6 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'PT Mono', monospace;
+}
+
+::-webkit-scrollbar {
+    width: 0;
 }
 
 /*
@@ -13,7 +18,7 @@
 
     padding-top: 25px;
 
-    background-color: #303133;
+    background-color: #ffffff;
     background-size: cover;
 }
 
@@ -43,7 +48,7 @@
     width: 425px;
     padding: 50px;
 
-    background: #262729;
+    background: #000000;
     text-align: center;
     overflow: hidden;
 
@@ -88,14 +93,14 @@
 input[type=button], input[type=submit], input[type=reset]  {
     font-size: 14px;
 
-    background-color: #262729;
-    color: #e4e6e8;
+    background-color: #000000;
+    color: #ffffff;
 
     padding: 10px 40px;
     margin-bottom: 20px;
     margin-top: 40px;
 
-    border: 2px solid #e4e6e8;
+    border: 2px solid #ffffff;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -107,7 +112,7 @@ input[type=button], input[type=submit], input[type=reset]  {
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-    background-color: #e4e6e8;
+    background-color: #ffffff;
     color: #262729;
 }
 
@@ -122,12 +127,12 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
 input[type=text], input[type=password], input[type=email] {
     font-size: 14px;
 
-    background-color: #e4e6e8;
+    background-color: #ffffff;
     color: #262729;
 
     width: 85%;
     height: 5px;
-    border: 2px solid #e4e6e8;
+    border: 2px solid #ffffff;
 
     padding: 14px 32px;
     margin-bottom: 10px;
@@ -144,21 +149,21 @@ input[type=text], input[type=password], input[type=email] {
 }
 
 input:focus {
-    background-color: #fff;
-    border: 4px solid #262729;
+    background-color: #ffffff;
+    border: 4px solid #000000;
 
     outline: none;
 }
 
 input::placeholder {
     font-size: 12px;
-    color: #262729;
+    color: #000000;
 }
 
 .link {
     font-size: 16px;
 
-    color: #e4e6e8;
+    color: #ffffff;
 
     user-select: none;
     transition: opacity .1s linear;

@@ -1,10 +1,13 @@
 package ru.dexterity.dao.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @Entity
@@ -15,14 +18,23 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "task")
-    private TaskTest taskTest;
+    @Column(nullable = false)
+    private boolean inModeration;
 
     @Column(unique = true, nullable = false)
     private String shortDescription;
 
     @Column(nullable = false)
     private String longDescription;
+
+    @Column(nullable = false)
+    private String testCode;
+
+    @Column(nullable = false)
+    private String startCode;
+
+    @Column(nullable = false)
+    private String solutionCode;
 
     @Column(nullable = false)
     private int difficult;

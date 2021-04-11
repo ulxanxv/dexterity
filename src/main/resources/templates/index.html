@@ -2,13 +2,12 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
 
-    <link rel="stylesheet" th:href="@{css/index.css}">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
 </head>
     <body>
 
@@ -20,7 +19,7 @@
                     <div class="panel_section">
 <!--                    Логотип в верхней панели-->
                         <div class="logo_container">
-                            <a class="logo_text" href="/">
+                            <a class="logo_text" th:href="@{/}" href="index.html">
                                 DEXTERITY
                             </a>
                         </div>
@@ -28,26 +27,33 @@
 
                     <div class="panel_section">
 <!--                    Фото профиля (выпадающий список)-->
-                        <nav class="profile">
+                      <!--                    Фото профиля (выпадающий список)-->
+                      <p class="profile_username">
+                        <th:block th:text="${username.toString()}"></th:block>
+                      </p>
+                      <nav class="profile">
+                        <ul>
+                          <li>
+<!--                            <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>-->
+                            <img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
                             <ul>
+                              <li>
+                                <a th:href="@{/file/upload}">Личный кабинет</a>
+                              </li>
+                              <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
                                 <li>
-                                    <a href="#">
-                                        <th:block th:text="${username.toString()}"></th:block>
-                                        <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
-                                        <img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" class="profile_photo"/>
-                                    </a>
-                                    <ul>
-                                        <li><a href="/file/upload">Личный кабинет</a></li>
-                                        <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
-                                          <li><a href="/logout">Выйти</a></li>
-                                        </th:block>
-                                        <th:block th:if="${#strings.equals(username, 'anonymousUser')}">
-                                          <li><a href="/login">Войти</a></li>
-                                        </th:block>
-                                    </ul>
+                                  <a th:href="@{/logout}">Выйти</a>
                                 </li>
+                              </th:block>
+                              <th:block th:if="${#strings.equals(username, 'anonymousUser')}">
+                                <li>
+                                  <a th:href="@{/login}" href="login.html">Войти</a>
+                                </li>
+                              </th:block>
                             </ul>
-                        </nav>
+                          </li>
+                        </ul>
+                      </nav>
                     </div>
                 </div>
 
@@ -60,13 +66,15 @@
 <!--                        Блок самого задания-->
                     <div class="task_body">
                         <th:block th:each="task : ${taskList}">
-                            <div class="task comp_hard" th:if="${task.getDifficult() == 1}">
+                            <div class="task" th:if="${task.getDifficult() == 1}">
+                                <a class="tb_text" th:text="${task.getShortDescription()}">
+                                  Тестовое описание задачи
+                                </a>
+                            </div>
+                            <div class="task" th:if="${task.getDifficult() == 2}">
                                 <a class="tb_text" th:text="${task.getShortDescription()}"></a>
                             </div>
-                            <div class="task comp_difficult" th:if="${task.getDifficult() == 2}">
-                                <a class="tb_text" th:text="${task.getShortDescription()}"></a>
-                            </div>
-                            <div class="task comp_easy" th:if="${task.getDifficult() == 3}">
+                            <div class="task" th:if="${task.getDifficult() == 3}">
                                 <a class="tb_text" th:text="${task.getShortDescription()}"></a>
                             </div>
                         </th:block>
@@ -92,7 +100,7 @@
                         </div>
                     </div>
                     <div class="btn_container">
-                        <a href="/execute" class="btn" th:if="${!username.toString().equals('anonymousUser')}">
+                        <a th:href="@{/execute}" href="../templates/execute.html" class="btn" th:if="${!username.toString().equals('anonymousUser')}">
                             Приступить к выполнению
                         </a>
                         <a class="btn_disable" th:if="${username.toString().equals('anonymousUser')}">
@@ -117,7 +125,7 @@
             </div>
         </div>
 
-        <script type="text/javascript" th:src="@{js/jquery.js}"></script>
-        <script type="text/javascript" th:src="@{js/dload.js}"></script>
+        <script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
+        <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
     </body>
 </html>

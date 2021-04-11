@@ -51,7 +51,6 @@ public class FileComponent {
             Files.write(Paths.get(uploadPath + resultFilename), file.getBytes());
 
             credential.setFileName(resultFilename);
-            credential.setImage(file.getBytes());
             credentialRepository.save(credential);
         }
     }

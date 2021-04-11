@@ -3,12 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
     <title>Dexterity — Auth</title>
 
-    <link rel="stylesheet" href="/css/au.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/au.css}" href="../static/css/au.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -16,7 +15,7 @@
         <div class="wrapper">
             <div class="form-content">
                 <span id="title" class="title">
-                    <a href="/" class="title-text">
+                    <a th:href="@{/}" href="../templates/index.html" class="title-text">
                         DEXTERITY
                     </a>
                 </span>
@@ -31,7 +30,7 @@
                         <span class="link">
                             Не имеете аккаунта?
                         </span>
-                        <a class="link link_a" href="/sign">
+                        <a class="link link_a" th:href="@{/sign}" href="../templates/sign.html">
                             Зарегистрироваться
                         </a>
                     </div>

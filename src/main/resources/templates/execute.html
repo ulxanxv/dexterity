@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" href="../static/css/index.css">
-    <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
 </head>
 <body>
     <div class="limiter">
@@ -16,28 +15,34 @@
                 <div class="panel_section">
                     <!--                    Логотип в верхней панели-->
                     <div class="logo_container">
-                        <a class="logo_text" href="/">
+                        <a class="logo_text" th:href="@{/}" href="index.html">
                             DEXTERITY
                         </a>
                     </div>
                 </div>
                 <div class="panel_section">
                     <!--                    Фото профиля (выпадающий список)-->
+                    <p class="profile_username">
+                        <th:block th:text="${username.toString()}"></th:block>
+                    </p>
                     <nav class="profile">
                         <ul>
                             <li>
-                                <a href="#">
-                                    <th:block th:text="${username.toString()}"></th:block>
-                                    <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
-                                    <img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" class="profile_photo"/>
-                                </a>
+<!--                                <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>-->
+                                <img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
                                 <ul>
-                                    <li><a href="/file/upload">Личный кабинет</a></li>
+                                    <li>
+                                        <a th:href="@{/file/upload}">Личный кабинет</a>
+                                    </li>
                                     <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
-                                        <li><a href="/logout">Выйти</a></li>
+                                        <li>
+                                            <a th:href="@{/logout}">Выйти</a>
+                                        </li>
                                     </th:block>
                                     <th:block th:if="${#strings.equals(username, 'anonymousUser')}">
-                                        <li><a href="/login">Войти</a></li>
+                                        <li>
+                                            <a th:href="@{/login}" href="login.html">Войти</a>
+                                        </li>
                                     </th:block>
                                 </ul>
                             </li>
@@ -46,7 +51,7 @@
                 </div>
             </div>
             <div class="execute_main">
-                <div class="block_header" th:text="${selectedTask.getShortDescription()}"></div>
+                <div id="e_dshort" class="block_header" th:text="${selectedTask.getShortDescription()}"></div>
                 <div class="execute_body">
                     <div class="desc">
                         <div class="block_header_code">
@@ -59,11 +64,16 @@
                             Код
                         </div>
                         <div id="editor"></div>
+                        <div class="btn_container">
+                            <a id="run_code" class="btn">
+                                Протестировать
+                            </a>
+                        </div>
                         <div class="block_header_code">
                             Результат
                         </div>
                         <div class="ex_result">
-
+                            <span class="result"></span>
                         </div>
                     </div>
                 </div>
@@ -85,10 +95,31 @@
         </div>
     </div>
 
+    <script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
+    <script type="text/javascript" th:src="@{js/typed.js}" src="../static/js/typed.js"></script>
+    <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
+
 <!--    Ace Editor-->
-    <script type="text/javascript" src="js/ace/ace.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="js/ace/mode-java.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="js/ace/ext-language_tools.js" charset="UTF-8"></script>
-    <script th:src="@{js/aceed.js}"></script>
+    <script type="text/javascript" th:src="@{js/ace/ace.js}" src="../static/js/ace/ace.js" charset="UTF-8"></script>
+    <script type="text/javascript" th:src="@{js/ace/ext-language_tools.js}" src="../static/js/ace/ext-language_tools.js" charset="UTF-8"></script>
+    <script>
+        ace.require("ace/ext/language_tools");
+        let editor = ace.edit("editor");
+
+        // Подключение редактора кода
+        let editorLib = {
+            init() {
+                editor.setTheme("ace/theme/twilight");
+                editor.session.setMode("ace/mode/java");
+
+                editor.setOptions({
+                    enableBasicAutocompletion: true,
+                    enableLiveAutocompletion: true
+                });
+            }
+        }
+
+        editorLib.init();
+    </script>
 </body>
 </html>
