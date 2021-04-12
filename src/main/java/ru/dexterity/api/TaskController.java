@@ -24,48 +24,38 @@ public class TaskController {
             Task task = taskComponent.findByShortDescription(shortDescription);
             selectedTask.setSelectedTask(task.getId());
 
-            return new TaskResponse(
-                "ok", task.getShortDescription(), task.getLongDescription(), task.getDifficult()
-            );
+            return new TaskResponse("ok", task);
         } catch (TaskNotFoundException exception) {
             return new TaskResponse("not_found");
         }
+    }
+
+    @GetMapping("/selected_task")
+    public TaskResponse selectedUserTask() {
+        return new TaskResponse("ok", taskComponent.findById(selectedTask.getSelectedTask()));
     }
 
     @JsonInclude(Include.NON_NULL)
     public static class TaskResponse {
 
         private final String status;
-
-        private String shortDescription;
-        private String longDescription;
-        private int difficult;
+        private Task taskInfo;
 
         public TaskResponse(String status) {
             this.status = status;
         }
 
-        public TaskResponse(String status, String shortDescription, String longDescription, int difficult) {
+        public TaskResponse(String status, Task taskInfo) {
             this.status = status;
-            this.shortDescription = shortDescription;
-            this.longDescription = longDescription;
-            this.difficult = difficult;
+            this.taskInfo = taskInfo;
         }
 
         public String getStatus() {
             return status;
         }
 
-        public String getShortDescription() {
-            return shortDescription;
-        }
-
-        public String getLongDescription() {
-            return longDescription;
-        }
-
-        public int getDifficult() {
-            return difficult;
+        public Task getTaskInfo() {
+            return taskInfo;
         }
     }
 

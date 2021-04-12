@@ -34,7 +34,7 @@
                       <nav class="profile">
                         <ul>
                           <li>
-<!--                            <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>-->
+                            <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
                             <img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
                             <ul>
                               <li>

@@ -71,6 +71,16 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: class_name
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: test_class_name
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
                   name: test_code
                   type: varchar(32768)
                   constraints:
@@ -190,6 +200,12 @@ databaseChangeLog:
                   name: long_description
                   value: "Подробное описание перевода числа в строку"
               - column:
+                  name: class_name
+                  value: "---"
+              - column:
+                  name: test_class_name
+                  value: "---"
+              - column:
                   name: test_code
                   value: "---"
               - column:
@@ -214,6 +230,12 @@ databaseChangeLog:
                   name: long_description
                   value: "Подробное описание вычисления палиндрома"
               - column:
+                  name: class_name
+                  value: "---"
+              - column:
+                  name: test_class_name
+                  value: "---"
+              - column:
                   name: test_code
                   value: "---"
               - column:
@@ -233,16 +255,33 @@ databaseChangeLog:
                   value: false
               - column:
                   name: short_description
-                  value: "Найти минимальное число"
+                  value: "Перевод в верхний регистр"
               - column:
                   name: long_description
-                  value: "Подробное описание минимального числа"
+                  value: "Напишите функцию, которая преобразует входную строку в верхний регистр."
+              - column:
+                  name: class_name
+                  value: "Upper"
+              - column:
+                  name: test_class_name
+                  value: "SolutionTest"
               - column:
                   name: test_code
-                  value: "---"
+                  value: "import org.junit.Test;
+                          import static org.junit.Assert.assertEquals;
+                          import org.junit.runners.JUnit4;
+
+                          public class SolutionTest {
+
+                          Upper u = new Upper();
+
+                              @Test
+                              public void testSomething() {
+                                 assertEquals(\"HELLO\",u.MakeUpperCase(\"hello\"));
+                                 }}"
               - column:
                   name: start_code
-                  value: "---"
+                  value: "class Upper {\n\tpublic static String MakeUpperCase(String str) {\n\t\n\t}\n}"
               - column:
                   name: solution_code
                   value: "---"

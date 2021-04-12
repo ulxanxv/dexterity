@@ -28,7 +28,7 @@
                     <nav class="profile">
                         <ul>
                             <li>
-<!--                                <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>-->
+                                <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
                                 <img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
                                 <ul>
                                     <li>
@@ -121,6 +121,19 @@
         }
 
         editorLib.init();
+
+        $(document).ready(function (e) {
+            $.ajax({
+                type: 'GET',
+                url: '/selected_task',
+
+                success: function (data) {
+                    if (data.status === 'ok') {
+                        editor.setValue(data.taskInfo.startCode);
+                    }
+                }
+            })
+        });
     </script>
 </body>
 </html>

@@ -28,6 +28,12 @@ public class Task {
     private String longDescription;
 
     @Column(nullable = false)
+    private String className;
+
+    @Column(nullable = false)
+    private String testClassName;
+
+    @Column(nullable = false)
     private String testCode;
 
     @Column(nullable = false)

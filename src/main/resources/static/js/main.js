@@ -10,13 +10,14 @@ $('.tb_text').on('click', function (e) {
 
        success: function (data) {
          if (data.status === 'ok') {
-           $('#long_description').text(data.longDescription);
+           $('#long_description').text(data.taskInfo.longDescription);
          }
        }
    })
 
 });
 
+// Получение результатов компиляции
 $('#run_code').on('click', function () {
 
   $.ajax({
@@ -28,8 +29,8 @@ $('#run_code').on('click', function () {
     },
 
     success: function (data) {
-
-      if (data.result === 'ok') {
+      console.log(data);
+      if (jQuery.parseJSON(data.result).message === 'tests_passed') {
         $('.ex_result').css('color', 'green');
         let typed = new Typed('.result', {
           strings: ['Все тесты^1000 успешно пройдены', '...', ''],
@@ -48,7 +49,7 @@ $('#run_code').on('click', function () {
       } else {
         $('.ex_result').css('color', 'red');
         let typed = new Typed('.result', {
-          strings: ['Ваш код не прошёл тесты,^1000 проверьте решение', '...', ''],
+          strings: ['Ваш код не прошёл тесты :: ^1000 ' + jQuery.parseJSON(data.result).message, '...', ''],
           typeSpeed: 20,
           startDelay: 100,
           backDelay: 1000,

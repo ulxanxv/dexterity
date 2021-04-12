@@ -33,3 +33,6 @@ server:
 upload:
   images-path: src/main/resources/static/images/
   resources-path: src\main\resources\static\images
+
+compileta:
+  url: http://localhost:8081/compile
