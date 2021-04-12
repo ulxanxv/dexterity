@@ -21,7 +21,7 @@ public class AuthController {
     @GetMapping("/login")
     public String loginPage(@RequestParam(value = "error", required = false) Boolean error, Model model) {
         if (error != null && error) {
-            model.addAttribute("authError", new AuthException(AuthError.CREDENTIAL_INCORRECT, "Неверный логин или пароль."));
+            model.addAttribute("authError", new AuthException(AuthError.CREDENTIAL_INCORRECT, "Неверный логин или пароль"));
         }
 
         return "login";

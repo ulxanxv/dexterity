@@ -1,17 +1,3 @@
-let typed = new Typed('.result', {
-
-  strings: ["Все тесты^1000 успешно пройдены!", "..."],
-  typeSpeed: 20,
-  startDelay: 100,
-  backDelay: 1000,
-  showCursor: false,
-
-  callback: function () {
-    $('.ex_result').css('background-color', 'green');
-  }
-
-})
-
 // Получение подробного описания задачи
 $('.tb_text').on('click', function (e) {
 
@@ -42,15 +28,38 @@ $('#run_code').on('click', function () {
     },
 
     success: function (data) {
+
       if (data.result === 'ok') {
-        $('.ex_result').css('color', 'greed');
+        $('.ex_result').css('color', 'green');
         let typed = new Typed('.result', {
-          strings: ["Все тесты успешно пройдены!"]
+          strings: ['Все тесты^1000 успешно пройдены', '...', ''],
+          typeSpeed: 20,
+          startDelay: 100,
+          backDelay: 1000,
+          showCursor: false,
+
+          preStringTyped: function () {
+            $('.ex_result').css('color', 'green');
+          },
+          callback: function () {
+            $('.ex_result').typed('reset');
+          }
         })
       } else {
         $('.ex_result').css('color', 'red');
         let typed = new Typed('.result', {
-          strings: ["Что-то не так :("]
+          strings: ['Ваш код не прошёл тесты,^1000 проверьте решение', '...', ''],
+          typeSpeed: 20,
+          startDelay: 100,
+          backDelay: 1000,
+          showCursor: false,
+
+          preStringTyped: function () {
+            $('.ex_result').css('color', 'red');
+          },
+          callback: function () {
+            $('.ex_result').typed('reset');
+          }
         })
       }
     }

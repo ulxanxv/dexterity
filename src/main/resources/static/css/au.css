@@ -83,27 +83,28 @@
 
 .info-about-register {
     padding: 10px 30px;
-    margin: 10px 0px;
+    margin: 10px 0;
 
     background-color: darkred;
-    border: 1px solid #222222;
     color: white;
+
+    transition: opacity 1s linear;
 }
 
 input[type=button], input[type=submit], input[type=reset]  {
     font-size: 14px;
 
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #000000;
 
     padding: 10px 40px;
     margin-bottom: 20px;
     margin-top: 40px;
 
-    border: 2px solid #ffffff;
+    border: none;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    cursor: pointer;
 
     transition: all .1s ease-in-out;
     -webkit-transition: all .1s ease-in-out;
@@ -112,8 +113,15 @@ input[type=button], input[type=submit], input[type=reset]  {
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-    background-color: #ffffff;
-    color: #262729;
+    border-bottom: 5px solid #ffffff;
+
+    outline: none;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+input[type=button]:focus, input[type=submit]:focus, input[type=reset]:focus  {
+    outline: none;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -132,13 +140,13 @@ input[type=text], input[type=password], input[type=email] {
 
     width: 85%;
     height: 5px;
-    border: 2px solid #ffffff;
 
     padding: 14px 32px;
     margin-bottom: 10px;
 
     text-align: center;
     text-decoration: none;
+    border: none;
 
     display: inline-block;
 
@@ -148,10 +156,8 @@ input[type=text], input[type=password], input[type=email] {
     -o-transition: all .1s ease-in-out;
 }
 
-input:focus {
-    background-color: #ffffff;
-    border: 4px solid #000000;
-
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+    width: 100%;
     outline: none;
 }
 
