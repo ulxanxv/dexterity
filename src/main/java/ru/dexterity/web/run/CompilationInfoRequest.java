@@ -7,12 +7,9 @@ import lombok.Data;
 @Builder
 public class CompilationInfoRequest {
 
-    private String className;
-    private String testClassName;
-    private String methodName;
     private String code;
+    private String className;
     private String testCode;
-    private String solutionCode;
-    private String solutionMethodName;
+    private String testClassName;
 
 }
