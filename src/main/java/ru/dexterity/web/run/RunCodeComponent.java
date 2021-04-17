@@ -16,7 +16,12 @@ public class RunCodeComponent {
         Task task = taskComponent.findByShortDescription(
             taskName
         );
-        return runCodeAdapter.runCode(code, task.getClassName(), task.getTestCode(), task.getTestClassName());
+
+        try {
+            return runCodeAdapter.runCode(code, task.getClassName(), task.getTestCode(), task.getTestClassName());
+        } catch (Exception ignored) {
+            return "server unavailable, please try later";
+        }
     }
 
 }

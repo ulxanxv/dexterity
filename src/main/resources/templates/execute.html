@@ -6,6 +6,10 @@
     <title>Title</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="limiter">
@@ -32,7 +36,7 @@
                                 <img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/file/upload}">Личный кабинет</a>
+                                        <a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
                                     </li>
                                     <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
                                         <li>
@@ -51,7 +55,7 @@
                 </div>
             </div>
             <div class="execute_main">
-                <div id="e_dshort" class="block_header" th:text="${selectedTask.getShortDescription()}"></div>
+                <div id="e_dshort" class="block_header" th:text="${selectedTask.getShortDescription()}">Тестовое название</div>
                 <div class="execute_body">
                     <div class="desc">
                         <div class="block_header_code">
@@ -64,32 +68,18 @@
                             Код
                         </div>
                         <div id="editor"></div>
-                        <div class="btn_container">
-                            <a id="run_code" class="btn">
-                                Протестировать
-                            </a>
-                        </div>
                         <div class="block_header_code">
                             Результат
                         </div>
                         <div class="ex_result">
                             <span class="result"></span>
                         </div>
+                        <div class="btn_container">
+                            <a id="run_code" class="btn">
+                                Протестировать
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <!--                Нижняя панель-->
-            <div class="bottom_panel">
-                <div class="panel_section">
-                        <span  class="bpanel_text">
-                            © Dexterity 2021
-                        </span>
-                </div>
-                <div class="panel_section">
-                    <a class="bpanel_text link" href="#">
-                        О разработчике
-                    </a>
                 </div>
             </div>
         </div>

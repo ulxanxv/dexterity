@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{../css/index.css}" href="../static/css/index.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="limiter">
+	<div class="wrapper">
+		<!--                Верхняя панель-->
+		<div class="top_panel">
+
+			<div class="panel_section">
+				<!--                    Логотип в верхней панели-->
+				<div class="logo_container">
+					<a class="logo_text" th:href="@{/}" href="index.html">
+						DEXTERITY
+					</a>
+				</div>
+			</div>
+
+			<div class="panel_section">
+				<!--                    Фото профиля (выпадающий список)-->
+				<p class="profile_username">
+					<th:block th:text="${username.toString()}"></th:block>
+				</p>
+				<nav class="profile">
+					<ul>
+						<li>
+							<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'../images/' + ${filename.toString()}" class="profile_photo"/>
+							<img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{../images/anon.jpg}" src="../static/images/anon.jpg"/>
+							<ul>
+								<li>
+									<a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
+								</li>
+								<th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
+									<li>
+										<a th:href="@{/logout}">Выйти</a>
+									</li>
+								</th:block>
+								<th:block th:if="${#strings.equals(username, 'anonymousUser')}">
+									<li>
+										<a th:href="@{/login}" href="login.html">Войти</a>
+									</li>
+								</th:block>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="personal_main">
+
+			<div class="personal_info">
+				<div class="personal_photo">
+					<img class="profile_photo" th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'../images/' + ${filename.toString()}"/>
+					<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{../images/anon.jpg}" src="../static/images/anon.jpg"/>
+				</div>
+				<span th:text="${username}">Ulxanxv</span>
+				<div class="personal_edit">
+					<form method="post" enctype="multipart/form-data" action="/file/upload">
+						<div>
+							<input type="file" name="file" id="input" class="input_file">
+							<label for="input">
+								<span class="input__file-button-text">Загрузить фото</span>
+							</label>
+						</div>
+						<div>
+							<button class="input__file-button-text" type="submit">Сохранить</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="personal_rating">
+				<div class="block_header">
+					Решенные задачи
+				</div>
+				<!--                        Блок самого задания-->
+				<div class="task_body">
+					<div class="task" style="border-bottom: 10px solid #404040;">
+						<div class="tb_text">
+							Тестовое описание задачи
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

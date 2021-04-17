@@ -19,6 +19,7 @@ $('.tb_text').on('click', function (e) {
 
 // Получение результатов компиляции
 $('#run_code').on('click', function () {
+  $('.ex_result').typed('reset');
 
   $.ajax({
     type: 'GET',
@@ -29,37 +30,30 @@ $('#run_code').on('click', function () {
     },
 
     success: function (data) {
-      console.log(data);
-      if (jQuery.parseJSON(data.result).message === 'tests_passed') {
+      if (jQuery.parseJSON(data.result).status === 'ok') {
         $('.ex_result').css('color', 'green');
         let typed = new Typed('.result', {
-          strings: ['Все тесты^1000 успешно пройдены', '...', ''],
+          strings: ['Все тесты^1000 успешно пройдены', ''],
+          startDelay: 0,
           typeSpeed: 20,
-          startDelay: 100,
-          backDelay: 1000,
+          backDelay: 10000,
           showCursor: false,
 
           preStringTyped: function () {
             $('.ex_result').css('color', 'green');
-          },
-          callback: function () {
-            $('.ex_result').typed('reset');
           }
         })
       } else {
         $('.ex_result').css('color', 'red');
         let typed = new Typed('.result', {
-          strings: ['Ваш код не прошёл тесты :: ^1000 ' + jQuery.parseJSON(data.result).message, '...', ''],
+          strings: ['Ошибка :: ^1000 ' + jQuery.parseJSON(data.result).message, ''],
+          startDelay: 0,
           typeSpeed: 20,
-          startDelay: 100,
-          backDelay: 1000,
+          backDelay: 10000,
           showCursor: false,
 
           preStringTyped: function () {
             $('.ex_result').css('color', 'red');
-          },
-          callback: function () {
-            $('.ex_result').typed('reset');
           }
         })
       }

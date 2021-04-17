@@ -1,0 +1,165 @@
+.offers_first {
+	width: 100%;
+	min-width: 350px;
+	height: 800px;
+
+	overflow: auto;
+
+	background-color: #ffffff;
+	box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
+	border-radius: 20px;
+
+	position: relative;
+	margin: 100px 30px 70px 30px;
+}
+
+.offers_first textarea {
+	height: 400px;
+	width: 300px;
+
+	padding: 15px;
+	outline: none;
+	overflow: auto;
+
+	background-color: #292929;
+	color: #ffffff;
+
+	resize: none;
+	-moz-appearance: none;
+}
+
+.offers_first p {
+	margin: 25px 0;
+	font-weight: 600;
+}
+
+.offers_body {
+	padding-top: 25px;
+	display: flex;
+	justify-content: space-around;
+}
+
+/* Блок описания задачи */
+.offers_description {
+	margin: 0 50px;
+}
+
+/* Краткое описание */
+.s_desc {
+	text-align: center;
+	margin: 0 auto;
+}
+
+/* Краткое описание */
+.l_desc {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.offers_code {
+	width: 60%;
+	margin: 0 25px;
+}
+
+.start_code {
+	text-align: center;
+	height: 200px;
+}
+
+.test_code {
+	text-align: center;
+	margin: 0 auto;
+	height: 350px;
+}
+
+.difficult {
+	width: 50%;
+	text-align: center;
+	margin: 25px auto;
+}
+
+.difficult select {
+	background-color: #292929;
+	color: #ffffff;
+}
+
+.offers_button {
+	margin: 50px 25px;
+}
+
+.editor {
+	font-size: 14px;
+	height: 80%;
+	font-family: 'Source Code Pro', monospace;
+
+	color: #ffffff;
+	background-color: #292929;
+}
+
+.btn_align {
+	margin: 25px auto;
+}
+
+#send_task {
+	font-size: 14px;
+
+	background-color: #292929;
+	color: #ffffff;
+
+	padding: 10px 150px;
+	margin: 30px 25px 30px 25px;
+
+	cursor: pointer;
+
+	text-align: center;
+	text-decoration: none;
+
+	transition: all .1s ease-in-out;
+	-webkit-transition: all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+	-o-transition: all .1s ease-in-out;
+}
+
+#send_task:hover {
+	background-color: #ffffff;
+	border-bottom: 5px solid #292929;
+	color: #292929;
+}
+
+input[type=text], input[type=password], input[type=email] {
+	font-size: 14px;
+
+	background-color: #ffffff;
+	color: #000000;
+
+	width: 85%;
+	height: 5px;
+
+	padding: 19px 32px;
+
+	border-top: none;
+	border-right: none;
+	border-left: none;
+
+	border-bottom: 1px solid #292929;
+
+	text-align: center;
+	text-decoration: none;
+
+	display: inline-block;
+
+	transition: all .1s ease-in-out;
+	-webkit-transition: all .1s ease-in-out;
+	-moz-transition: all .1s ease-in-out;
+	-o-transition: all .1s ease-in-out;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+	width: 100%;
+	outline: none;
+}
+
+input::placeholder {
+	font-size: 12px;
+	color: #292929;
+}

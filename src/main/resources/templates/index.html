@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
 </head>
     <body>
 
@@ -27,7 +27,6 @@
 
                     <div class="panel_section">
 <!--                    Фото профиля (выпадающий список)-->
-                      <!--                    Фото профиля (выпадающий список)-->
                       <p class="profile_username">
                         <th:block th:text="${username.toString()}"></th:block>
                       </p>
@@ -38,7 +37,7 @@
                             <img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
                             <ul>
                               <li>
-                                <a th:href="@{/file/upload}">Личный кабинет</a>
+                                <a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
                               </li>
                               <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
                                 <li>
@@ -67,20 +66,21 @@
                     <div class="task_body">
                         <th:block th:each="task : ${taskList}">
                             <div class="task" th:if="${task.getDifficult() == 1}">
-                                <a class="tb_text" th:text="${task.getShortDescription()}">
-                                  Тестовое описание задачи
-                                </a>
+                              <a class="tb_text" th:text="${task.getShortDescription()}">We'll get an exception during compile-time saying that the firstArticle is null:</a>
+                              <span style="color: darkgreen">Легко</span>
                             </div>
                             <div class="task" th:if="${task.getDifficult() == 2}">
-                                <a class="tb_text" th:text="${task.getShortDescription()}"></a>
+                              <a class="tb_text" th:utext="${task.getShortDescription()}"></a>
+                              <span style="color: #646200">Средне</span>
                             </div>
                             <div class="task" th:if="${task.getDifficult() == 3}">
                                 <a class="tb_text" th:text="${task.getShortDescription()}"></a>
+                              <span style="color: #640000">Трудно</span>
                             </div>
                         </th:block>
                     </div>
                     <div class="btn_container">
-                        <a href="#" class="btn">
+                        <a th:href="@{../offers}" href="../templates/offers.html" class="btn">
                             Предложить задание
                         </a>
                     </div>
@@ -105,20 +105,6 @@
                         </a>
                         <a class="btn_disable" th:if="${username.toString().equals('anonymousUser')}">
                             Приступить к выполнению (неактивна)
-                        </a>
-                    </div>
-                </div>
-
-<!--                Нижняя панель-->
-                <div class="bottom_panel">
-                    <div class="panel_section">
-                        <span  class="bpanel_text">
-                            © Dexterity 2021
-                        </span>
-                    </div>
-                    <div class="panel_section">
-                        <a class="bpanel_text link" href="#">
-                            О разработчике
                         </a>
                     </div>
                 </div>

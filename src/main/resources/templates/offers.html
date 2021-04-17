@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/offers.css}" href="../static/css/offers.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet">
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="wrapper">
+
+			<div class="top_panel">
+				<div class="panel_section">
+					<!--                    Логотип в верхней панели-->
+					<div class="logo_container">
+						<a class="logo_text" th:href="@{/}" href="index.html">
+							DEXTERITY
+						</a>
+					</div>
+				</div>
+				<div class="panel_section">
+					<!--                    Фото профиля (выпадающий список)-->
+					<p class="profile_username">
+						<th:block th:text="${username.toString()}"></th:block>
+					</p>
+					<nav class="profile">
+						<ul>
+							<li>
+								<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
+								<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
+								<ul>
+									<li>
+										<a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
+									</li>
+									<th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
+										<li>
+											<a th:href="@{/logout}">Выйти</a>
+										</li>
+									</th:block>
+									<th:block th:if="${#strings.equals(username, 'anonymousUser')}">
+										<li>
+											<a th:href="@{/login}" href="login.html">Войти</a>
+										</li>
+									</th:block>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+
+			<div class="offers_first">
+				<div class="block_header">
+					Предложение задачи
+				</div>
+<!--				Краткое описание и подробное описание-->
+				<div class="offers_body">
+					<div class="offers_description">
+						<div class="s_desc">
+							<p>Краткое описание</p>
+							<input name="short_description" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
+						</div>
+						<div class="l_desc">
+							<p>Подробное описание</p>
+							<textarea name="long_description" type="text" maxlength="32768"></textarea>
+						</div>
+						<div class="difficult">
+							<p>Сложность</p>
+							<select id="difficult" style="width: 100%">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+							</select>
+						</div>
+					</div>
+
+<!--					Стартовый код и сложность-->
+					<div class="offers_code">
+						<div class="start_code">
+							<p title="Код должен содержать класс и метод, куда пользователь должен будет вводить решение. Метод должен быть статичным и принимать.">
+								Стартовый код
+							</p>
+							<div class="editor" id="start_code">
+
+							</div>
+						</div>
+						<div class="test_code">
+							<p>Код для тестирования</p>
+							<div class="editor" id="test_code">
+
+							</div>
+						</div>
+						<div class="btn_align">
+							<a type="button" id="send_task">
+								Предложить
+							</a>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
+			<script type="text/javascript" th:src="@{js/typed.js}" src="../static/js/typed.js"></script>
+			<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
+			<!--    Ace Editor-->
+			<script type="text/javascript" th:src="@{js/ace/ace.js}" src="../static/js/ace/ace.js" charset="UTF-8"></script>
+			<script type="text/javascript" th:src="@{js/ace/ext-language_tools.js}" src="../static/js/ace/ext-language_tools.js" charset="UTF-8"></script>
+			<script>
+				ace.require("ace/ext/language_tools");
+				let startEditor = ace.edit("start_code");
+				let testEditor = ace.edit("test_code");
+
+				// Подключение редактора кода
+				let editorLib = {
+					init() {
+						startEditor.setTheme("ace/theme/twilight");
+						startEditor.session.setMode("ace/mode/java");
+
+						startEditor.setOptions({
+							enableBasicAutocompletion: true,
+							enableLiveAutocompletion: true,
+							highlightActiveLine: true
+						});
+
+						testEditor.setTheme("ace/theme/twilight");
+						testEditor.session.setMode("ace/mode/java");
+
+						testEditor.setOptions({
+							enableBasicAutocompletion: true,
+							enableLiveAutocompletion: true,
+							highlightActiveLine: true
+						});
+					}
+				}
+
+				editorLib.init();
+			</script>
+
+		</div>
+	</div>
+
+</body>
+</html>
