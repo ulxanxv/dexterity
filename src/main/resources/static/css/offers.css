@@ -14,18 +14,26 @@
 }
 
 .offers_first textarea {
-	height: 400px;
-	width: 300px;
+	height: 50px;
+	width: 500px;
 
 	padding: 15px;
 	outline: none;
 	overflow: auto;
+
+	border: none;
 
 	background-color: #292929;
 	color: #ffffff;
 
 	resize: none;
 	-moz-appearance: none;
+
+	transition: all .5s;
+}
+
+.offers_first textarea:focus {
+	height: 500px;
 }
 
 .offers_first p {
@@ -42,6 +50,10 @@
 /* Блок описания задачи */
 .offers_description {
 	margin: 0 50px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 }
 
 /* Краткое описание */
@@ -73,7 +85,7 @@
 }
 
 .difficult {
-	width: 50%;
+	width: 50vh;
 	text-align: center;
 	margin: 25px auto;
 }
@@ -97,10 +109,12 @@
 }
 
 .btn_align {
-	margin: 25px auto;
+	margin: 15px auto;
+	display: flex;
+	justify-content: center;
 }
 
-#send_task {
+.btn_align button {
 	font-size: 14px;
 
 	background-color: #292929;
@@ -113,24 +127,25 @@
 
 	text-align: center;
 	text-decoration: none;
+	outline: none;
+	border: none;
 
 	transition: all .1s ease-in-out;
-	-webkit-transition: all .1s ease-in-out;
-	-moz-transition: all .1s ease-in-out;
-	-o-transition: all .1s ease-in-out;
 }
 
-#send_task:hover {
-	background-color: #ffffff;
-	border-bottom: 5px solid #292929;
+.btn_align button:hover {
 	color: #292929;
+	background-color: #ffffff;
+
+	border-right: 5px solid #292929;
+	border-left: 5px solid #292929;
 }
 
-input[type=text], input[type=password], input[type=email] {
+.offers_description input[type=text], input[type=password], input[type=email] {
 	font-size: 14px;
 
 	background-color: #ffffff;
-	color: #000000;
+	color: #292929;
 
 	width: 85%;
 	height: 5px;
@@ -154,7 +169,7 @@ input[type=text], input[type=password], input[type=email] {
 	-o-transition: all .1s ease-in-out;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
+.offers_description input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 	width: 100%;
 	outline: none;
 }

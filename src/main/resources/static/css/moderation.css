@@ -1,0 +1,41 @@
+.class_names {
+    display: flex;
+    justify-content: center;
+}
+
+.class_names input {
+    font-size: 14px;
+
+    background-color: #ffffff;
+    color: #292929;
+
+    width: 30vh;
+    height: 5px;
+
+    padding: 19px 32px;
+
+    border-top: none;
+    border-right: none;
+    border-left: none;
+
+    border-bottom: 1px solid #292929;
+
+    text-align: center;
+    text-decoration: none;
+
+    display: inline-block;
+
+    transition: all .1s ease-in-out;
+}
+
+.class_names input:focus {
+    outline: none;
+}
+
+.start_code_name {
+    margin: 0 25px;
+}
+
+.test_code_name {
+    margin: 0 25px;
+}

@@ -1,10 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/rating.css}" href="../static/css/rating.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<div class="limiter">
+	<div class="wrapper">
+		<div class="top_panel">
+			<div class="panel_section">
+				<!--                    Логотип в верхней панели-->
+				<div class="logo_container">
+					<a class="logo_text" th:href="@{/}" href="index.html">
+						DEXTERITY
+					</a>
+				</div>
+			</div>
+			<div class="panel_section">
+				<!--                    Фото профиля (выпадающий список)-->
+				<p class="profile_username">
+					<th:block th:text="${username.toString()}"></th:block>
+				</p>
+				<nav class="profile">
+					<ul>
+						<li>
+							<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
+							<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
+							<ul>
+								<li>
+									<a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
+								</li>
+								<th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
+									<li>
+										<a th:href="@{/logout}">Выйти</a>
+									</li>
+								</th:block>
+								<th:block th:if="${#strings.equals(username, 'anonymousUser')}">
+									<li>
+										<a th:href="@{/login}" href="login.html">Войти</a>
+									</li>
+								</th:block>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+	<div class="rating_body">
+		<div class="table task_table">
+			<div class="block_header">
+				Выбор задачи
+			</div>
+			<div class="search_task">
+				<input type="text" placeholder="Поиск задачи">
+			</div>
+			<div class="task_list">
+				<div class="task" th:if="${task.getDifficult() == 1}">
+					<a class="tb_text" th:text="${task.getShortDescription()}">We'll get an exception during compile-time saying that the firstArticle is null</a>
+					<span style="color: darkgreen;">Легко</span>
+				</div>
+				<div class="task" th:if="${task.getDifficult() == 2}">
+					<a class="tb_text" th:utext="${task.getShortDescription()}"></a>
+					<span style="color: #646200;">Средне</span>
+				</div>
+				<div class="task" th:if="${task.getDifficult() == 3}">
+					<a class="tb_text" th:text="${task.getShortDescription()}"></a>
+					<span style="color: #640000">Трудно</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="table rating_table">
+			<div class="block_header">
+				Рейтинг
+			</div>
+			<div class="rating">
+				<table>
+					<tr>
+						<th>Место</th>
+						<th>Логин пользователя</th>
+						<th>Задача</th>
+						<th>Оценка</th>
+					</tr>
+					<tr>
+						<td>Первая строка</td>
+						<td>Вторая строка</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	</div>
+</div>
 
 </body>
 </html>

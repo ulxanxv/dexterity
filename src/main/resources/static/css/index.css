@@ -181,12 +181,12 @@
     font-weight: 600;
     letter-spacing: 3px;
 
-    color: #000000;
+    color: #292929;
 
     text-align: center;
 
     height: 40px;
-    border-bottom: 1px solid #000000;
+    border-bottom: 1px solid #292929;
     user-select: none;
 
     /*margin-left: 25px;*/
@@ -199,7 +199,7 @@
 */
 .block_header_code {
     letter-spacing: 2px;
-    color: #000000;
+    color: #292929;
 
     text-align: center;
 
@@ -248,14 +248,16 @@
 */
 .task {
     width: 100%;
-    padding: 10px;
     display: table;
-    margin-bottom: 25px;
 
-    color: #000000;
+    padding: 10px 20px;
+    margin-bottom: 15px;
+
+    color: #292929;
     background-color: #ffffff;
 
-    border: 1px solid #292929;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
 }
 
 .task span {
@@ -282,7 +284,7 @@
     vertical-align: middle;
     text-align: center;
 
-    color: #000000;
+    color: #292929;
     text-decoration: none;
     transition: all .1s linear;
 
@@ -336,7 +338,7 @@
     font-size: 16px;
     line-height: 1.5;
 
-    color: #000000;
+    color: #292929;
     text-decoration: none;
 
     text-align: justify;
@@ -467,7 +469,7 @@
 
 .ex_description {
     font-size: 18px;
-    color: #000000;
+    color: #292929;
 
     height: 650px;
 
@@ -517,7 +519,7 @@
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
     border-radius: 20px;
-    border-right: 42px solid #232323;
+    border-right: 42px solid #292929;
 
     transition: background-color 1s linear;
 }
