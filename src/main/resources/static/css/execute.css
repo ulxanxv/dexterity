@@ -1,0 +1,164 @@
+/*
+    Главное рабочее окно
+*/
+.wrapper {
+    max-width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+}
+
+/*
+    Header у кода
+*/
+.block_header_code {
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #292929;
+
+    text-align: center;
+
+    height: 40px;
+    user-select: none;
+    margin: 25px 25px 10px 25px
+}
+
+/*
+    Блок выполнения задания
+*/
+.execute_main {
+    width: 100%;
+    min-width: 350px;
+    height: 800px;
+
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
+    border-radius: 20px;
+
+    position: relative;
+    margin: 100px 30px 70px 30px;
+}
+
+.execute_body {
+    display: flex;
+    justify-content: center;
+
+    padding: 0px 25px;
+}
+
+/*
+    Описание задание на странице оформления
+*/
+
+.desc {
+    height: 650px;
+    width: 50%;
+
+    padding-right: 25px;
+    padding-left: 25px;
+}
+
+.ex_description {
+    font-size: 14px;
+    color: #292929;
+
+    height: 650px;
+
+    text-align: justify;
+}
+
+/*
+    Блок для написания кода
+*/
+.ex_code {
+    width: 100%;
+
+    display: block;
+    justify-content: center;
+
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-bottom: 25px;
+}
+
+#editor {
+    font-size: 14px;
+
+    width: 100%;
+    height: 60%;
+
+    font-family: 'Source Code Pro', monospace;
+    color: #ffffff;
+    background-color: #292929;
+    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
+
+    border-radius: 20px;
+}
+
+/*
+    Результат выполнения
+*/
+.ex_result {
+    width: 100%;
+    height: 20%;
+
+    overflow: auto;
+
+    display: table;
+
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
+
+    border-radius: 20px;
+    border-right: 42px solid #292929;
+
+    transition: background-color 1s linear;
+}
+
+.result {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+/*
+    Стиль для кнопки
+*/
+.btn_container {
+    width: 100%;
+    height: 30px;
+
+    margin: 35px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: 700;
+
+    color: white;
+    background-color: #292929;
+
+    padding: 10px 100px;
+
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    text-decoration: none;
+
+    border-radius: 20px;
+
+    transition: all .1s ease-in-out;
+}
+
+.btn:hover {
+    color: #292929;
+    background-color: white;
+
+    border: 2px solid #292929;
+}

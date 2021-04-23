@@ -1,4 +1,18 @@
 /*
+    Главное рабочее окно
+*/
+.wrapper {
+    max-width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+}
+
+/*
     Окно формы авторизации
 */
 .form-content {
@@ -13,26 +27,16 @@
 }
 
 .title {
-    width: 300px;
-
     font-size: 36px;
     text-align: center;
+
+    width: 300px;
 
     border-radius: 5px;
     display: inline-block;
     margin-bottom: 48px;
 
     overflow: hidden;
-}
-
-.title a {
-    font-weight: 500;
-    color: #e4e6e8;
-
-    text-decoration: none;
-
-    font-style: normal;
-    letter-spacing: 5px;
 }
 
 .error {
@@ -81,6 +85,34 @@ input[type=text]:focus, input[type=password]:focus, input[type=email]:focus {
 input::placeholder {
     font-size: 12px;
     color: #292929;
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: 700;
+
+    background-color: #ffffff;
+    color: #292929;
+
+    padding: 10px 150px;
+    margin: 30px 25px 30px 25px;
+
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+
+    outline: none;
+    border: none;
+    border-radius: 20px;
+
+    transition: all .1s ease-in-out;
+}
+
+.btn:hover {
+    color: #ffffff;
+    background-color: #292929;
+
+    border: 2px solid white;
 }
 
 .link {

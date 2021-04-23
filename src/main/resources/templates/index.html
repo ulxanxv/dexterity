@@ -6,6 +6,7 @@
   <title>Title</title>
 
   <link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
+  <link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
 </head>
@@ -19,7 +20,7 @@
                     <div class="panel_section">
 <!--                    Логотип в верхней панели-->
                         <div class="logo_container">
-                            <a class="logo_text" th:href="@{/}" href="index.html">
+                            <a class="logo" th:href="@{/}" href="index.html">
                                 DEXTERITY
                             </a>
                         </div>
@@ -33,7 +34,7 @@
                       <nav class="profile">
                         <ul>
                           <li>
-                            <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
+<!--                            <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>-->
                             <img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
                             <ul>
                               <li>
@@ -66,15 +67,15 @@
                     <div class="task_body">
                         <th:block th:each="task : ${taskList}">
                             <div class="task" th:if="${task.getDifficult() == 1}">
-                              <a class="tb_text" th:text="${task.getShortDescription()}">We'll get an exception during compile-time saying that the firstArticle is null:</a>
+                              <a class="tb_text" th:text="${task.getShortDescription()}">Перевести число в строку</a>
                               <span style="color: darkgreen">Легко</span>
                             </div>
                             <div class="task" th:if="${task.getDifficult() == 2}">
-                              <a class="tb_text" th:utext="${task.getShortDescription()}"></a>
+                              <a class="tb_text" th:utext="${task.getShortDescription()}">ASD</a>
                               <span style="color: #646200">Средне</span>
                             </div>
                             <div class="task" th:if="${task.getDifficult() == 3}">
-                                <a class="tb_text" th:text="${task.getShortDescription()}"></a>
+                                <a class="tb_text" th:text="${task.getShortDescription()}">FDS</a>
                               <span style="color: #640000">Трудно</span>
                             </div>
                         </th:block>
@@ -102,9 +103,6 @@
                     <div class="btn_container">
                         <a th:href="@{/execute}" href="../templates/execute.html" class="btn" th:if="${!username.toString().equals('anonymousUser')}">
                             Приступить к выполнению
-                        </a>
-                        <a class="btn_disable" th:if="${username.toString().equals('anonymousUser')}">
-                            Приступить к выполнению (неактивна)
                         </a>
                     </div>
                 </div>

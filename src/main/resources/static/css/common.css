@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     font-family: 'Fira Code', monospace;
     font-weight: 300;
 }
@@ -17,50 +18,152 @@
     width: 100%;
     margin: 0 auto;
 
-    padding-top: 25px;
-
     background-color: #ffffff;
     background-size: cover;
 }
 
+.logo {
+    font-size: 36px;
+    font-weight: 500;
+
+    letter-spacing: 5px;
+
+    color: #ffffff;
+    text-decoration: none;
+}
+
 /*
-    Главное рабочее окно
+    Верхняя панель
 */
-.wrapper {
-    max-width: 100%;
-    min-height: 100vh;
+.top_panel {
+    width: 100%;
+    height: 50px;
+    max-height: 50px;
+
+    z-index: 1;
+    position: fixed;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 
-    padding: 15px;
+    background: #292929;
 }
 
-.btn {
-    font-size: 14px;
-    font-weight: 700;
+.panel_section {
+    display: flex;
+    align-items: center;
+}
 
-    background-color: #ffffff;
+.logo_container {
+    width: 100%;
+
+    user-select: none;
+
+    padding-left: 25px;
+    padding-right: 10px;
+}
+
+.profile {
+    display: flex;
+
+    padding-left: 10px;
+    padding-right: 40px;
+}
+
+.profile_photo {
+    width: 35px;
+    height: 35px;
+
+    margin-right: 5px;
+
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+}
+
+.profile_username {
+    color: #e4e6e8;
+    font-size: 16px;
+
+    text-decoration: none;
+    user-select: none;
+}
+
+/*
+    Выпадающее меню
+*/
+.profile ul,
+.profile ol {
+    list-style: none;
+}
+
+.profile > ul {
+    display: flex;
+    justify-content: center;
+}
+
+.profile > ul li a {
+    display: block;
+    font-size: 16px;
+
+    color: #e4e6e8;
+    text-decoration: none;
+}
+
+.profile > ul li {
+    position: relative;
+}
+
+.profile > ul li > a img {
+    position: absolute;
+    left: -2.75em;
+    top: -50%;
+}
+
+/*
+    Sub menu
+*/
+.profile li ul {
+    width: 200px;
+    top: 3em;
+    left: -7.75em;
+
+    position: absolute;
+
+    text-align: center;
+    visibility: hidden;
+
+    transition: all 0.2s ease;
+}
+
+.profile li:hover > ul {
+    visibility: visible;
+}
+
+.profile li > ul li a {
+    padding: 10px;
+    background: #292929;
+}
+
+.profile li > ul li a:hover {
+    background: #ffffff;
+    color: #292929;
+}
+
+/*
+    Header у блоков описания и задач
+*/
+.block_header {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+
     color: #292929;
 
-    padding: 10px 150px;
-    margin: 30px 25px 30px 25px;
-
-    cursor: pointer;
     text-align: center;
-    text-decoration: none;
 
-    outline: none;
-    border: none;
-    border-radius: 20px;
+    height: 40px;
+    border-bottom: 1px solid #292929;
+    user-select: none;
 
-    transition: all .1s ease-in-out;
-}
-
-.btn:hover {
-    color: #ffffff;
-    background-color: #292929;
-
-    border: 2px solid white;
+    margin-top: 15px;
 }
