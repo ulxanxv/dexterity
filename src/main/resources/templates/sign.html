@@ -6,8 +6,9 @@
     <title>Dexterity — Registration</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{css/au.css}" href="../static/css/au.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -15,24 +16,20 @@
         <div class="wrapper">
             <div class="form-content">
                 <span id="title" class="title">
-                    <a th:href="@{/}" href="../templates/index.html" class="title-text">
+                    <a th:href="@{/}" href="../templates/index.html">
                         DEXTERITY
                     </a>
                 </span>
-
                 <form action="/sign" method="post" th:object="${credential}">
                     <input th:field="*{email}" style="margin-bottom: 25px" type="email" placeholder="E-Mail"/>
                     <input th:field="*{login}" type="text" placeholder="Логин"/>
                     <input th:field="*{password}" type="password" placeholder="Пароль"/>
                     <input type="password" placeholder="Подтверждение пароля"/>
-                    <p th:if="${authError != null}" th:text="${authError.getDescription()}" class="info-about-register"></p>
-                    <input type="submit" value="Зарегистрироваться">
-
-                    <div>
-                        <span class="link">
-                            Уже имеете аккаунт?
-                        </span>
-                        <a class="link link_a" th:href="@{/login}" href="../templates/login.html">
+                    <p th:if="${authError != null}" th:text="${authError.getDescription()}" class="error"></p>
+                    <input class="btn" type="submit" value="Зарегистрироваться">
+                    <div class="link">
+                        <span>Уже имеете аккаунт?</span>
+                        <a th:href="@{/login}" href="../templates/login.html">
                             Войти
                         </a>
                     </div>
@@ -45,10 +42,10 @@
     <script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
     <script>
         setTimeout(function () {
-            $('.info-about-register').css('opacity', '0');
+            $('.error').css('opacity', '0');
 
             setTimeout(function () {
-                $('.info-about-register').remove();
+                $('.error').remove();
             }, 1000);
 
         }, 5000);

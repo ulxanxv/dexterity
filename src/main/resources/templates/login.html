@@ -6,6 +6,7 @@
     <title>Dexterity — Auth</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{css/au.css}" href="../static/css/au.css">
+    <link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
 </head>
@@ -15,26 +16,21 @@
         <div class="wrapper">
             <div class="form-content">
                 <span id="title" class="title">
-                    <a th:href="@{/}" href="../templates/index.html" class="title-text">
+                    <a th:href="@{/}" href="../templates/index.html">
                         DEXTERITY
                     </a>
                 </span>
-
                 <form method="post" action="/login">
                     <input type="text" name="login" placeholder="Логин">
                     <input type="password" name="password" placeholder="Пароль">
-                    <p th:if="${authError != null}" th:text="${authError.getDescription()}" class="info-about-register"></p>
-                    <input type="submit" value="Войти">
-
-                    <div class="text-c">
-                        <span class="link">
-                            Не имеете аккаунта?
-                        </span>
-                        <a class="link link_a" th:href="@{/sign}" href="../templates/sign.html">
+                    <p th:if="${authError != null}" th:text="${authError.getDescription()}" class="error"></p>
+                    <input class="btn" type="submit" value="Войти">
+                    <div class="link">
+                        <span>Не имеете аккаунта?</span>
+                        <a th:href="@{/sign}" href="../templates/sign.html">
                             Зарегистрироваться
                         </a>
                     </div>
-
                 </form>
             </div>
         </div>
@@ -43,10 +39,10 @@
     <script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
     <script>
        setTimeout(function () {
-           $('.info-about-register').css('opacity', '0');
+           $('.error').css('opacity', '0');
 
            setTimeout(function () {
-               $('.info-about-register').remove();
+               $('.error').remove();
            }, 1000);
 
        }, 5000);

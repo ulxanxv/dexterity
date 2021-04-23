@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Code', monospace;
+    font-weight: 300;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+/*
+    Ограничитель для сайта
+*/
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+
+    padding-top: 25px;
+
+    background-color: #ffffff;
+    background-size: cover;
+}
+
+/*
+    Главное рабочее окно
+*/
+.wrapper {
+    max-width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+}
+
+.btn {
+    font-size: 14px;
+    font-weight: 700;
+
+    background-color: #ffffff;
+    color: #292929;
+
+    padding: 10px 150px;
+    margin: 30px 25px 30px 25px;
+
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+
+    outline: none;
+    border: none;
+    border-radius: 20px;
+
+    transition: all .1s ease-in-out;
+}
+
+.btn:hover {
+    color: #ffffff;
+    background-color: #292929;
+
+    border: 2px solid white;
+}
