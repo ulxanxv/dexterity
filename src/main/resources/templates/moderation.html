@@ -5,9 +5,10 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 
-	<link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
+
 	<link rel="stylesheet" type="text/css" th:href="@{css/offers.css}" href="../static/css/offers.css">
 	<link rel="stylesheet" type="text/css" th:href="@{css/moderation.css}" href="../static/css/moderation.css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet">
 </head>
@@ -20,7 +21,7 @@
 			<div class="panel_section">
 				<!--                    Логотип в верхней панели-->
 				<div class="logo_container">
-					<a class="logo_text" th:href="@{/}" href="index.html">
+					<a class="logo" th:href="@{/}" href="index.html">
 						DEXTERITY
 					</a>
 				</div>
@@ -63,21 +64,36 @@
 			<!--				Краткое описание и подробное описание-->
 			<div class="offers_body">
 				<div class="offers_description">
-					<div class="s_desc">
+					<div class="tab">
+						<button class="tablinks" onclick="openCity(event, 'd_short')">Краткое описание</button>
+						<button class="tablinks" onclick="openCity(event, 'd_long')">Подробное описание</button>
+						<button class="tablinks" onclick="openCity(event, 'd_difficult')">Сложность</button>
+						<button class="tablinks" onclick="openCity(event, 'start_code_name_id')">Название основного класса</button>
+						<button class="tablinks" onclick="openCity(event, 'test_code_name_id')">Название тестового класса</button>
+					</div>
+					<div id="d_short" class="tabcontent s_desc">
 						<p>Краткое описание</p>
 						<input name="short_description" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
 					</div>
-					<div class="l_desc">
+					<div id="d_long" class="tabcontent l_desc">
 						<p>Подробное описание</p>
 						<textarea name="long_description" type="text" maxlength="32768"></textarea>
 					</div>
-					<div class="difficult">
+					<div id="d_difficult" class="tabcontent difficult">
 						<p>Сложность</p>
 						<select id="difficult" style="width: 100%">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
+							<option>Легко</option>
+							<option>Средне</option>
+							<option>Трудно</option>
 						</select>
+					</div>
+					<div id="start_code_name_id" class="tabcontent start_code_name">
+						<p>Название основного класса</p>
+						<input name="sc_name" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
+					</div>
+					<div id="test_code_name_id" class="tabcontent test_code_name">
+						<p>Название тестового класса</p>
+						<input name="tc_name" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
 					</div>
 				</div>
 
@@ -97,20 +113,12 @@
 
 						</div>
 					</div>
-					<div class="class_names">
-						<div class="start_code_name">
-							<input placeholder="Название основного класса" name="start_code_name" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
-						</div>
-						<div class="test_code_name">
-							<input placeholder="Название тестового класса" name="test_code_name" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
-						</div>
-					</div>
 					<div class="btn_align">
-						<button type="button" id="accept">
-							Отклонить
-						</button>
-						<button type="button" id="decline">
+						<button class="btn btn_accept" type="button" id="accept">
 							Одобрить
+						</button>
+						<button class="btn btn_decline" type="button" id="decline">
+							Отклонить
 						</button>
 					</div>
 				</div>
@@ -154,7 +162,6 @@
 
 		editorLib.init();
 	</script>
-
 </div>
 </div>
 

@@ -33,9 +33,23 @@
 }
 
 .start_code_name {
-    margin: 0 25px;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .test_code_name {
-    margin: 0 25px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.btn_accept:hover {
+    color: white;
+    background-color: #4bb338;
+    border: none;
+}
+
+.btn_decline:hover {
+    color: white;
+    background-color: #b33838;
+    border: none;
 }
