@@ -1,0 +1,168 @@
+/*
+    Главное рабочее окно
+*/
+.wrapper {
+    max-width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+}
+
+/*
+    Личный кабинет
+*/
+
+.personal_main {
+    width: 100%;
+    min-width: 350px;
+    height: 800px;
+
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
+    border-radius: 20px;
+
+    margin: 100px 30px 70px 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.personal_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.personal_photo img {
+    width: 250px;
+    height: 250px;
+
+    margin: 25px;
+
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+}
+
+.personal_info span {
+    font-size: 20px;
+}
+
+.personal_info form {
+    margin-top: 100px;
+}
+
+.personal_info form div {
+    margin: 25px;
+}
+
+.input_file {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.input__file-button-text {
+    font-size: 14px;
+    font-weight: 700;
+
+    color: white;
+    background-color: #292929;
+
+    padding: 10px 50px;
+    margin: 30px 25px 30px 25px;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    text-decoration: none;
+
+    border-radius: 20px;
+
+    transition: all .1s ease-in-out;
+}
+
+.input__file-button-text:hover {
+    color: #292929;
+    background-color: white;
+
+    border: 2px solid #292929;
+}
+
+/*
+    Блок самого задания
+*/
+.task_body {
+    height: 500px;
+    margin: 30px 25px 30px 25px;
+}
+
+.task_body::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+}
+
+.task_body::-webkit-scrollbar-thumb {
+    background: #424242;
+    border-radius: 8px;
+}
+
+/*
+    Задача
+*/
+.task {
+    width: 100%;
+    display: table;
+
+    padding: 10px 20px;
+    margin-bottom: 15px;
+
+    color: #292929;
+    background-color: #ffffff;
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
+}
+
+.task span {
+    font-size: 14px;
+    font-weight: 600;
+
+    padding-left: 10px;
+
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+
+    user-select: none;
+}
+
+/*
+    Текст названия задачи
+*/
+.tb_text {
+    font-size: 14px;
+    font-weight: 600;
+
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+
+    color: #292929;
+    text-decoration: none;
+    transition: all .1s linear;
+
+    cursor: pointer;
+}
+
+.tb_text:hover {
+    opacity: 0.5;
+}
+
+.personal_rating {
+    width: 80vh;
+    border-radius: 20px;
+    margin: 50px 30px 70px 30px;
+    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
+}

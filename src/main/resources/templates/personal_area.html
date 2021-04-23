@@ -5,9 +5,10 @@
 	<meta charset="UTF-8">
 	<title>Title</title>
 
-	<link rel="stylesheet" type="text/css" th:href="@{../css/index.css}" href="../static/css/index.css">
+	<link rel="stylesheet" type="text/css" th:href="@{../css/personal-area.css}" href="../static/css/personal-area.css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,7 +20,7 @@
 			<div class="panel_section">
 				<!--                    Логотип в верхней панели-->
 				<div class="logo_container">
-					<a class="logo_text" th:href="@{/}" href="index.html">
+					<a class="logo" th:href="@{/}" href="index.html">
 						DEXTERITY
 					</a>
 				</div>
@@ -57,10 +58,9 @@
 		</div>
 
 		<div class="personal_main">
-
 			<div class="personal_info">
 				<div class="personal_photo">
-					<img class="profile_photo" th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'../images/' + ${filename.toString()}"/>
+<!--					<img class="profile_photo" th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'../images/' + ${filename.toString()}"/>-->
 					<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{../images/anon.jpg}" src="../static/images/anon.jpg"/>
 				</div>
 				<span th:text="${username}">Ulxanxv</span>
@@ -85,14 +85,20 @@
 				</div>
 				<!--                        Блок самого задания-->
 				<div class="task_body">
-					<div class="task" style="border-bottom: 10px solid #404040;">
-						<div class="tb_text">
-							Тестовое описание задачи
-						</div>
+					<div class="task" th:if="${task.getDifficult() == 1}">
+						<a class="tb_text" th:text="${task.getShortDescription()}">Перевести число в строку</a>
+						<span style="color: darkgreen">Легко</span>
+					</div>
+					<div class="task" th:if="${task.getDifficult() == 2}">
+						<a class="tb_text" th:utext="${task.getShortDescription()}">ASD</a>
+						<span style="color: #646200">Средне</span>
+					</div>
+					<div class="task" th:if="${task.getDifficult() == 3}">
+						<a class="tb_text" th:text="${task.getShortDescription()}">FDS</a>
+						<span style="color: #640000">Трудно</span>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>
