@@ -19,7 +19,8 @@ $('.tb_text').on('click', function (e) {
 
 // Получение результатов компиляции
 $('#run_code').on('click', function () {
-  $('.ex_result').typed('reset');
+
+  $('.result').text('');
 
   $.ajax({
     type: 'GET',
@@ -30,13 +31,12 @@ $('#run_code').on('click', function () {
     },
 
     success: function (data) {
-      if (jQuery.parseJSON(data.result).status === 'ok') {
+      if (data.status === 'ok') {
         $('.ex_result').css('color', 'green');
         let typed = new Typed('.result', {
-          strings: ['Все тесты^1000 успешно пройдены', ''],
+          strings: ['Все тесты^1000 успешно пройдены'],
           startDelay: 0,
           typeSpeed: 20,
-          backDelay: 10000,
           showCursor: false,
 
           preStringTyped: function () {
@@ -46,10 +46,9 @@ $('#run_code').on('click', function () {
       } else {
         $('.ex_result').css('color', 'red');
         let typed = new Typed('.result', {
-          strings: ['Ошибка :: ^1000 ' + jQuery.parseJSON(data.result).message, ''],
+          strings: ['Ошибка :: ^1000 ' + data.message],
           startDelay: 0,
           typeSpeed: 20,
-          backDelay: 10000,
           showCursor: false,
 
           preStringTyped: function () {

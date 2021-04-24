@@ -20,6 +20,12 @@ databaseChangeLog:
                     unique: true
                     nullable: false
               - column:
+                  name: experience
+                  type: bigint
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
                   name: email
                   type: varchar(128)
                   constraints:
@@ -167,11 +173,14 @@ databaseChangeLog:
                   name: login
                   value: "Ulxanxv"
               - column:
+                  name: experience
+                  value: 42343
+              - column:
                   name: password
                   value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
               - column:
                   name: role
-                  value: "USER"
+                  value: "MODER"
         - insert:
             tableName: credential
             columns:
@@ -181,6 +190,9 @@ databaseChangeLog:
               - column:
                   name: login
                   value: "Qwerty"
+              - column:
+                  name: experience
+                  value: 42342
               - column:
                   name: password
                   value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
@@ -278,7 +290,8 @@ databaseChangeLog:
                               @Test
                               public void testSomething() {
                                  assertEquals(\"HELLO\",u.MakeUpperCase(\"hello\"));
-                                 }}"
+                              }
+                          }"
               - column:
                   name: start_code
                   value: "class Upper {\n\tpublic static String MakeUpperCase(String str) {\n\t\n\t}\n}"

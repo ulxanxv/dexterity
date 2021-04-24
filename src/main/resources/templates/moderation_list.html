@@ -35,7 +35,7 @@
 							<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
 							<ul>
 								<li>
-									<a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
+									<a th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a>
 								</li>
 								<li>
 									<a th:href="@{/rating}" href="../templates/rating.html">Рейтинг</a>
@@ -68,18 +68,20 @@
 					Предложенные задачи
 				</div>
 				<div class="task_list">
-					<div class="task" th:if="${task.getDifficult() == 1}">
-						<a class="tb_text" th:text="${task.getShortDescription()}">sdfgdfgdfgf sdfsdfsdfsd fsd sdfsdfsdfs dfgdfgdg g fdgdfgdfg df</a>
-						<span style="color: darkgreen;">Легко</span>
-					</div>
-					<div class="task" th:if="${task.getDifficult() == 2}">
-						<a class="tb_text" th:utext="${task.getShortDescription()}"></a>
-						<span style="color: #646200;">Средне</span>
-					</div>
-					<div class="task" th:if="${task.getDifficult() == 3}">
-						<a class="tb_text" th:text="${task.getShortDescription()}"></a>
-						<span style="color: #640000">Трудно</span>
-					</div>
+					<th:block th:each="task : ${taskList}">
+						<div class="task" th:if="${task.getDifficult() == 1}">
+							<a class="tb_text" th:text="${task.getShortDescription()}">sdfgdfgdfgf sdfsdfsdfsd fsd sdfsdfsdfs dfgdfgdg g fdgdfgdfg df</a>
+							<span style="color: darkgreen;">Легко</span>
+						</div>
+						<div class="task" th:if="${task.getDifficult() == 2}">
+							<a class="tb_text" th:utext="${task.getShortDescription()}"></a>
+							<span style="color: #646200;">Средне</span>
+						</div>
+						<div class="task" th:if="${task.getDifficult() == 3}">
+							<a class="tb_text" th:text="${task.getShortDescription()}"></a>
+							<span style="color: #640000">Трудно</span>
+						</div>
+					</th:block>
 				</div>
 			</div>
 		</div>

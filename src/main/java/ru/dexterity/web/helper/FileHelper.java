@@ -1,20 +1,15 @@
-package ru.dexterity.web.attach;
+package ru.dexterity.web.helper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import ru.dexterity.dao.models.Credential;
 import ru.dexterity.dao.repositories.CredentialRepository;
 import ru.dexterity.security.AuthorizationAttributes;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -24,7 +19,7 @@ import java.util.UUID;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class FileComponent {
+public class FileHelper {
 
     @Value("${upload.images-path}")
     private String uploadPath;

@@ -73,10 +73,11 @@
 
     border: 2px solid #ffffff;
     border-radius: 25px;
-    background: linear-gradient(to right, darkgreen 50%, transparent 50%);
+    /*background: linear-gradient(to right, darkgreen 50%, transparent 50%);*/
 
     margin-bottom: 2px;
     margin-right: 15px;
+    margin-left: 15px;
     padding: 2px 15px;
 }
 

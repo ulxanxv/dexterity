@@ -1,34 +1,26 @@
-package ru.dexterity.web.main;
+package ru.dexterity.web.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.dexterity.api.TaskComponent;
 import ru.dexterity.web.domain.SelectedTask;
+import ru.dexterity.web.helper.ModelHelper;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-public class IndexController {
+public class ExecuteController {
 
-    private final TaskComponent taskComponent;
-    private final IndexComponent indexComponent;
+    private final ModelHelper modelHelper;
     private final SelectedTask selectedTask;
-
-    @GetMapping("/")
-    public String index(Model model) {
-        indexComponent.setUsernameAndPhoto(model);
-        indexComponent.setTaskList(model);
-
-        return "index";
-    }
+    private final TaskComponent taskComponent;
 
     @GetMapping("/execute")
     public String execute(Model model) {
-        indexComponent.setUsernameAndPhoto(model);
+        modelHelper.setCredential(model);
 
         if (selectedTask.getSelectedTask() != null) {
             model.addAttribute("selectedTask", taskComponent.findById(selectedTask.getSelectedTask()));
@@ -39,4 +31,3 @@ public class IndexController {
     }
 
 }
-

@@ -1,4 +1,4 @@
-package ru.dexterity.web.run;
+package ru.dexterity.web.controllers.compile;
 
 import lombok.Builder;
 import lombok.Data;

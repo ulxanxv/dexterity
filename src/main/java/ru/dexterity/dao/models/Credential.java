@@ -21,6 +21,9 @@ public class Credential {
     private String login;
 
     @Column(nullable = false)
+    private int experience;
+
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)

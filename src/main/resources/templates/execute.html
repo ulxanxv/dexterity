@@ -30,6 +30,9 @@
                     <p class="profile_username">
                         <th:block th:text="${username.toString()}"></th:block>
                     </p>
+                    <div class="experience" th:if="${!#strings.equals(username, 'anonymousUser')}">
+                        5 уровень
+                    </div>
                     <nav class="profile">
                         <ul>
                             <li>
@@ -37,7 +40,7 @@
                                 <img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
                                 <ul>
                                     <li>
-                                        <a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
+                                        <a th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a>
                                     </li>
                                     <li>
                                         <a th:href="@{/rating}" href="../templates/rating.html">Рейтинг</a>

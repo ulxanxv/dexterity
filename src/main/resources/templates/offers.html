@@ -34,11 +34,11 @@
 					<nav class="profile">
 						<ul>
 							<li>
-								<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
-								<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
+								<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'images/' + ${filename.toString()}" class="profile_photo"/>
+								<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
 								<ul>
 									<li>
-										<a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
+										<a th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a>
 									</li>
 									<li>
 										<a th:href="@{/rating}" href="../templates/rating.html">Рейтинг</a>

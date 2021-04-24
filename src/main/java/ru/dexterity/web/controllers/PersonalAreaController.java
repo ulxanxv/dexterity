@@ -1,4 +1,4 @@
-package ru.dexterity.web.attach;
+package ru.dexterity.web.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -7,32 +7,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import ru.dexterity.web.main.IndexComponent;
+import ru.dexterity.web.helper.FileHelper;
+import ru.dexterity.web.helper.ModelHelper;
 
 import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
-public class FileController {
+public class PersonalAreaController {
 
-    private final FileComponent fileComponent;
-    private final IndexComponent indexComponent;
+    private final FileHelper fileHelper;
+    private final ModelHelper modelHelper;
 
-    @GetMapping("/file/upload")
+    @GetMapping("/personal_area")
     public String uploadFilePage(Model model) {
-        indexComponent.setUsernameAndPhoto(model);
+        modelHelper.setCredential(model);
+        modelHelper.setTaskList(model);
         return "personal_area";
     }
 
     @PostMapping("/file/upload")
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile, Model model) {
         try {
-            fileComponent.uploadFile(multipartFile);
-            indexComponent.setUsernameAndPhoto(model);
+            fileHelper.uploadFile(multipartFile);
+            modelHelper.setCredential(model);
+            modelHelper.setTaskList(model);
         } catch (IOException e) {
-            return "redirect:/file/upload";
+            return "redirect:/personal_area";
         }
-        return "redirect:/file/upload";
+        return "redirect:/personal_area";
     }
 
 }
