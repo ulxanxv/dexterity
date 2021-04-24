@@ -42,6 +42,7 @@
 
     z-index: 1;
     position: fixed;
+    border-radius: 0 0 25px 25px;
 
     display: flex;
     justify-content: space-between;
@@ -63,6 +64,22 @@
     padding-right: 10px;
 }
 
+.experience {
+    font-weight: 600;
+
+    color: #ffffff;
+
+    user-select: none;
+
+    border: 2px solid #ffffff;
+    border-radius: 25px;
+    background: linear-gradient(to right, darkgreen 50%, transparent 50%);
+
+    margin-bottom: 2px;
+    margin-right: 15px;
+    padding: 2px 15px;
+}
+
 .profile {
     display: flex;
 
@@ -81,7 +98,7 @@
 }
 
 .profile_username {
-    color: #e4e6e8;
+    color: #ffffff;
     font-size: 16px;
 
     text-decoration: none;
@@ -166,4 +183,59 @@
     user-select: none;
 
     margin-top: 15px;
+}
+
+/*
+    Задача
+*/
+.task {
+    width: 100%;
+    display: table;
+
+    padding: 10px 20px;
+    margin-bottom: 15px;
+
+    color: #292929;
+    background-color: #ffffff;
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
+}
+
+.task span {
+    font-size: 14px;
+    font-weight: 600;
+
+    width: 60px;
+
+    padding-left: 10px;
+    margin: 0 10px;
+
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+
+    user-select: none;
+}
+
+/*
+    Текст названия задачи
+*/
+.tb_text {
+    font-size: 14px;
+    font-weight: 600;
+
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+
+    color: #292929;
+    text-decoration: none;
+    transition: all .1s linear;
+
+    cursor: pointer;
+}
+
+.tb_text:hover {
+    opacity: 0.5;
 }

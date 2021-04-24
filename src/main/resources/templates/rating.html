@@ -7,6 +7,7 @@
 
 	<link rel="stylesheet" type="text/css" th:href="@{css/index.css}" href="../static/css/index.css">
 	<link rel="stylesheet" type="text/css" th:href="@{css/rating.css}" href="../static/css/rating.css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
 </head>
@@ -18,7 +19,7 @@
 			<div class="panel_section">
 				<!--                    Логотип в верхней панели-->
 				<div class="logo_container">
-					<a class="logo_text" th:href="@{/}" href="index.html">
+					<a class="logo" th:href="@{/}" href="index.html">
 						DEXTERITY
 					</a>
 				</div>
@@ -37,6 +38,14 @@
 								<li>
 									<a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
 								</li>
+								<li>
+									<a th:href="@{/rating}" href="../templates/rating.html">Рейтинг</a>
+								</li>
+								<th:block th:if="${!#strings.equals(role, 'MODER')}">
+									<li>
+										<a th:href="@{/moderation}" href="../templates/moderation_list.html">Модерация</a>
+									</li>
+								</th:block>
 								<th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
 									<li>
 										<a th:href="@{/logout}">Выйти</a>

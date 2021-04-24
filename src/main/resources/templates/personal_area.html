@@ -40,6 +40,14 @@
 								<li>
 									<a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
 								</li>
+								<li>
+									<a th:href="@{/rating}" href="../templates/rating.html">Рейтинг</a>
+								</li>
+								<th:block th:if="${!#strings.equals(role, 'MODER')}">
+									<li>
+										<a th:href="@{/moderation}" href="../templates/moderation_list.html">Модерация</a>
+									</li>
+								</th:block>
 								<th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
 									<li>
 										<a th:href="@{/logout}">Выйти</a>
@@ -88,6 +96,8 @@
 					<div class="task" th:if="${task.getDifficult() == 1}">
 						<a class="tb_text" th:text="${task.getShortDescription()}">Перевести число в строку</a>
 						<span style="color: darkgreen">Легко</span>
+						<span>Место 3212</span>
+						<span>Оценка 433</span>
 					</div>
 					<div class="task" th:if="${task.getDifficult() == 2}">
 						<a class="tb_text" th:utext="${task.getShortDescription()}">ASD</a>

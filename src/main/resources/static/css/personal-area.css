@@ -108,58 +108,6 @@
     border-radius: 8px;
 }
 
-/*
-    Задача
-*/
-.task {
-    width: 100%;
-    display: table;
-
-    padding: 10px 20px;
-    margin-bottom: 15px;
-
-    color: #292929;
-    background-color: #ffffff;
-
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
-}
-
-.task span {
-    font-size: 14px;
-    font-weight: 600;
-
-    padding-left: 10px;
-
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-
-    user-select: none;
-}
-
-/*
-    Текст названия задачи
-*/
-.tb_text {
-    font-size: 14px;
-    font-weight: 600;
-
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-
-    color: #292929;
-    text-decoration: none;
-    transition: all .1s linear;
-
-    cursor: pointer;
-}
-
-.tb_text:hover {
-    opacity: 0.5;
-}
-
 .personal_rating {
     width: 80vh;
     border-radius: 20px;

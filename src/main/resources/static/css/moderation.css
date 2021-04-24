@@ -44,12 +44,14 @@
 
 .btn_accept:hover {
     color: white;
-    background-color: #4bb338;
+    /*background-color: #4bb338;*/
+    background-color: #006400FF;
     border: none;
 }
 
 .btn_decline:hover {
     color: white;
-    background-color: #b33838;
+    /*background-color: #b33838;*/
+    background-color: #640000FF;
     border: none;
 }

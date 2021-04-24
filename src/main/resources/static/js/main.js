@@ -61,3 +61,20 @@ $('#run_code').on('click', function () {
   })
 
 });
+
+function openCity(evt, cityName) {
+  let i, tabContent, tabLinks;
+  tabContent = $('.tabcontent');
+
+  for (i = 0; i < tabContent.length; i++) {
+    tabContent[i].style.display = "none";
+  }
+
+  tabLinks = $('.tablinks');
+  for (i = 0; i < tabLinks.length; i++) {
+    tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+  }
+
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}

@@ -39,6 +39,14 @@
                                     <li>
                                         <a th:href="@{/file/upload}" href="../templates/personal_area.html">Личный кабинет</a>
                                     </li>
+                                    <li>
+                                        <a th:href="@{/rating}" href="../templates/rating.html">Рейтинг</a>
+                                    </li>
+                                    <th:block th:if="${!#strings.equals(role, 'MODER')}">
+                                        <li>
+                                            <a th:href="@{/moderation}" href="../templates/moderation_list.html">Модерация</a>
+                                        </li>
+                                    </th:block>
                                     <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
                                         <li>
                                             <a th:href="@{/logout}">Выйти</a>
