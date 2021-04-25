@@ -70,7 +70,7 @@
 					Предложенные задачи
 				</div>
 				<div class="task_list">
-					<th:block th:each="task : ${taskList}">
+					<th:block th:each="task : ${moderationTaskList}">
 						<div class="task" th:if="${task.getDifficult() == 1}">
 							<a class="tb_text" th:text="${task.getShortDescription()}">sdfgdfgdfgf sdfsdfsdfsd fsd sdfsdfsdfs dfgdfgdg g fdgdfgdfg df</a>
 							<span style="color: darkgreen;">Легко</span>

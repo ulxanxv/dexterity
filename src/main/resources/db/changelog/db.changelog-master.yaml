@@ -264,6 +264,36 @@ databaseChangeLog:
             columns:
               - column:
                   name: in_moderation
+                  value: true
+              - column:
+                  name: short_description
+                  value: "Удалить повторяющиеся элементы"
+              - column:
+                  name: long_description
+                  value: "Подробное описание удаления повторяющихся элементов"
+              - column:
+                  name: class_name
+                  value: "---"
+              - column:
+                  name: test_class_name
+                  value: "---"
+              - column:
+                  name: test_code
+                  value: "---"
+              - column:
+                  name: start_code
+                  value: "---"
+              - column:
+                  name: solution_code
+                  value: "---"
+              - column:
+                  name: difficult
+                  value: 3
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: in_moderation
                   value: false
               - column:
                   name: short_description

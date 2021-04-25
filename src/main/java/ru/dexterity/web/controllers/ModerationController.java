@@ -23,7 +23,7 @@ public class ModerationController {
     @GetMapping("/moderation_list")
     public String moderationList(Model model) {
         modelHelper.setCredential(model);
-        modelHelper.setTaskList(model);
+        modelHelper.setModerationTaskList(model);
         return "moderation_list";
     }
 
