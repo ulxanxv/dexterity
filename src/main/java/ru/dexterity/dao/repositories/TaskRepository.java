@@ -16,7 +16,4 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findAllByInModerationTrue();
 
-    @Query("SELECT tr FROM TaskRating tr WHERE tr.task.shortDescription = ?1")
-    List<TaskRating> findRatingListByShortDescription(String shortDescription);
-
 }

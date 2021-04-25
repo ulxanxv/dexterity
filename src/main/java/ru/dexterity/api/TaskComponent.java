@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.dexterity.api.TaskNotFoundException.TaskErrorCode;
 import ru.dexterity.dao.models.Task;
 import ru.dexterity.dao.models.TaskRating;
+import ru.dexterity.dao.repositories.TaskRatingRepository;
 import ru.dexterity.dao.repositories.TaskRepository;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class TaskComponent {
 
     private final TaskRepository taskRepository;
+    private final TaskRatingRepository taskRatingRepository;
 
     public List<Task> findAllNotModeration() {
         return taskRepository.findAllByInModerationFalse();
@@ -27,7 +29,7 @@ public class TaskComponent {
     }
 
     public List<TaskRating> ratingList(String shortDescription) {
-        return taskRepository.findRatingListByShortDescription(shortDescription);
+        return taskRatingRepository.findRatingListByShortDescription(shortDescription);
     }
 
     public Task findByShortDescription(String shortDescription) {
