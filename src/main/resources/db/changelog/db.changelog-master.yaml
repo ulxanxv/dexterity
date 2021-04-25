@@ -174,7 +174,7 @@ databaseChangeLog:
                   value: "Ulxanxv"
               - column:
                   name: experience
-                  value: 42343
+                  value: 1000
               - column:
                   name: password
                   value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"
@@ -192,7 +192,7 @@ databaseChangeLog:
                   value: "Qwerty"
               - column:
                   name: experience
-                  value: 42342
+                  value: 1000
               - column:
                   name: password
                   value: "$2y$12$.EzBlMBHH9jp5lHgZi4Fw.sEaIeaM2E2G3.h5oE7L8IY2YDUhB/la"

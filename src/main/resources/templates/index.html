@@ -29,34 +29,33 @@
                     <div class="panel_section">
 <!--                    Фото профиля (выпадающий список)-->
                       <p class="profile_username">
-                        <th:block th:text="${username.toString()}"></th:block>
+                        <th:block th:if="${userExist == true}" th:text="${username.toString()}"></th:block>
                       </p>
-                      <div class="experience" th:if="${!#strings.equals(username, 'anonymousUser')}" th:text="${level} + ' уровень'">
-
+                      <div class="experience" th:if="${userExist == true}" th:text="${level} + ' уровень'">
                       </div>
                       <nav class="profile">
                         <ul>
                           <li>
-                            <img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'images/' + ${filename.toString()}" class="profile_photo"/>
-                            <img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
+                            <img th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}" class="profile_photo"/>
+                            <img class="profile_photo" th:if="${userExist == false}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
                             <ul>
                               <li>
-                                <a th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a>
+                                <a th:if="${userExist == true}" th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a>
                               </li>
                               <li>
-                                <a th:href="@{/rating}" href="rating.html">Рейтинг</a>
+                                <a th:if="${userExist == true}" th:href="@{/rating}" href="rating.html">Рейтинг</a>
                               </li>
                               <th:block th:if="${#strings.equals(role, 'MODER')}">
                                 <li>
                                   <a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a>
                                 </li>
                               </th:block>
-                              <th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
+                              <th:block th:if="${userExist == true}">
                                 <li>
                                   <a th:href="@{/logout}">Выйти</a>
                                 </li>
                               </th:block>
-                              <th:block th:if="${#strings.equals(username, 'anonymousUser')}">
+                              <th:block th:if="${userExist == false}">
                                 <li>
                                   <a th:href="@{/login}" href="login.html">Войти</a>
                                 </li>

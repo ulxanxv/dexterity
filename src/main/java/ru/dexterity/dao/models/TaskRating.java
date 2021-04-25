@@ -32,7 +32,7 @@ public class TaskRating {
 
     private Double brevity;
     private Double rapidity;
-    private Double resourcesConsumption;
+    private Double resourceConsumption;
     private Double totalScore;
 
 }

@@ -5,9 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.dexterity.api.TaskNotFoundException.TaskErrorCode;
 import ru.dexterity.dao.models.Task;
+import ru.dexterity.dao.models.TaskRating;
 import ru.dexterity.dao.repositories.TaskRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -16,8 +18,16 @@ public class TaskComponent {
 
     private final TaskRepository taskRepository;
 
-    public List<Task> findAll() {
-        return taskRepository.findAll();
+    public List<Task> findAllNotModeration() {
+        return taskRepository.findAllByInModerationFalse();
+    }
+
+    public List<Task> findAllModeration() {
+        return taskRepository.findAllByInModerationTrue();
+    }
+
+    public List<TaskRating> ratingList(String shortDescription) {
+        return taskRepository.findRatingListByShortDescription(shortDescription);
     }
 
     public Task findByShortDescription(String shortDescription) {

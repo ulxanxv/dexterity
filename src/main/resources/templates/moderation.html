@@ -31,21 +31,23 @@
 				<p class="profile_username">
 					<th:block th:text="${username.toString()}"></th:block>
 				</p>
+				<div class="experience" th:if="${!#strings.equals(username, 'anonymousUser')}" th:text="${level} + ' уровень'">
+				</div>
 				<nav class="profile">
 					<ul>
 						<li>
-							<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'/images/' + ${filename.toString()}" class="profile_photo"/>
-							<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg" class="profile_photo"/>
+							<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'images/' + ${filename.toString()}" class="profile_photo"/>
+							<img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
 							<ul>
 								<li>
 									<a th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a>
 								</li>
 								<li>
-									<a th:href="@{/rating}" href="../templates/rating.html">Рейтинг</a>
+									<a th:href="@{/rating}" href="rating.html">Рейтинг</a>
 								</li>
-								<th:block th:if="${!#strings.equals(role, 'MODER')}">
+								<th:block th:if="${#strings.equals(role, 'MODER')}">
 									<li>
-										<a th:href="@{/moderation}" href="../templates/moderation_list.html">Модерация</a>
+										<a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a>
 									</li>
 								</th:block>
 								<th:block th:if="${!#strings.equals(username, 'anonymousUser')}">

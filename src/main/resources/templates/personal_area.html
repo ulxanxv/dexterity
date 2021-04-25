@@ -31,21 +31,23 @@
 				<p class="profile_username">
 					<th:block th:text="${username.toString()}"></th:block>
 				</p>
+				<div class="experience" th:if="${!#strings.equals(username, 'anonymousUser')}" th:text="${level} + ' уровень'">
+				</div>
 				<nav class="profile">
 					<ul>
 						<li>
-							<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'../images/' + ${filename.toString()}" class="profile_photo"/>
-							<img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{../images/anon.jpg}" src="../static/images/anon.jpg"/>
+							<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'images/' + ${filename.toString()}" class="profile_photo"/>
+							<img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
 							<ul>
 								<li>
 									<a th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a>
 								</li>
 								<li>
-									<a th:href="@{/rating}" href="../templates/rating.html">Рейтинг</a>
+									<a th:href="@{/rating}" href="rating.html">Рейтинг</a>
 								</li>
-								<th:block th:if="${!#strings.equals(role, 'MODER')}">
+								<th:block th:if="${#strings.equals(role, 'MODER')}">
 									<li>
-										<a th:href="@{/moderation}" href="../templates/moderation_list.html">Модерация</a>
+										<a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a>
 									</li>
 								</th:block>
 								<th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
@@ -93,19 +95,17 @@
 				</div>
 				<!--                        Блок самого задания-->
 				<div class="task_body">
-					<th:block th:each="task : ${taskList}">
-						<div class="task" th:if="${task.getDifficult() == 1}">
-							<a class="tb_text" th:text="${task.getShortDescription()}">Перевести число в строку</a>
+					<th:block th:each="decidedTask : ${decidedTaskList}">
+						<div class="task" th:if="${decidedTask.getTask().getDifficult() == 1}">
+							<a class="tb_text" th:text="${decidedTask.getTask().getShortDescription()}">Перевести число в строку</a>
 							<span style="color: darkgreen">Легко</span>
-							<span>Место 3212</span>
-							<span>Оценка 433</span>
 						</div>
-						<div class="task" th:if="${task.getDifficult() == 2}">
-							<a class="tb_text" th:utext="${task.getShortDescription()}">ASD</a>
+						<div class="task" th:if="${decidedTask.getTask().getDifficult() == 2}">
+							<a class="tb_text" th:utext="${decidedTask.getTask().getShortDescription()}"></a>
 							<span style="color: #646200">Средне</span>
 						</div>
-						<div class="task" th:if="${task.getDifficult() == 3}">
-							<a class="tb_text" th:text="${task.getShortDescription()}">FDS</a>
+						<div class="task" th:if="${decidedTask.getTask().getDifficult() == 3}">
+							<a class="tb_text" th:text="${decidedTask.getTask().getShortDescription()}"></a>
 							<span style="color: #640000">Трудно</span>
 						</div>
 					</th:block>

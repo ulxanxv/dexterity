@@ -32,6 +32,7 @@ public class AuthComponent {
 
         credential.setRole("USER");
         credential.setPassword(passwordEncoder.encode(credential.getPassword()));
+        credential.setExperience(1000);
 
         try {
             credentialRepository.save(credential);

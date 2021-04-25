@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.dexterity.dao.models.Task;
+import ru.dexterity.dao.models.TaskRating;
 import ru.dexterity.web.domain.SelectedTask;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -33,6 +37,11 @@ public class TaskController {
     @GetMapping("/selected_task")
     public TaskResponse selectedUserTask() {
         return new TaskResponse("ok", taskComponent.findById(selectedTask.getSelectedTask()));
+    }
+
+    @GetMapping("task_rating_list")
+    public ResponseEntity<List<TaskRating>> taskRatingList(@RequestParam(name = "short_description") String shortDescription) {
+        return ResponseEntity.ok(taskComponent.ratingList(shortDescription));
     }
 
     @JsonInclude(Include.NON_NULL)
