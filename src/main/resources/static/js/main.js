@@ -1,3 +1,59 @@
+// Отправка задачи
+$('#offer_task').on('click', function () {
+
+  let shortDescription = $('#short').val(),
+      longDescription = $('#long').val(),
+      difficult = $('#difficult').val(),
+      startCode = startEditor.getValue(),
+      testCode = testEditor.getValue();
+
+  switch (difficult) {
+    case "Легко":
+      difficult = 1;
+      break
+    case "Средне":
+      difficult = 2
+      break
+    case "Трудно":
+      difficult = 3
+      break
+    default:
+      difficult = 0
+  }
+
+  if (shortDescription.length < 3 || longDescription.length < 10 || difficult === 0 || startCode.length < 10 || testCode.length < 10) {
+    swal({
+      title: "Ошибка",
+      text: "Проверьте, всё ли вы заполнили",
+      icon: "error",
+      className: "alert",
+      button: {
+        className: "alert_btn"
+      }
+    });
+
+    return;
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/offer_task',
+    contentType: "application/json",
+    data: JSON.stringify({
+      shortDescription: shortDescription,
+      longDescription: longDescription,
+      difficult: difficult,
+      startCode: startCode,
+      testCode: testCode
+    }),
+
+    success: function (data) {
+      console.log(data);
+    }
+  })
+
+})
+
 // Получение подробного описания задачи
 $('.tb_text').on('click', function (e) {
 
@@ -15,7 +71,7 @@ $('.tb_text').on('click', function (e) {
        }
    })
 
-});
+})
 
 // Получение результатов компиляции
 $('#run_code').on('click', function () {
@@ -59,9 +115,9 @@ $('#run_code').on('click', function () {
     }
   })
 
-});
+})
 
-function openCity(evt, cityName) {
+function openTab(evt, tabName) {
   let i, tabContent, tabLinks;
   tabContent = $('.tabcontent');
 
@@ -74,6 +130,6 @@ function openCity(evt, cityName) {
     tabLinks[i].className = tabLinks[i].className.replace(" active", "");
   }
 
-  document.getElementById(cityName).style.display = "block";
+  document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
 }

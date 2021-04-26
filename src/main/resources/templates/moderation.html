@@ -75,11 +75,11 @@
 			<div class="offers_body">
 				<div class="offers_description">
 					<div class="tab">
-						<button class="tablinks" onclick="openCity(event, 'd_short')">Краткое описание</button>
-						<button class="tablinks" onclick="openCity(event, 'd_long')">Подробное описание</button>
-						<button class="tablinks" onclick="openCity(event, 'd_difficult')">Сложность</button>
-						<button class="tablinks" onclick="openCity(event, 'start_code_name_id')">Название основного класса</button>
-						<button class="tablinks" onclick="openCity(event, 'test_code_name_id')">Название тестового класса</button>
+						<button class="tablinks" onclick="openTab(event, 'd_short')">Краткое описание</button>
+						<button class="tablinks" onclick="openTab(event, 'd_long')">Подробное описание</button>
+						<button class="tablinks" onclick="openTab(event, 'd_difficult')">Сложность</button>
+						<button class="tablinks" onclick="openTab(event, 'start_code_name_id')">Название основного класса</button>
+						<button class="tablinks" onclick="openTab(event, 'test_code_name_id')">Название тестового класса</button>
 					</div>
 					<div id="d_short" class="tabcontent s_desc">
 						<p>Краткое описание</p>
@@ -137,7 +137,6 @@
 	</div>
 
 	<script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
-	<script type="text/javascript" th:src="@{js/typed.js}" src="../static/js/typed.js"></script>
 	<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 	<!--    Ace Editor-->
 	<script type="text/javascript" th:src="@{js/ace/ace.js}" src="../static/js/ace/ace.js" charset="UTF-8"></script>

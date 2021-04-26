@@ -40,9 +40,6 @@ public class Task {
     private String startCode;
 
     @Column(nullable = false)
-    private String solutionCode;
-
-    @Column(nullable = false)
     private int difficult;
 
 }

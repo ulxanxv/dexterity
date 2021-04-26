@@ -97,11 +97,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: solution_code
-                  type: varchar(32768)
-                  constraints:
-                    nullable: false
-              - column:
                   name: difficult
                   type: int
                   constraints:
@@ -224,9 +219,6 @@ databaseChangeLog:
                   name: start_code
                   value: "---"
               - column:
-                  name: solution_code
-                  value: "---"
-              - column:
                   name: difficult
                   value: 3
         - insert:
@@ -254,9 +246,6 @@ databaseChangeLog:
                   name: start_code
                   value: "---"
               - column:
-                  name: solution_code
-                  value: "---"
-              - column:
                   name: difficult
                   value: 2
         - insert:
@@ -282,9 +271,6 @@ databaseChangeLog:
                   value: "---"
               - column:
                   name: start_code
-                  value: "---"
-              - column:
-                  name: solution_code
                   value: "---"
               - column:
                   name: difficult
@@ -325,9 +311,6 @@ databaseChangeLog:
               - column:
                   name: start_code
                   value: "class Upper {\n\tpublic static String MakeUpperCase(String str) {\n\t\n\t}\n}"
-              - column:
-                  name: solution_code
-                  value: "---"
               - column:
                   name: difficult
                   value: 1

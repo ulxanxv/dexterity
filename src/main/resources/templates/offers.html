@@ -75,17 +75,17 @@
 				<div class="offers_body">
 					<div class="offers_description">
 						<div class="tab">
-							<button class="tablinks" onclick="openCity(event, 'd_short')">Краткое описание</button>
-							<button class="tablinks" onclick="openCity(event, 'd_long')">Подробное описание</button>
-							<button class="tablinks" onclick="openCity(event, 'd_difficult')">Сложность</button>
+							<button class="tablinks" onclick="openTab(event, 'd_short')">Краткое описание</button>
+							<button class="tablinks" onclick="openTab(event, 'd_long')">Подробное описание</button>
+							<button class="tablinks" onclick="openTab(event, 'd_difficult')">Сложность</button>
 						</div>
 						<div id="d_short" class="s_desc tabcontent">
 							<p>Краткое описание</p>
-							<input name="short_description" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
+							<input id="short" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
 						</div>
 						<div id="d_long" class="l_desc tabcontent">
 							<p>Подробное описание</p>
-							<textarea name="long_description" type="text" maxlength="32768"></textarea>
+							<textarea id="long" type="text" maxlength="32768"></textarea>
 						</div>
 						<div id="d_difficult" class="difficult tabcontent">
 							<p>Сложность</p>
@@ -114,7 +114,7 @@
 							</div>
 						</div>
 						<div class="btn_align">
-							<button class="btn" type="button" id="send_task">
+							<button class="btn" type="button" id="offer_task">
 								Предложить
 							</button>
 						</div>
@@ -123,8 +123,8 @@
 				</div>
 			</div>
 
+			<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 			<script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
-			<script type="text/javascript" th:src="@{js/typed.js}" src="../static/js/typed.js"></script>
 			<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 			<!--    Ace Editor-->
 			<script type="text/javascript" th:src="@{js/ace/ace.js}" src="../static/js/ace/ace.js" charset="UTF-8"></script>

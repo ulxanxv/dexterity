@@ -76,18 +76,14 @@
 <!--                        Блок самого задания-->
                     <div class="task_body">
                         <th:block th:each="task : ${taskList}">
-                            <div class="task" th:if="${task.getDifficult() == 1}">
-                              <a class="tb_text" th:text="${task.getShortDescription()}">Перевести число в строку</a>
-                              <span style="color: darkgreen">Легко</span>
-                            </div>
-                            <div class="task" th:if="${task.getDifficult() == 2}">
-                              <a class="tb_text" th:utext="${task.getShortDescription()}">ASD</a>
-                              <span style="color: #646200">Средне</span>
-                            </div>
-                            <div class="task" th:if="${task.getDifficult() == 3}">
-                              <a class="tb_text" th:text="${task.getShortDescription()}">FDS</a>
-                              <span style="color: #640000">Трудно</span>
-                            </div>
+                          <div class="task">
+                            <a class="tb_text" th:text="${task.getShortDescription()}"></a>
+                            <th:block th:switch="${task.getDifficult()}">
+                              <span th:case="1" style="color: #006400FF">Легко</span>
+                              <span th:case="2" style="color: #646200">Средне</span>
+                              <span th:case="3" style="color: #646200">Трудно</span>
+                            </th:block>
+                          </div>
                         </th:block>
                     </div>
                     <div class="btn_container">
@@ -120,7 +116,6 @@
         </div>
 
         <script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
-        <script type="text/javascript" th:src="@{js/typed.js}" src="../static/js/typed.js"></script>
         <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
     </body>
 </html>

@@ -96,17 +96,13 @@
 				<!--                        Блок самого задания-->
 				<div class="task_body">
 					<th:block th:each="decidedTask : ${decidedTaskList}">
-						<div class="task" th:if="${decidedTask.getTask().getDifficult() == 1}">
-							<a class="tb_text" th:text="${decidedTask.getTask().getShortDescription()}">Перевести число в строку</a>
-							<span style="color: darkgreen">Легко</span>
-						</div>
-						<div class="task" th:if="${decidedTask.getTask().getDifficult() == 2}">
-							<a class="tb_text" th:utext="${decidedTask.getTask().getShortDescription()}"></a>
-							<span style="color: #646200">Средне</span>
-						</div>
-						<div class="task" th:if="${decidedTask.getTask().getDifficult() == 3}">
+						<div class="task">
 							<a class="tb_text" th:text="${decidedTask.getTask().getShortDescription()}"></a>
-							<span style="color: #640000">Трудно</span>
+							<th:block th:switch="${decidedTask.getTask().getDifficult()}">
+								<span th:case="1" style="color: #006400FF">Легко</span>
+								<span th:case="2" style="color: #646200">Средне</span>
+								<span th:case="3" style="color: #646200">Трудно</span>
+							</th:block>
 						</div>
 					</th:block>
 				</div>

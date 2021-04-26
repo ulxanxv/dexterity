@@ -240,3 +240,16 @@
 .tb_text:hover {
     opacity: 0.5;
 }
+
+.alert {
+    border-radius: 25px;
+}
+
+.alert_btn {
+    background-color: #292929;
+    border-radius: 25px;
+}
+
+.alert_btn:hover {
+    background-color: #292929 !important;
+}
