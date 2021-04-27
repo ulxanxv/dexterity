@@ -1,4 +1,4 @@
-package ru.dexterity.api;
+package ru.dexterity.api.task;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

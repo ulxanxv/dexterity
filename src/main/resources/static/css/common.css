@@ -73,9 +73,7 @@
 
     border: 2px solid #ffffff;
     border-radius: 25px;
-    /*background: linear-gradient(to right, darkgreen 50%, transparent 50%);*/
 
-    margin-bottom: 2px;
     margin-right: 15px;
     margin-left: 15px;
     padding: 2px 15px;
@@ -84,15 +82,14 @@
 .profile {
     display: flex;
 
-    padding-left: 10px;
-    padding-right: 40px;
+    padding-right: 60px;
 }
 
 .profile_photo {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 
-    margin-right: 5px;
+    margin-top: 5px;
 
     border-radius: 100px;
     -webkit-border-radius: 100px;
@@ -142,7 +139,7 @@
 */
 .profile li ul {
     width: 200px;
-    top: 3em;
+    top: 3.5em;
     left: -7.75em;
 
     position: absolute;

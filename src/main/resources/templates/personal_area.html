@@ -31,7 +31,10 @@
 				<p class="profile_username">
 					<th:block th:text="${username.toString()}"></th:block>
 				</p>
-				<div class="experience" th:if="${!#strings.equals(username, 'anonymousUser')}" th:text="${level} + ' уровень'">
+				<div class="experience"
+				     th:if="${userExist == true}"
+				     th:text="${level} + ' уровень'"
+				     th:style="'background: linear-gradient(to right, #646200 ' + (${experience} / 1000 * 100) * 0.75 + '%, transparent ' + (${experience} / 1000 * 100) + '%);'">
 				</div>
 				<nav class="profile">
 					<ul>
@@ -101,7 +104,7 @@
 							<th:block th:switch="${decidedTask.getTask().getDifficult()}">
 								<span th:case="1" style="color: #006400FF">Легко</span>
 								<span th:case="2" style="color: #646200">Средне</span>
-								<span th:case="3" style="color: #646200">Трудно</span>
+								<span th:case="3" style="color: #640000">Трудно</span>
 							</th:block>
 						</div>
 					</th:block>

@@ -30,8 +30,8 @@ public class OfferController {
     @PostMapping("/offer_task")
     public ResponseEntity<?> offerTask(@RequestBody Task task) {
         try {
-            log.info(task.toString());
-            // offerComponent.saveModerationOffer(task);
+            // log.info(task.toString());
+            offerComponent.saveModerationOffer(task);
             return ResponseEntity.ok(HttpStatus.OK);
         } catch (DataAccessException e) {
             return ResponseEntity.badRequest().body("такая задача уже существует");

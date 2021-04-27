@@ -31,7 +31,10 @@
 				<p class="profile_username">
 					<th:block th:text="${username.toString()}"></th:block>
 				</p>
-				<div class="experience" th:if="${!#strings.equals(username, 'anonymousUser')}" th:text="${level} + ' уровень'">
+				<div class="experience"
+				     th:if="${userExist == true}"
+				     th:text="${level} + ' уровень'"
+				     th:style="'background: linear-gradient(to right, #646200 ' + (${experience} / 1000 * 100) * 0.75 + '%, transparent ' + (${experience} / 1000 * 100) + '%);'">
 				</div>
 				<nav class="profile">
 					<ul>

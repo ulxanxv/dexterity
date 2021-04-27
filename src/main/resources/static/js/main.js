@@ -49,6 +49,19 @@ $('#offer_task').on('click', function () {
 
     success: function (data) {
       console.log(data);
+      swal({
+        title: "Успех",
+        text: "Ваша задача успешно отправлена...",
+        icon: "success",
+        className: "alert",
+        button: {
+          className: "alert_btn"
+        }
+      });
+
+      setTimeout(function () {
+        document.location.href = "/";
+      }, 2000);
     }
   })
 
@@ -132,4 +145,8 @@ function openTab(evt, tabName) {
 
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
+}
+
+function moderation(element) {
+  console.log(element.target.innerText);
 }

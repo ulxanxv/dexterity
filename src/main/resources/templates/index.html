@@ -31,12 +31,15 @@
                       <p class="profile_username">
                         <th:block th:if="${userExist == true}" th:text="${username.toString()}"></th:block>
                       </p>
-                      <div class="experience" th:if="${userExist == true}" th:text="${level} + ' уровень'">
+                      <div class="experience"
+                           th:if="${userExist == true}"
+                           th:text="${level} + ' уровень'"
+                           th:style="'background: linear-gradient(to right, #646200 ' + (${experience} / 1000 * 100) * 0.75 + '%, transparent ' + (${experience} / 1000 * 100) + '%);'">
                       </div>
                       <nav class="profile">
                         <ul>
                           <li>
-                            <img th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}" class="profile_photo"/>
+                            <img class="profile_photo" th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}"/>
                             <img class="profile_photo" th:if="${userExist == false}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
                             <ul>
                               <li>
@@ -81,7 +84,7 @@
                             <th:block th:switch="${task.getDifficult()}">
                               <span th:case="1" style="color: #006400FF">Легко</span>
                               <span th:case="2" style="color: #646200">Средне</span>
-                              <span th:case="3" style="color: #646200">Трудно</span>
+                              <span th:case="3" style="color: #640000">Трудно</span>
                             </th:block>
                           </div>
                         </th:block>

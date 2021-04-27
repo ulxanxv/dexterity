@@ -1,16 +1,15 @@
-package ru.dexterity.api;
+package ru.dexterity.api.task;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ru.dexterity.api.TaskNotFoundException.TaskErrorCode;
+import ru.dexterity.api.task.TaskNotFoundException.TaskErrorCode;
 import ru.dexterity.dao.models.Task;
 import ru.dexterity.dao.models.TaskRating;
 import ru.dexterity.dao.repositories.TaskRatingRepository;
 import ru.dexterity.dao.repositories.TaskRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component

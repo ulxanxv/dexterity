@@ -3,7 +3,7 @@ package ru.dexterity.web.controllers.compile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ru.dexterity.api.TaskComponent;
+import ru.dexterity.api.task.TaskComponent;
 import ru.dexterity.dao.models.Credential;
 import ru.dexterity.dao.models.Task;
 import ru.dexterity.dao.models.TaskRating;
