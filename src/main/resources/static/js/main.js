@@ -130,6 +130,14 @@ $('#run_code').on('click', function () {
 
 })
 
+$('#accept').on('click', function () {
+
+});
+
+$('#decline').on('click', function () {
+
+});
+
 function openTab(evt, tabName) {
   let i, tabContent, tabLinks;
   tabContent = $('.tabcontent');
@@ -149,4 +157,17 @@ function openTab(evt, tabName) {
 
 function moderation(element) {
   console.log(element.target.innerText);
+
+  $.ajax({
+    type: 'POST',
+    url: '/select_moderation',
+    data: {
+      shortDescription: element.target.innerText
+    },
+
+    success: function (data) {
+      document.location.href = "/moderation"
+    }
+
+  })
 }

@@ -34,7 +34,7 @@
 				<div class="experience"
 				     th:if="${userExist == true}"
 				     th:text="${level} + ' уровень'"
-				     th:style="'background: linear-gradient(to right, #646200 ' + (${experience} / 1000 * 100) * 0.75 + '%, transparent ' + (${experience} / 1000 * 100) + '%);'">
+				     th:style="'background: linear-gradient(to right, #646200 ' + ((${experience} % 1000) / 1000 * 100) * 0.75 + '%, transparent ' + ((${experience} % 1000) / 1000 * 100) + '%);'">
 				</div>
 				<nav class="profile">
 					<ul>
@@ -86,11 +86,11 @@
 					</div>
 					<div id="d_short" class="tabcontent s_desc">
 						<p>Краткое описание</p>
-						<input name="short_description" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
+						<input th:value="${moderationTask.getShortDescription()}" name="short_description" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
 					</div>
 					<div id="d_long" class="tabcontent l_desc">
 						<p>Подробное описание</p>
-						<textarea name="long_description" type="text" maxlength="32768"></textarea>
+						<textarea th:text="${moderationTask.getLongDescription()}" name="long_description" type="text" maxlength="32768"></textarea>
 					</div>
 					<div id="d_difficult" class="tabcontent difficult">
 						<p>Сложность</p>
@@ -102,11 +102,11 @@
 					</div>
 					<div id="start_code_name_id" class="tabcontent start_code_name">
 						<p>Название основного класса</p>
-						<input name="sc_name" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
+						<input th:value="${moderationTask.getClassName()}" name="sc_name" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
 					</div>
 					<div id="test_code_name_id" class="tabcontent test_code_name">
 						<p>Название тестового класса</p>
-						<input name="tc_name" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
+						<input th:value="${moderationTask.getTestClassName()}" name="tc_name" type="text" pattern="[А-Яа-яЁё]{0-64}"/>
 					</div>
 				</div>
 
@@ -116,13 +116,13 @@
 						<p title="Код должен содержать класс и метод, куда пользователь должен будет вводить решение. Метод должен быть статичным и принимать.">
 							Стартовый код
 						</p>
-						<div class="editor" id="start_code">
+						<div th:text="${moderationTask.getStartCode()}"  class="editor" id="start_code">
 
 						</div>
 					</div>
 					<div class="test_code">
 						<p>Код для тестирования</p>
-						<div class="editor" id="test_code">
+						<div th:text="${moderationTask.getTestCode()}"  class="editor" id="test_code">
 
 						</div>
 					</div>

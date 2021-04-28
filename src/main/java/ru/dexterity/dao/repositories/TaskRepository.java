@@ -16,4 +16,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findAllByInModerationTrue();
 
+    Task findByShortDescriptionAndInModerationTrue(String shortDescription);
+
 }

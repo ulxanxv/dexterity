@@ -1,4 +1,4 @@
-package ru.dexterity.api.task;
+package ru.dexterity.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
