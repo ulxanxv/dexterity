@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.dexterity.dao.models.Task;
@@ -54,12 +55,12 @@ public class ModerationController {
 
     @ResponseBody
     @PostMapping("/accept")
-    public ResponseEntity<?> acceptTask() {
+    public ResponseEntity<?> acceptTask(@RequestBody Task editedTask) {
         if (!authorizationAttributes.getRole().equals("MODER")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        moderationComponent.acceptTask(moderationTask.getModerationTask());
+        moderationComponent.acceptTask(moderationTask.getModerationTask(), editedTask);
         moderationTask.setModerationTask(null);
         return ResponseEntity.status(HttpStatus.OK).build();
     }

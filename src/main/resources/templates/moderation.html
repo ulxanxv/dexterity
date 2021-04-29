@@ -81,8 +81,8 @@
 						<button class="tablinks" onclick="openTab(event, 'd_short')">Краткое описание</button>
 						<button class="tablinks" onclick="openTab(event, 'd_long')">Подробное описание</button>
 						<button class="tablinks" onclick="openTab(event, 'd_difficult')">Сложность</button>
-						<button class="tablinks" onclick="openTab(event, 'start_code_name_id')">Название основного класса</button>
-						<button class="tablinks" onclick="openTab(event, 'test_code_name_id')">Название тестового класса</button>
+						<button class="tablinks" onclick="openTab(event, 'div_sc_name')">Название основного класса</button>
+						<button class="tablinks" onclick="openTab(event, 'div_tc_name')">Название тестового класса</button>
 					</div>
 					<div id="d_short" class="tabcontent s_desc">
 						<p>Краткое описание</p>
@@ -100,11 +100,11 @@
 							<option th:selected="${moderationTask.getDifficult() == 3}">Трудно</option>
 						</select>
 					</div>
-					<div id="start_code_name_id" class="tabcontent start_code_name">
+					<div id="div_sc_name" class="tabcontent start_code_name">
 						<p>Название основного класса</p>
 						<input th:value="${moderationTask.getClassName()}" id="sc_name" type="text"/>
 					</div>
-					<div id="test_code_name_id" class="tabcontent test_code_name">
+					<div id="div_tc_name" class="tabcontent test_code_name">
 						<p>Название тестового класса</p>
 						<input th:value="${moderationTask.getTestClassName()}" id="tc_name" type="text"/>
 					</div>

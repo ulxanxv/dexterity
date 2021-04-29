@@ -13,12 +13,19 @@ public class ModerationComponent {
 
     private final TaskRepository taskRepository;
 
-    public void acceptTask(Long taskId) {
+    public void acceptTask(Long taskId, Task editedTask) {
         Task task = taskRepository.findById(taskId).orElse(null);
         if (task == null) {
             return;
         }
 
+        task.setShortDescription(editedTask.getShortDescription());
+        task.setLongDescription(editedTask.getLongDescription());
+        task.setStartCode(editedTask.getStartCode());
+        task.setTestCode(editedTask.getTestCode());
+        task.setDifficult(editedTask.getDifficult());
+        task.setClassName(editedTask.getClassName());
+        task.setTestClassName(editedTask.getTestClassName());
         task.setInModeration(false);
         taskRepository.save(task);
     }

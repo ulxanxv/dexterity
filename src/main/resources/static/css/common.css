@@ -103,6 +103,10 @@
     user-select: none;
 }
 
+.swal-text {
+    text-align: center;
+}
+
 /*
     Выпадающее меню
 */

@@ -4,22 +4,6 @@ $('#offer_task').on('click', function () {
     return;
   }
 
-  let difficult = $('#difficult').val();
-
-  switch (difficult) {
-    case "Легко":
-      difficult = 1;
-      break
-    case "Средне":
-      difficult = 2
-      break
-    case "Трудно":
-      difficult = 3
-      break
-    default:
-      difficult = 0
-  }
-
   $.ajax({
     type: 'POST',
     url: '/offer_task',
@@ -27,7 +11,7 @@ $('#offer_task').on('click', function () {
     data: JSON.stringify({
       shortDescription: $('#short').val(),
       longDescription: $('#long').val(),
-      difficult: difficult,
+      difficult: getDifficult(),
       startCode: startEditor.getValue(),
       testCode: testEditor.getValue()
     }),
@@ -135,36 +119,72 @@ $('#accept').on('click', function () {
   }
 
   swal({
-    title: "Уверены?",
-    text: "После одобрения задачу нельзя будет удалить",
+    title: "Подтверждение",
+    text: "Вы уверены в принятии данной задачи?",
     icon: "warning",
     buttons: true,
     dangerMode: true,
-  })
-      .then((willDelete) => {
-        if (willDelete) {
-          $.ajax({
-            type: "POST",
-            url: "/accept",
+  }).then((willAccept) => {
 
-            success: function (data) {
-              swal("Отлично! Задача успешно одобрена!", {
-                icon: "success",
-              });
+    if (willAccept) {
+      $.ajax({
+        type: "POST",
+        url: "/accept",
+        contentType: "application/json",
+        data: JSON.stringify({
+          shortDescription: $('#short').val(),
+          longDescription: $('#long').val(),
+          difficult: getDifficult(),
+          className: $('#sc_name').val(),
+          testClassName: $('#tc_name').val(),
+          startCode: startEditor.getValue(),
+          testCode: testEditor.getValue()
+        }),
 
-              setTimeout(function () {
-                document.location.href = "/";
-              }, 2000)
-            }
-          })
+        success: function (data) {
+          swal("Отлично! Задача успешно одобрена!", {
+            icon: "success",
+          });
+
+          setTimeout(function () {
+            document.location.href = "/moderation_list";
+          }, 2000)
         }
-      });
+      })
+    }
+
+  });
 
 });
 
 // Отклонить задачу
 $('#decline').on('click', function () {
+  swal({
+    title: "Подтверждение",
+    text: "Вы уверены, что хотите отклонить данную задачу?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDecline) => {
 
+    if (willDecline) {
+      $.ajax({
+        type: "POST",
+        url: "/decline",
+
+        success: function () {
+          swal("Задача отклонена!", {
+            icon: "error",
+          });
+
+          setTimeout(function () {
+            document.location.href = "/moderation_list";
+          }, 2000)
+        }
+      })
+    }
+
+  });
 });
 
 function openTab(evt, tabName) {
@@ -240,4 +260,24 @@ function checkData() {
   }
 
   return true;
+}
+
+function getDifficult() {
+  let difficult = $('#difficult').val();
+
+  switch (difficult) {
+    case "Легко":
+      difficult = 1;
+      break
+    case "Средне":
+      difficult = 2
+      break
+    case "Трудно":
+      difficult = 3
+      break
+    default:
+      difficult = 0
+  }
+
+  return difficult;
 }
