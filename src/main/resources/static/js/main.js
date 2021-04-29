@@ -94,6 +94,10 @@ $('#run_code').on('click', function () {
             $('.ex_result').css('color', 'green');
           }
         })
+
+        setTimeout(function () {
+          document.location.href = "/"
+        }, 5000)
       } else {
         $('.ex_result').css('color', 'red');
         let typed = new Typed('.result', {
