@@ -25,4 +25,9 @@ public class AuthorizationAttributes {
         return credentialRepository.findByLogin(((User) principal).getUsername()).orElse(null);
     }
 
+    public String getRole() {
+        Credential credential = this.getCredential();
+        return credential != null ? credential.getRole() : "NONE";
+    }
+
 }

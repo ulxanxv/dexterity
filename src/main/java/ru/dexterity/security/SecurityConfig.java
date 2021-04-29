@@ -33,24 +33,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/")
-                    .permitAll()
-                .antMatchers("/login*", "/sign*")
-                    .permitAll()
-                .antMatchers("/execute", "/moderation*", "/rating*", "/offers*", "/personal_area*")
-                    .authenticated()
-                .and()
-                    .logout().logoutSuccessUrl("/")
-                .and()
-                    .formLogin()
-                        .loginPage("/login")
-                            .usernameParameter("login")
-                            .passwordParameter("password")
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/login?error=true")
-                .and()
-                    .csrf()
-                        .disable();
+            .antMatchers("/")
+                .permitAll()
+            .antMatchers("/login*", "/sign*")
+                .permitAll()
+            .antMatchers("/execute", "/rating*", "/offers*", "/personal_area*", "/moderation*", "/moderation_list*")
+                .authenticated()
+            .and()
+                .logout().logoutSuccessUrl("/")
+            .and()
+                .formLogin()
+                    .loginPage("/login")
+                        .usernameParameter("login")
+                        .passwordParameter("password")
+                    .defaultSuccessUrl("/", true)
+                    .failureUrl("/login?error=true")
+            .and()
+                .csrf()
+                    .disable();
     }
 
 }

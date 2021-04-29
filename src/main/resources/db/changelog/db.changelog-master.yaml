@@ -79,13 +79,9 @@ databaseChangeLog:
               - column:
                   name: class_name
                   type: varchar(256)
-                  constraints:
-                    nullable: false
               - column:
                   name: test_class_name
                   type: varchar(256)
-                  constraints:
-                    nullable: false
               - column:
                   name: test_code
                   type: varchar(32768)

@@ -1,11 +1,10 @@
 // Отправка задачи
 $('#offer_task').on('click', function () {
+  if (checkData() === false) {
+    return;
+  }
 
-  let shortDescription = $('#short').val(),
-      longDescription = $('#long').val(),
-      difficult = $('#difficult').val(),
-      startCode = startEditor.getValue(),
-      testCode = testEditor.getValue();
+  let difficult = $('#difficult').val();
 
   switch (difficult) {
     case "Легко":
@@ -21,30 +20,16 @@ $('#offer_task').on('click', function () {
       difficult = 0
   }
 
-  if (shortDescription.length < 3 || longDescription.length < 10 || difficult === 0 || startCode.length < 10 || testCode.length < 10) {
-    swal({
-      title: "Ошибка",
-      text: "Проверьте, всё ли вы заполнили",
-      icon: "error",
-      className: "alert",
-      button: {
-        className: "alert_btn"
-      }
-    });
-
-    return;
-  }
-
   $.ajax({
     type: 'POST',
     url: '/offer_task',
     contentType: "application/json",
     data: JSON.stringify({
-      shortDescription: shortDescription,
-      longDescription: longDescription,
+      shortDescription: $('#short').val(),
+      longDescription: $('#long').val(),
       difficult: difficult,
-      startCode: startCode,
-      testCode: testCode
+      startCode: startEditor.getValue(),
+      testCode: testEditor.getValue()
     }),
 
     success: function (data) {
@@ -57,11 +42,24 @@ $('#offer_task').on('click', function () {
         button: {
           className: "alert_btn"
         }
-      });
+      })
 
       setTimeout(function () {
         document.location.href = "/";
       }, 2000);
+    },
+
+    error: function (data) {
+      console.log(data)
+      swal({
+        title: "Ошибка",
+        text: data.responseText,
+        icon: "error",
+        className: "alert",
+        button: {
+          className: "alert_btn"
+        }
+      })
     }
   })
 
@@ -130,10 +128,41 @@ $('#run_code').on('click', function () {
 
 })
 
+// Одобрить задачу
 $('#accept').on('click', function () {
+  if (checkData() === false) {
+    return;
+  }
+
+  swal({
+    title: "Уверены?",
+    text: "После одобрения задачу нельзя будет удалить",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+      .then((willDelete) => {
+        if (willDelete) {
+          $.ajax({
+            type: "POST",
+            url: "/accept",
+
+            success: function (data) {
+              swal("Отлично! Задача успешно одобрена!", {
+                icon: "success",
+              });
+
+              setTimeout(function () {
+                document.location.href = "/";
+              }, 2000)
+            }
+          })
+        }
+      });
 
 });
 
+// Отклонить задачу
 $('#decline').on('click', function () {
 
 });
@@ -170,4 +199,45 @@ function moderation(element) {
     }
 
   })
+}
+
+function checkData() {
+  let shortDescription  = $('#short').val();
+  let longDescription   = $('#long').val();
+  let difficult         = $('#difficult').val();
+  let startCode         = startEditor.getValue();
+  let testCode          = testEditor.getValue();
+
+  let startClassName    = $('#sc_name').val();
+  let testClassName     = $('#tc_name').val();
+
+  if ((startClassName !== undefined && testClassName !== undefined) && (startClassName.length < 1 || testClassName.length < 1)) {
+    swal({
+      title: "Ошибка",
+      text: "Проверьте, всё ли вы заполнили",
+      icon: "error",
+      className: "alert",
+      button: {
+        className: "alert_btn"
+      }}
+    );
+
+    return false;
+  }
+
+  if (shortDescription.length < 3 || longDescription.length < 10 || difficult === 0 || startCode.length < 10 || testCode.length < 10) {
+    swal({
+      title: "Ошибка",
+      text: "Проверьте, всё ли вы заполнили",
+      icon: "error",
+      className: "alert",
+      button: {
+        className: "alert_btn"
+      }}
+    );
+
+    return false;
+  }
+
+  return true;
 }
