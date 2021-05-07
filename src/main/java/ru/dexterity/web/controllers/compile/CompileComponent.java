@@ -66,7 +66,7 @@ public class CompileComponent {
         taskRating.setCredential(authorizationAttributes.getCredential());
         taskRating.setTask(completedTask);
         taskRating.setSolution(userSolution);
-        taskRating.setBrevity(0.0D); // FIXME
+        taskRating.setBrevity(compileResponse.getBrevity());
         taskRating.setRapidity(compileResponse.getRapidity());
         taskRating.setResourceConsumption(0.0D); // FIXME
         taskRating.setTotalScore(0.0D); // FIXME

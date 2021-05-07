@@ -13,9 +13,9 @@ public class CompileResponse {
     private String status;
     private String message;
 
-    private Double brevity;
-    private Double rapidity;
-    private Double resourceConsumption;
-    private Double totalScore;
+    private int brevity;
+    private double rapidity;
+    private double resourceConsumption;
+    private double totalScore;
 
 }

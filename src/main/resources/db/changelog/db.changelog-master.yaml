@@ -123,7 +123,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: brevity
-                  type: double
+                  type: bigint
                   constraints:
                     nullable: false
               - column:
@@ -301,7 +301,7 @@ databaseChangeLog:
                           }"
               - column:
                   name: start_code
-                  value: "class Upper {\n\tpublic static String MakeUpperCase(String str) {\n\t\n\t}\n}"
+                  value: "class Upper {\n\tpublic static String MakeUpperCase(String str) {\n\t\treturn str;\n\t}\n}"
               - column:
                   name: difficult
                   value: 1
