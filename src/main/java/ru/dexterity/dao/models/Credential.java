@@ -29,8 +29,6 @@ public class Credential {
     @Column(nullable = false)
     private String role;
 
-    private byte[] image;
-
     private String fileName;
 
 }

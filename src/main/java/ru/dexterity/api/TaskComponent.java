@@ -10,6 +10,7 @@ import ru.dexterity.dao.repositories.TaskRatingRepository;
 import ru.dexterity.dao.repositories.TaskRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -25,6 +26,10 @@ public class TaskComponent {
 
     public List<Task> findAllModeration() {
         return taskRepository.findAllByInModerationTrue();
+    }
+
+    public List<Task> findAllByQuery(String query) {
+        return taskRepository.findAllByQuery(query);
     }
 
     public List<TaskRating> ratingList(String shortDescription) {

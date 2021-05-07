@@ -208,6 +208,7 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 
+// Выбор задачи на сервере
 function moderation(element) {
   console.log(element.target.innerText);
 
@@ -285,3 +286,37 @@ function getDifficult() {
 
   return difficult;
 }
+
+// Поиск задачи (rating.html)
+$('#t_search').on('input', function () {
+
+  $.ajax({
+    type: 'GET',
+    url: '/search_tasks',
+    data: {
+      query: $('#t_search').val()
+    },
+
+    success: function (data) {
+      let $taskList = $('.task_list');
+      let taskListInHtml = "";
+
+      $taskList.empty();
+
+      for (let i = 0; i < data.length; ++i) {
+        let color = data[i].difficult === 1 ? "#006400" : data[i].difficult === 2 ? "#646200" : "#640000";
+        let difficult = data[i].difficult === 1 ? "Легко" : data[i].difficult === 2 ? "Средне" : "Трудно";
+        let task =
+            "<div class='task'>" +
+              "<a class='tb_text'>" + data[i].shortDescription + "</a>" +
+              "<span style='color: " + color + "'>" + difficult + "</span>" +
+            "</div>";
+
+        taskListInHtml += task;
+      }
+
+      $taskList.html(taskListInHtml);
+    }
+  })
+
+})

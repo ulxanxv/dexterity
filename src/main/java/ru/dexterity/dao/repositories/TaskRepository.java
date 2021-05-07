@@ -18,4 +18,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     Task findByShortDescriptionAndInModerationTrue(String shortDescription);
 
+    @Query("SELECT t FROM Task t WHERE t.shortDescription LIKE %:query% AND t.inModeration = false")
+    List<Task> findAllByQuery(String query);
+
 }

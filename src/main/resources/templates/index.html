@@ -28,14 +28,15 @@
 
                     <div class="panel_section">
 <!--                    Фото профиля (выпадающий список)-->
+                      <span class="level_span" th:if="${userExist == true}" th:text="${level}"></span>
                       <p class="profile_username">
-                        <th:block th:if="${userExist == true}" th:text="${username.toString()}"></th:block>
+                        <th:block th:if="${userExist == true}" th:text="'- ' + ${username.toString()}"/>
                       </p>
-                      <div class="experience"
-                           th:if="${userExist == true}"
-                           th:text="${level} + ' уровень'"
-                           th:style="'background: linear-gradient(to right, #646200 ' + ((${experience} % 1000) / 1000 * 100) * 0.75 + '%, transparent ' + ((${experience} % 1000) / 1000 * 100) + '%);'">
-                      </div>
+<!--                      <div class="experience"-->
+<!--                           th:if="${userExist == true}"-->
+<!--                           th:text="(${experience} % 1000) + ' / 1000'"-->
+<!--                           th:style="'background: linear-gradient(to right, #646200 ' + ((${experience} % 1000) / 1000 * 100) * 0.75 + '%, transparent ' + ((${experience} % 1000) / 1000 * 100) + '%);'">-->
+<!--                      </div>-->
                       <nav class="profile">
                         <ul>
                           <li>

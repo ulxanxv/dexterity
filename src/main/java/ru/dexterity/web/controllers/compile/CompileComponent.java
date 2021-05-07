@@ -28,42 +28,50 @@ public class CompileComponent {
 
     public CompileResponse runCode(String code, String taskName) {
         Task task = taskComponent.findByShortDescription(taskName);
+
+        CompileResponse response;
         try {
-            CompileResponse response = compileAdapter.runCode(code, task.getClassName(), task.getTestCode(), task.getTestClassName());
-            if (response.getStatus().equals("ok")) {
-                if (this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId())) {
-                    log.info("Status :: " + this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId()));
-                    return response;
-                }
-
-                this.updateExperience(task.getDifficult());
-                this.saveRating(task, code);
-            }
-
-            return response;
+            response = compileAdapter.runCode(
+                code, task.getClassName(), task.getTestCode(), task.getTestClassName()
+            );
         } catch (Exception ignored) {
             return new CompileResponse("error", "сервер не доступен, попробуйте позже");
         }
+
+        if (response.getStatus().equals("ok")) {
+            if (this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId())) {
+                log.info("Status :: " + this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId()));
+                return response;
+            }
+
+            this.updateExperience(task.getDifficult());
+            this.saveRating(response, task, code);
+        }
+
+        return response;
     }
 
     private void updateExperience(int taskDifficult) {
         int fullExperience = 100 * taskDifficult;
 
         Credential credential = authorizationAttributes.getCredential();
-        credential.setExperience(fullExperience - fullExperience / 100 * credential.getExperience() / 1000);
+        credential.setExperience(
+            credential.getExperience() + (fullExperience - fullExperience / 100 * credential.getExperience() / 1000)
+        );
+
         credentialRepository.save(credential);
     }
 
-    private void saveRating(Task completedTask, String userSolution) {
+    private void saveRating(CompileResponse compileResponse, Task completedTask, String userSolution) {
         TaskRating taskRating = new TaskRating();
+
         taskRating.setCredential(authorizationAttributes.getCredential());
         taskRating.setTask(completedTask);
         taskRating.setSolution(userSolution);
-
-        taskRating.setBrevity(1.0);
-        taskRating.setRapidity(2.30);
-        taskRating.setResourceConsumption(42.3);
-        taskRating.setTotalScore(412.23);
+        taskRating.setBrevity(0.0D); // FIXME
+        taskRating.setRapidity(compileResponse.getRapidity());
+        taskRating.setResourceConsumption(0.0D); // FIXME
+        taskRating.setTotalScore(0.0D); // FIXME
 
         taskRatingRepository.save(taskRating);
     }

@@ -41,11 +41,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: image
-                  type: bytea
-                  constraints:
-                    nullable: true
-              - column:
                   name: file_name
                   type: varchar(1024)
                   constraints:
@@ -67,13 +62,13 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: short_description
-                  type: varchar(64)
+                  type: varchar(128)
                   constraints:
                     unique: true
                     nullable: false
               - column:
                   name: long_description
-                  type: varchar(1024)
+                  type: varchar(32768)
                   constraints:
                     nullable: false
               - column:

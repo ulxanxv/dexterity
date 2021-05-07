@@ -22,6 +22,11 @@ public class TaskController {
     private final TaskComponent taskComponent;
     private final SelectedTask selectedTask;
 
+    @GetMapping("/search_tasks")
+    public ResponseEntity<List<Task>> searchTasks(@RequestParam String query) {
+        return ResponseEntity.ok(taskComponent.findAllByQuery(query));
+    }
+
     @GetMapping("/task")
     public TaskResponse taskByShortDescription(@RequestParam(name = "short_description") String shortDescription) {
         try {
