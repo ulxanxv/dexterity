@@ -39,10 +39,8 @@ public class CompileComponent {
         }
 
         if (response.getStatus().equals("ok")) {
-            if (this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId())) {
-                log.info("Status :: " + this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId()));
+            if (this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId()))
                 return response;
-            }
 
             this.updateExperience(task.getDifficult());
             this.saveRating(response, task, code);
@@ -77,16 +75,7 @@ public class CompileComponent {
     }
 
     private boolean alreadyDecided(Long credentialId, Long taskId) {
-        Optional<List<TaskRating>> optionalRatingList = taskRatingRepository.findByCredentialId(credentialId);
-        if (optionalRatingList.isPresent()) {
-            List<TaskRating> ratingList = optionalRatingList.get();
-            Optional<TaskRating> firstTask = ratingList.stream()
-                .filter(x -> x.getTask().getId().equals(taskId))
-                .findFirst();
-
-            return firstTask.isPresent();
-        }
-        return false;
+        return taskRatingRepository.findByCredentialIdAndTaskId(credentialId, taskId).isPresent();
     }
 
 }
