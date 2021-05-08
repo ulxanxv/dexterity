@@ -91,4 +91,14 @@ public class ModerationController {
         return ResponseEntity.ok().build();
     }
 
+    @ResponseBody
+    @GetMapping("/update_rating_table")
+    public ResponseEntity<?> updateRatingTable() {
+        if (!authorizationAttributes.getRole().equals("MODER")) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return ResponseEntity.ok("ok");
+    }
+
 }

@@ -10,6 +10,17 @@
 	<link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
+	<style th:inline="css" th:if="${userExist == true}">
+      .top_panel::before {
+          content: "";
+
+          background: darkred;
+          position: absolute;
+
+          height: 2px;
+          width: /*[(${experience} % 1000 / 10 + '%')]*/ 0;
+      }
+	</style>
 </head>
 <body>
 
@@ -26,41 +37,30 @@
 			</div>
 			<div class="panel_section">
 				<!--                    Фото профиля (выпадающий список)-->
+				<span class="level_span" th:if="${userExist == true}" th:text="${level}"></span>
 				<p class="profile_username">
-					<th:block th:text="${username.toString()}"></th:block>
+					<th:block th:if="${userExist == true}" th:text="'- ' + ${username.toString()}"/>
 				</p>
-				<div class="experience"
-				     th:if="${userExist == true}"
-				     th:text="${level} + ' уровень'"
-				     th:style="'background: linear-gradient(to right, #646200 ' + ((${experience} % 1000) / 1000 * 100) * 0.75 + '%, transparent ' + ((${experience} % 1000) / 1000 * 100) + '%);'">
-				</div>
 				<nav class="profile">
 					<ul>
 						<li>
-							<img th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'images/' + ${filename.toString()}" class="profile_photo"/>
-							<img class="profile_photo" th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
+							<img class="profile_photo" th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}"/>
+							<img class="profile_photo" th:if="${userExist == false}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
 							<ul>
 								<li>
-									<a th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a>
-								</li>
+									<a th:if="${userExist == true}" th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a></li>
+
 								<li>
-									<a th:href="@{/rating}" href="rating.html">Рейтинг</a>
-								</li>
-								<th:block th:if="${#strings.equals(role, 'MODER')}">
-									<li>
-										<a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a>
-									</li>
-								</th:block>
-								<th:block th:if="${!#strings.equals(username, 'anonymousUser')}">
-									<li>
-										<a th:href="@{/logout}">Выйти</a>
-									</li>
-								</th:block>
-								<th:block th:if="${#strings.equals(username, 'anonymousUser')}">
-									<li>
-										<a th:href="@{/login}" href="login.html">Войти</a>
-									</li>
-								</th:block>
+									<a th:if="${userExist == true}" th:href="@{/rating}" href="rating.html">Рейтинг</a></li>
+
+								<li th:if="${#strings.equals(role, 'MODER')}">
+									<a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a></li>
+
+								<li th:if="${userExist == true}">
+									<a th:href="@{/logout}">Выйти</a></li>
+
+								<li th:if="${userExist == false}">
+									<a th:href="@{/login}" href="login.html">Войти</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -78,17 +78,13 @@
 			</div>
 			<div class="task_list">
 				<th:block th:each="task : ${taskList}">
-					<div class="task" th:if="${task.getDifficult() == 1}">
-						<a class="tb_text" th:text="${task.getShortDescription()}">We'll get an exception during compile-time saying that the firstArticle is null</a>
-						<span style="color: darkgreen;">Легко</span>
-					</div>
-					<div class="task" th:if="${task.getDifficult() == 2}">
-						<a class="tb_text" th:utext="${task.getShortDescription()}"></a>
-						<span style="color: #646200;">Средне</span>
-					</div>
-					<div class="task" th:if="${task.getDifficult() == 3}">
-						<a class="tb_text" th:text="${task.getShortDescription()}"></a>
-						<span style="color: #640000">Трудно</span>
+					<div class="task">
+						<a class="tb_text" th:text="${task.getShortDescription()}" onclick="searchRatingList(event)"></a>
+						<th:block th:switch="${task.getDifficult()}">
+							<span th:case="1" style="color: #006400FF">Легко</span>
+							<span th:case="2" style="color: #646200">Средне</span>
+							<span th:case="3" style="color: #640000">Трудно</span>
+						</th:block>
 					</div>
 				</th:block>
 			</div>
@@ -104,11 +100,9 @@
 						<th>Место</th>
 						<th>Логин пользователя</th>
 						<th>Задача</th>
+						<th>Скорость (нс.)</th>
+						<th>Краткость (с.)</th>
 						<th>Оценка</th>
-					</tr>
-					<tr>
-						<td>Первая строка</td>
-						<td>Вторая строка</td>
 					</tr>
 				</table>
 			</div>

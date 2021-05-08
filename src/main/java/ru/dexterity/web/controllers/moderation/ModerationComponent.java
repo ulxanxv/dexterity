@@ -39,6 +39,10 @@ public class ModerationComponent {
         taskRepository.delete(task);
     }
 
+    public void updateRatingTable() {
+
+    }
+
     public Task findById(Long id) {
         Optional<Task> optionalTask = taskRepository.findById(id);
         return optionalTask.orElse(null);

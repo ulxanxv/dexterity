@@ -22,8 +22,6 @@ spring:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
 
-
-
 ## Server
 server:
   port: 8080
@@ -37,4 +35,5 @@ upload:
   resources-path: src\main\resources\static\images
 
 compileta:
-  url: http://localhost:8081/compile
+  compileUrl: http://localhost:8081/compile
+  compileAllUrl: http://localhost:8081/compile_all

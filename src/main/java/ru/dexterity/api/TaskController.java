@@ -44,8 +44,8 @@ public class TaskController {
         return new TaskResponse("ok", taskComponent.findById(selectedTask.getSelectedTask()));
     }
 
-    @GetMapping("task_rating_list")
-    public ResponseEntity<List<TaskRating>> taskRatingList(@RequestParam(name = "short_description") String shortDescription) {
+    @GetMapping("/task_rating_list")
+    public ResponseEntity<List<TaskRating>> taskRatingList(@RequestParam String shortDescription) {
         return ResponseEntity.ok(taskComponent.ratingList(shortDescription));
     }
 

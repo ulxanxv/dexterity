@@ -8,9 +8,7 @@
 
 .table {
 	height: 80vh;
-	min-height: 200px;
-
-	overflow: auto;
+	min-height: 600px;
 
 	background-color: #ffffff;
 	box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
@@ -30,8 +28,12 @@
 }
 
 .rating {
-	width: 90vh;
-	margin: 25px 0;
+	font-size: 15px;
+
+	height: 67.5vh;
+	margin: 30px 25px 30px 25px;
+
+	overflow: auto;
 }
 
 .rating table {
@@ -74,5 +76,12 @@
 }
 
 .task_list {
-	margin: 25px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	height: 60vh;
+	margin: 30px 25px 30px 25px;
+
+	overflow: auto;
 }

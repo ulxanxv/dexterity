@@ -85,7 +85,7 @@ $('#run_code').on('click', function () {
       if (data.status === 'ok') {
         $('.ex_result').css('color', 'green');
         let typed = new Typed('.result', {
-          strings: ['Все тесты^1000 успешно пройдены'],
+          strings: [data.message],
           startDelay: 0,
           typeSpeed: 20,
           showCursor: false,
@@ -96,7 +96,7 @@ $('#run_code').on('click', function () {
         })
 
         setTimeout(function () {
-          document.location.href = "/"
+          document.location.href = "/rating"
         }, 5000)
       } else {
         $('.ex_result').css('color', 'red');
@@ -287,6 +287,55 @@ function getDifficult() {
   return difficult;
 }
 
+// Подгрузка рейтинг-таблицы
+function searchRatingList(element) {
+
+  $.ajax({
+    type: 'GET',
+    url: '/task_rating_list',
+    data: {
+      shortDescription: element.target.innerText
+    },
+
+    success: function (data) {
+      let $ratingTable = $('.rating')
+      let ratingHtml = "";
+
+      $ratingTable.empty()
+
+      ratingHtml += "<table>" +
+          "<tr>" +
+            "<th>Место</th>" +
+            "<th>Логин пользователя</th>" +
+            "<th>Задача</th>" +
+            "<th>Скорость</th>" +
+            "<th>Краткость</th>" +
+            "<th>Оценка</th>" +
+          "</tr>";
+
+      for (let i = 0; i < data.length; ++i) {
+        let each =
+            "<tr>" +
+              "<td>" + (i + 1) + "</td>" +
+              "<td>" + data[i].credential.login + "</td>" +
+              "<td>" + data[i].task.shortDescription + "</td>" +
+              "<td>" + data[i].rapidity + "</td>" +
+              "<td>" + data[i].brevity + "</td>" +
+              "<td>" + data[i].totalScore + "</td>" +
+            "</tr>"
+
+        ratingHtml += each;
+      }
+
+      ratingHtml += "</table>";
+
+      $ratingTable.html(ratingHtml);
+    }
+
+  })
+
+}
+
 // Поиск задачи (rating.html)
 $('#t_search').on('input', function () {
 
@@ -298,17 +347,21 @@ $('#t_search').on('input', function () {
     },
 
     success: function (data) {
-      let $taskList = $('.task_list');
-      let taskListInHtml = "";
+      let $taskList       = $('.task_list');
+      let taskListInHtml  = "";
 
       $taskList.empty();
 
       for (let i = 0; i < data.length; ++i) {
-        let color = data[i].difficult === 1 ? "#006400" : data[i].difficult === 2 ? "#646200" : "#640000";
-        let difficult = data[i].difficult === 1 ? "Легко" : data[i].difficult === 2 ? "Средне" : "Трудно";
+        let color =
+            data[i].difficult === 1 ? "#006400" : data[i].difficult === 2 ? "#646200" : "#640000";
+
+        let difficult =
+            data[i].difficult === 1 ? "Легко" : data[i].difficult === 2 ? "Средне" : "Трудно";
+
         let task =
             "<div class='task'>" +
-              "<a class='tb_text'>" + data[i].shortDescription + "</a>" +
+              "<a class='tb_text' onclick=\"searchRatingList(event)\">" + data[i].shortDescription + "</a>" +
               "<span style='color: " + color + "'>" + difficult + "</span>" +
             "</div>";
 

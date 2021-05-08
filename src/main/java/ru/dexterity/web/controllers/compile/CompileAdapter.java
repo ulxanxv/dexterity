@@ -8,7 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.time.Duration;
 import java.util.Collections;
 
@@ -17,21 +19,26 @@ public class CompileAdapter {
 
     private final RestTemplate restTemplate;
 
-    @Value("${compileta.url}")
-    private String compiletaUrl;
+    @Value("${compileta.compileUrl}")
+    private String compileUrl;
 
     public CompileAdapter(RestTemplateBuilder builder) {
-        RestTemplateBuilder templateBuilder = builder.rootUri(compiletaUrl)
+        RestTemplateBuilder templateBuilder = builder.rootUri(compileUrl)
             .setConnectTimeout(Duration.ofSeconds(10))
             .setReadTimeout(Duration.ofSeconds(30));
 
         this.restTemplate = templateBuilder.build();
     }
 
-    public CompileResponse runCode(String code,  String className, String testCode, String testClassName) {
+    public CompileResponse runCode(String code,  String className, String testCode, String testClassName, double averageSpeed, double averageBrevity) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+        URI compiletaUrlWithParameters = UriComponentsBuilder.fromHttpUrl(compileUrl)
+            .queryParam("averageSpeed", averageSpeed)
+            .queryParam("averageBrevity", averageBrevity)
+            .build().toUri();
 
         CompilationInfoRequest compilationInfoRequest = CompilationInfoRequest.builder()
             .code(code)
@@ -42,7 +49,7 @@ public class CompileAdapter {
 
         HttpEntity<CompilationInfoRequest> requestHttpEntity = new HttpEntity<>(compilationInfoRequest, httpHeaders);
 
-        ResponseEntity<CompileResponse> responseEntity = restTemplate.postForEntity(compiletaUrl, requestHttpEntity, CompileResponse.class);
+        ResponseEntity<CompileResponse> responseEntity = restTemplate.postForEntity(compiletaUrlWithParameters, requestHttpEntity, CompileResponse.class);
         return responseEntity.getBody();
     }
 

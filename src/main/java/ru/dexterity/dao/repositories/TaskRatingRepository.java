@@ -17,4 +17,6 @@ public interface TaskRatingRepository extends JpaRepository<TaskRating, Long> {
     @Query("SELECT tr FROM TaskRating tr WHERE tr.credential.id = :credentialId AND tr.task.id = :taskId")
     Optional<TaskRating> findByCredentialIdAndTaskId(Long credentialId, Long taskId);
 
+    List<TaskRating> findByTaskId(Long taskId);
+
 }
