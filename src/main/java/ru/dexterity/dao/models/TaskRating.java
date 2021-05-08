@@ -32,7 +32,6 @@ public class TaskRating {
 
     private int brevity;
     private double rapidity;
-    private double resourceConsumption;
     private double totalScore;
 
 }

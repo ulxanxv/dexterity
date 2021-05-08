@@ -132,11 +132,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: resource_consumption
-                  type: double
-                  constraints:
-                    nullable: false
-              - column:
                   name: total_score
                   type: double
                   constraints:

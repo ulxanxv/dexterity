@@ -15,7 +15,6 @@ public class CompileResponse {
 
     private int brevity;
     private double rapidity;
-    private double resourceConsumption;
     private double totalScore;
 
 }
