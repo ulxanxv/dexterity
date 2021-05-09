@@ -10,7 +10,6 @@ import ru.dexterity.dao.repositories.TaskRatingRepository;
 import ru.dexterity.dao.repositories.TaskRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component

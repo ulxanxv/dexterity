@@ -35,21 +35,18 @@ public class CompileAdapter {
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-        URI compiletaUrlWithParameters = UriComponentsBuilder.fromHttpUrl(compileUrl)
-            .queryParam("averageSpeed", averageSpeed)
-            .queryParam("averageBrevity", averageBrevity)
-            .build().toUri();
-
         CompilationInfoRequest compilationInfoRequest = CompilationInfoRequest.builder()
             .code(code)
             .className(className)
             .testCode(testCode)
             .testClassName(testClassName)
+            .averageSpeed(averageSpeed)
+            .averageBrevity(averageBrevity)
             .build();
 
         HttpEntity<CompilationInfoRequest> requestHttpEntity = new HttpEntity<>(compilationInfoRequest, httpHeaders);
 
-        ResponseEntity<CompileResponse> responseEntity = restTemplate.postForEntity(compiletaUrlWithParameters, requestHttpEntity, CompileResponse.class);
+        ResponseEntity<CompileResponse> responseEntity = restTemplate.postForEntity(compileUrl, requestHttpEntity, CompileResponse.class);
         return responseEntity.getBody();
     }
 

@@ -1,7 +1,5 @@
 package ru.dexterity.web.controllers.compile;
 
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -16,7 +14,6 @@ import ru.dexterity.dao.repositories.CredentialRepository;
 import ru.dexterity.dao.repositories.TaskRatingRepository;
 import ru.dexterity.security.AuthorizationAttributes;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +40,7 @@ public class CompileComponent {
 
         CompileResponse response;
         try {
-            AverageTaskMetrics taskMetrics = this.getAverageTaskMetricsFromCache(task);
+            AverageTaskMetrics taskMetrics = this.averageTaskMetrics(task.getId());
 
             response = compileAdapter.runCode(
                 code, task.getClassName(), task.getTestCode(), task.getTestClassName(), taskMetrics.getAverageSpeed(), taskMetrics.getAverageBrevity()
@@ -63,13 +60,22 @@ public class CompileComponent {
         return response;
     }
 
-    private AverageTaskMetrics getAverageTaskMetricsFromCache(Task task) {
+    public Map<Long, AverageTaskMetrics> averageTasksMetricsMap(List<Long> ids) {
+        Map<Long, AverageTaskMetrics> allTasksMetrics = new HashMap<>();
+        ids.forEach(each -> {
+            allTasksMetrics.put(each, this.averageTaskMetrics(each));
+        });
 
-        if (cacheMetrics.containsKey(task.getId())) {
-            return cacheMetrics.get(task.getId());
+        return allTasksMetrics;
+    }
+
+    public AverageTaskMetrics averageTaskMetrics(Long taskId) {
+
+        if (cacheMetrics.containsKey(taskId)) {
+            return cacheMetrics.get(taskId);
         }
 
-        List<TaskRating> taskRatings = taskRatingRepository.findByTaskId(task.getId());
+        List<TaskRating> taskRatings = taskRatingRepository.findByTaskId(taskId);
         double averageSpeed = taskRatings.stream()
             .map(TaskRating::getRapidity)
             .mapToDouble(Double::valueOf)
@@ -86,7 +92,7 @@ public class CompileComponent {
         averageTaskMetrics.setAverageSpeed(averageSpeed);
         averageTaskMetrics.setAverageBrevity(averageBrevity);
 
-        cacheMetrics.put(task.getId(), averageTaskMetrics);
+        cacheMetrics.put(taskId, averageTaskMetrics);
 
         return averageTaskMetrics;
     }
@@ -123,7 +129,7 @@ public class CompileComponent {
 
     @Getter
     @Setter
-    private static class AverageTaskMetrics {
+    public static class AverageTaskMetrics {
 
         private double averageSpeed;
         private double averageBrevity;

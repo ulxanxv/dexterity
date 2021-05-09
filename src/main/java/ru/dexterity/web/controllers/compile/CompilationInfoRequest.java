@@ -12,4 +12,7 @@ public class CompilationInfoRequest {
     private String testCode;
     private String testClassName;
 
+    private Double averageSpeed;
+    private Double averageBrevity;
+
 }

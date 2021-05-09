@@ -8,10 +8,12 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestClientException;
 import ru.dexterity.dao.models.Task;
 import ru.dexterity.security.AuthorizationAttributes;
 import ru.dexterity.web.domain.ModerationTask;
@@ -92,13 +94,18 @@ public class ModerationController {
     }
 
     @ResponseBody
-    @GetMapping("/update_rating_table")
+    @PatchMapping("/update_rating_table")
     public ResponseEntity<?> updateRatingTable() {
         if (!authorizationAttributes.getRole().equals("MODER")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        return ResponseEntity.ok("ok");
+        try {
+            moderationComponent.updateRatingTable();
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (RestClientException e) {
+            return ResponseEntity.status(HttpStatus.GATEWAY_TIMEOUT).build();
+        }
     }
 
 }

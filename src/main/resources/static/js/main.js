@@ -68,6 +68,35 @@ $('.tb_text').on('click', function (e) {
 
 })
 
+function updateRatingTable() {
+
+  swal({
+    title: "Подтверждение",
+    text: "Эта процедура может занимать большое количество времени. Вы уверены?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willAccept) => {
+
+    if (willAccept) {
+      $.ajax({
+        type: "PATCH",
+        url: "/update_rating_table",
+
+        success: function (data) {
+          console.log(data)
+        },
+
+        error: function (data) {
+          console.log(data);
+        }
+      })
+    }
+
+  });
+
+}
+
 // Получение результатов компиляции
 $('#run_code').on('click', function () {
 
