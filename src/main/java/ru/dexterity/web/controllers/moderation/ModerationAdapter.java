@@ -1,14 +1,11 @@
 package ru.dexterity.web.controllers.moderation;
 
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.dexterity.web.controllers.compile.CompilationInfoRequest;
@@ -16,9 +13,7 @@ import ru.dexterity.web.controllers.moderation.domain.TaskOwner;
 import ru.dexterity.web.controllers.moderation.domain.UpdateTableResponse;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @Service

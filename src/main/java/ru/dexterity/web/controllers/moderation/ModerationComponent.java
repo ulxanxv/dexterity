@@ -11,11 +11,7 @@ import ru.dexterity.web.controllers.compile.CompileComponent;
 import ru.dexterity.web.controllers.compile.CompileComponent.AverageTaskMetrics;
 import ru.dexterity.web.controllers.compile.CompileResponse;
 import ru.dexterity.web.controllers.moderation.domain.TaskOwner;
-import ru.dexterity.web.controllers.moderation.domain.UpdateTableResponse;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
