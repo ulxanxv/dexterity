@@ -13,7 +13,7 @@ public interface TaskRatingRepository extends JpaRepository<TaskRating, Long> {
 
     Optional<List<TaskRating>> findByCredentialId(Long credentialId);
 
-    @Query("SELECT tr FROM TaskRating tr WHERE tr.task.shortDescription = ?1 ORDER BY tr.totalScore")
+    @Query("SELECT tr FROM TaskRating tr WHERE tr.task.shortDescription = ?1 ORDER BY tr.totalScore DESC")
     List<TaskRating> findRatingListByShortDescription(String shortDescription);
 
     @Query("SELECT tr FROM TaskRating tr WHERE tr.credential.id = :credentialId AND tr.task.id = :taskId")

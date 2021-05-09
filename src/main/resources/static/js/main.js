@@ -337,8 +337,8 @@ function searchRatingList(element) {
             "<th>Место</th>" +
             "<th>Логин пользователя</th>" +
             "<th>Задача</th>" +
-            "<th>Скорость</th>" +
-            "<th>Краткость</th>" +
+            "<th>Скорость (нс.)</th>" +
+            "<th>Краткость (симв.)</th>" +
             "<th>Оценка</th>" +
           "</tr>";
 
@@ -350,7 +350,7 @@ function searchRatingList(element) {
               "<td>" + data[i].task.shortDescription + "</td>" +
               "<td>" + data[i].rapidity + "</td>" +
               "<td>" + data[i].brevity + "</td>" +
-              "<td>" + data[i].totalScore + "</td>" +
+              "<td>" + data[i].totalScore.toFixed(3) + "</td>" +
             "</tr>"
 
         ratingHtml += each;

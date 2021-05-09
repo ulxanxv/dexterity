@@ -116,9 +116,7 @@ public class CompileComponent {
         taskRating.setSolution(userSolution);
         taskRating.setBrevity(compileResponse.getBrevity());
         taskRating.setRapidity(compileResponse.getRapidity());
-        taskRating.setTotalScore(
-            Precision.round(compileResponse.getTotalScore(), 2)
-        );
+        taskRating.setTotalScore(compileResponse.getTotalScore());
 
         taskRatingRepository.save(taskRating);
     }

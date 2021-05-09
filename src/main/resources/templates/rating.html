@@ -56,6 +56,9 @@
 								<li th:if="${#strings.equals(role, 'MODER')}">
 									<a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a></li>
 
+								<li th:if="${#strings.equals(role, 'MODER')}">
+									<a style="cursor: pointer" onclick="updateRatingTable()">Обновить рейтинг-таблицу</a></li>
+
 								<li th:if="${userExist == true}">
 									<a th:href="@{/logout}">Выйти</a></li>
 
@@ -101,7 +104,7 @@
 						<th>Логин пользователя</th>
 						<th>Задача</th>
 						<th>Скорость (нс.)</th>
-						<th>Краткость (с.)</th>
+						<th>Краткость (симв.)</th>
 						<th>Оценка</th>
 					</tr>
 				</table>
