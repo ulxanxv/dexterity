@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: dexterity
+
+  compileta:
+    container_name: compileta
+    image: compileta
+    ports:
+      - 8081:8081
+    volumes:
+    - ./modules:/modules/
+    environment:
+      SERVER_PORT: 8081
+      COMPILE_CLASSESDIRECTORY: /classes/
+      COMPILE_MODULESDIRECTORY: /modules/
+
+  app:
+    build: .
+    container_name: dexterity
+    ports:
+      - 8080:8080
+    command: java -jar dexterity.jar --spring.profiles.active=dev
+    volumes:
+      - ./res/images:/avatars/
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/dexterity
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+      COMPILETA_COMPILEURL: http://compileta:8081/compile
+      COMPILETA_COMPILALLURL: http://compileta:8081/compile_all
+      UPLOAD_IMAGESPATH: /avatars/
+    links:
+      - db
+      - compileta

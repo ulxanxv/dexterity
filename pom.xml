@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>ru</groupId>
 	<artifactId>dexterity</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>dexterity</name>
 	<description>Automated web-based system for checking solutions to programming problems</description>
 
@@ -58,14 +57,24 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
+			<version>4.3.5</version>
 		</dependency>
 
 <!--		POSTGRE SQL-->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<finalName>dexterity</finalName>
+	</build>
 </project>

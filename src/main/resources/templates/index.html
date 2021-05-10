@@ -47,7 +47,7 @@
                         <ul>
                           <li>
                             <img class="profile_photo" th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}"/>
-                            <img class="profile_photo" th:if="${userExist == false}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
+                            <img class="profile_photo" th:if="${userExist == false}" th:src="@{images/anon.jpg}" src="../static/images/anon.jpg"/>
                             <ul>
                               <li>
                                 <a th:if="${userExist == true}" th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a></li>
