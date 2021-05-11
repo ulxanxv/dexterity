@@ -14,10 +14,12 @@ services:
   compileta:
     container_name: compileta
     image: compileta
+    command: java -jar compileta.jar --spring.profiles.active=dev
     ports:
       - 8081:8081
     volumes:
     - ./modules:/modules/
+    - ./clasess:/classes/
     environment:
       SERVER_PORT: 8081
       COMPILE_CLASSESDIRECTORY: /classes/
