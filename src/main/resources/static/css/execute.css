@@ -73,10 +73,12 @@
     Блок для написания кода
 */
 .ex_code {
-    width: 100%;
+    width: 80vh;
 
-    display: block;
-    justify-content: center;
+    max-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
 
     padding-right: 25px;
     padding-left: 25px;
@@ -85,9 +87,7 @@
 
 #editor {
     font-size: 14px;
-
-    width: 100%;
-    height: 60%;
+    height: 60vh;
 
     font-family: 'Source Code Pro', monospace;
     color: #ffffff;
@@ -95,32 +95,6 @@
     box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
 
     border-radius: 20px;
-}
-
-/*
-    Результат выполнения
-*/
-.ex_result {
-    width: 100%;
-    height: 20%;
-
-    overflow: auto;
-
-    display: table;
-
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(160, 160, 160, 0.5);
-
-    border-radius: 20px;
-    border-right: 42px solid #292929;
-
-    transition: background-color 1s linear;
-}
-
-.result {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
 }
 
 /*

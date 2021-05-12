@@ -111,35 +111,41 @@ $('#run_code').on('click', function () {
     },
 
     success: function (data) {
-      if (data.status === 'ok') {
-        $('.ex_result').css('color', 'green');
-        let typed = new Typed('.result', {
-          strings: [data.message],
-          startDelay: 0,
-          typeSpeed: 20,
-          showCursor: false,
+      let $exResult = $('.ex_result');
+      let $result   = $('.result');
 
-          preStringTyped: function () {
-            $('.ex_result').css('color', 'green');
-          }
-        })
+      console.log(data.status)
+
+      if (data.status === 'ok') {
+        $exResult.css('color', 'green');
+
+        swal({
+          title: "Поздравляем!",
+          text: data.message + ". Перенаправление на страницу рейтинга...",
+          icon: "success",
+          showCancelButton: false,
+          showConfirmButton: false
+        });
 
         setTimeout(function () {
           document.location.href = "/rating"
         }, 5000)
-      } else {
-        $('.ex_result').css('color', 'red');
-        let typed = new Typed('.result', {
-          strings: ['Ошибка :: ^1000 ' + data.message],
-          startDelay: 0,
-          typeSpeed: 20,
-          showCursor: false,
 
-          preStringTyped: function () {
-            $('.ex_result').css('color', 'red');
-          }
-        })
+      } else {
+        $exResult.css('color', 'red');
+        // $result.text(data.message);
+
+        swal({
+          title: "Ошибка",
+          text: data.message,
+          icon: "error",
+          className: "alert",
+          button: {
+            className: "alert_btn"
+          }}
+        );
       }
+
     }
   })
 

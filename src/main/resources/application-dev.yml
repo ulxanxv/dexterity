@@ -31,7 +31,7 @@ server:
 
 ## Properties
 upload:
-  imagesPath: res/images/
+  imagesPath: src/main/resources/images/
 
 compileta:
   compileUrl: http://localhost:8081/compile
