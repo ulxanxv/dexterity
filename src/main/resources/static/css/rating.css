@@ -69,10 +69,12 @@
 	outline: none;
 
 	padding: 5px;
+	border-radius: 25px;
 }
 
 .search_task input::placeholder {
 	color: #e0e0e0;
+	opacity: 0.5;
 }
 
 .task_list {

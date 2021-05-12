@@ -58,15 +58,39 @@
     padding-left: 25px;
 }
 
-.ex_description {
+.db_text {
     font-size: 14px;
-    color: #292929;
 
-    height: 650px;
+    color: #292929;
+    text-decoration: none;
 
     text-align: justify;
 
+    white-space: pre-wrap;
+}
+
+.ex_description {
+    height: 550px;
+
+    font-size: 14px;
+    color: #292929;
+
+    padding-right: 50px;
+
+    overflow: auto;
+
+    text-align: justify;
     white-space: pre-line
+}
+
+.ex_description::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.ex_description::-webkit-scrollbar-thumb {
+    background: #424242;
+    border-radius: 8px;
 }
 
 /*

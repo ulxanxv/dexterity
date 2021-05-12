@@ -50,8 +50,16 @@ public class CompileComponent {
         }
 
         if (response.getStatus().equals("ok")) {
-            if (this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId()))
+            if (this.alreadyDecided(authorizationAttributes.getCredential().getId(), task.getId())) {
+                response.setStatus("already_decided");
+                response.setMessage(String.format(
+                    "Вы уже выполняли данное задание, поэтому рейтинг-таблица не будет обновлена\n\nПоказатели по этому решению:\n\nСкорость: %s\nКраткость: %s\nОценка: %s\n",
+                    response.getRapidity(),
+                    response.getBrevity(),
+                    response.getTotalScore()
+                ));
                 return response;
+            }
 
             this.updateExperience(task.getDifficult());
             this.saveRating(response, task, code);

@@ -10,6 +10,8 @@ import ru.dexterity.dao.repositories.TaskRatingRepository;
 import ru.dexterity.dao.repositories.TaskRepository;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -27,8 +29,16 @@ public class TaskComponent {
         return taskRepository.findAllByInModerationTrue();
     }
 
-    public List<Task> findAllByQuery(String query) {
-        return taskRepository.findAllByQuery(query);
+    public List<Task> findAllByQuery(String query, Integer difficult) {
+        List<Task> allByQuery = taskRepository.findAllByQuery(query.toLowerCase(Locale.ROOT));
+
+        if (difficult != null && difficult != 0) {
+            allByQuery = allByQuery.stream()
+                .filter(each -> each.getDifficult() == difficult)
+                .collect(Collectors.toList());
+        }
+
+        return allByQuery;
     }
 
     public List<TaskRating> ratingList(String shortDescription) {

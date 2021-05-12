@@ -25,149 +25,149 @@
 </head>
 <body>
 
-	<div class="limiter">
-		<div class="wrapper">
+<div class="limiter">
+	<div class="wrapper">
 
-			<div class="top_panel">
-				<div class="panel_section">
-					<!--                    Логотип в верхней панели-->
-					<div class="logo_container">
-						<a class="logo" th:href="@{/}" href="index.html">
-							DEXTERITY
-						</a>
-					</div>
-				</div>
-				<div class="panel_section">
-					<!--                    Фото профиля (выпадающий список)-->
-					<span class="level_span" th:if="${userExist == true}" th:text="${level}"></span>
-					<p class="profile_username">
-						<th:block th:if="${userExist == true}" th:text="'- ' + ${username.toString()}"/>
-					</p>
-					<nav class="profile">
-						<ul>
-							<li>
-								<img class="profile_photo" th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}"/>
-								<img class="profile_photo" th:if="${userExist == false}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
-								<ul>
-									<li>
-										<a th:if="${userExist == true}" th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a></li>
-
-									<li>
-										<a th:if="${userExist == true}" th:href="@{/rating}" href="rating.html">Рейтинг</a></li>
-
-									<li th:if="${#strings.equals(role, 'MODER')}">
-										<a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a></li>
-
-									<li th:if="${#strings.equals(role, 'MODER')}">
-										<a style="cursor: pointer" onclick="updateRatingTable()">Обновить рейтинг-таблицу</a></li>
-
-									<li th:if="${userExist == true}">
-										<a th:href="@{/logout}">Выйти</a></li>
-
-									<li th:if="${userExist == false}">
-										<a th:href="@{/login}" href="login.html">Войти</a></li>
-								</ul>
-							</li>
-						</ul>
-					</nav>
+		<div class="top_panel">
+			<div class="panel_section">
+				<!--                    Логотип в верхней панели-->
+				<div class="logo_container">
+					<a class="logo" th:href="@{/}" href="index.html">
+						DEXTERITY
+					</a>
 				</div>
 			</div>
+			<div class="panel_section">
+				<!--                    Фото профиля (выпадающий список)-->
+				<span class="level_span" th:if="${userExist == true}" th:text="${level}"></span>
+				<p class="profile_username">
+					<th:block th:if="${userExist == true}" th:text="'- ' + ${username.toString()}"/>
+				</p>
+				<nav class="profile">
+					<ul>
+						<li>
+							<img class="profile_photo" th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}"/>
+							<img class="profile_photo" th:if="${userExist == false}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
+							<ul>
+								<li>
+									<a th:if="${userExist == true}" th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a></li>
 
-			<div class="offers_first">
-				<div class="block_header">
-					Предложить задачу
+								<li>
+									<a th:if="${userExist == true}" th:href="@{/rating}" href="rating.html">Рейтинг</a></li>
+
+								<li th:if="${#strings.equals(role, 'MODER')}">
+									<a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a></li>
+
+								<li th:if="${#strings.equals(role, 'MODER')}">
+									<a style="cursor: pointer" onclick="updateRatingTable()">Обновить рейтинг-таблицу</a></li>
+
+								<li th:if="${userExist == true}">
+									<a th:href="@{/logout}">Выйти</a></li>
+
+								<li th:if="${userExist == false}">
+									<a th:href="@{/login}" href="login.html">Войти</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="offers_first">
+			<div class="block_header">
+				Предложить задачу
+			</div>
+			<!--				Краткое описание и подробное описание-->
+			<div class="offers_body">
+				<div class="offers_description">
+					<div class="tab">
+						<button class="tablinks" onclick="openTab(event, 'd_short')">Краткое описание</button>
+						<button class="tablinks" onclick="openTab(event, 'd_long')">Подробное описание</button>
+						<button class="tablinks" onclick="openTab(event, 'd_difficult')">Сложность</button>
+					</div>
+					<div id="d_short" class="s_desc tabcontent">
+						<p>Краткое описание</p>
+						<input id="short" type="text"/>
+					</div>
+					<div id="d_long" class="l_desc tabcontent">
+						<p>Подробное описание</p>
+						<textarea id="long" type="text" maxlength="32768"></textarea>
+					</div>
+					<div id="d_difficult" class="difficult tabcontent">
+						<p>Сложность</p>
+						<select id="difficult" style="width: 100%">
+							<option>Легко</option>
+							<option>Средне</option>
+							<option>Трудно</option>
+						</select>
+					</div>
 				</div>
-<!--				Краткое описание и подробное описание-->
-				<div class="offers_body">
-					<div class="offers_description">
-						<div class="tab">
-							<button class="tablinks" onclick="openTab(event, 'd_short')">Краткое описание</button>
-							<button class="tablinks" onclick="openTab(event, 'd_long')">Подробное описание</button>
-							<button class="tablinks" onclick="openTab(event, 'd_difficult')">Сложность</button>
-						</div>
-						<div id="d_short" class="s_desc tabcontent">
-							<p>Краткое описание</p>
-							<input id="short" type="text"/>
-						</div>
-						<div id="d_long" class="l_desc tabcontent">
-							<p>Подробное описание</p>
-							<textarea id="long" type="text" maxlength="32768"></textarea>
-						</div>
-						<div id="d_difficult" class="difficult tabcontent">
-							<p>Сложность</p>
-							<select id="difficult" style="width: 100%">
-								<option>Легко</option>
-								<option>Средне</option>
-								<option>Трудно</option>
-							</select>
+
+				<!--					Стартовый код и сложность-->
+				<div class="offers_code">
+					<div class="start_code">
+						<p title="Код должен содержать класс и метод, куда пользователь должен будет вводить решение. Метод должен быть статичным и принимать.">
+							Стартовый код
+						</p>
+						<div class="editor" id="start_code">
+
 						</div>
 					</div>
+					<div class="test_code">
+						<p>Код для тестирования</p>
+						<div class="editor" id="test_code">
 
-<!--					Стартовый код и сложность-->
-					<div class="offers_code">
-						<div class="start_code">
-							<p title="Код должен содержать класс и метод, куда пользователь должен будет вводить решение. Метод должен быть статичным и принимать.">
-								Стартовый код
-							</p>
-							<div class="editor" id="start_code">
-
-							</div>
 						</div>
-						<div class="test_code">
-							<p>Код для тестирования</p>
-							<div class="editor" id="test_code">
-
-							</div>
-						</div>
-						<div class="btn_align">
-							<button class="btn" type="button" id="offer_task">
-								Предложить
-							</button>
-						</div>
-						</div>
+					</div>
+					<div class="btn_align">
+						<button class="btn" type="button" id="offer_task">
+							Предложить
+						</button>
 					</div>
 				</div>
 			</div>
-
-			<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-			<script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
-			<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
-			<!--    Ace Editor-->
-			<script type="text/javascript" th:src="@{js/ace/ace.js}" src="../static/js/ace/ace.js" charset="UTF-8"></script>
-			<script type="text/javascript" th:src="@{js/ace/ext-language_tools.js}" src="../static/js/ace/ext-language_tools.js" charset="UTF-8"></script>
-			<script>
-				ace.require("ace/ext/language_tools");
-				let startEditor = ace.edit("start_code");
-				let testEditor = ace.edit("test_code");
-
-				// Подключение редактора кода
-				let editorLib = {
-					init() {
-						startEditor.setTheme("ace/theme/twilight");
-						startEditor.session.setMode("ace/mode/java");
-
-						startEditor.setOptions({
-							enableBasicAutocompletion: true,
-							enableLiveAutocompletion: true,
-							highlightActiveLine: true
-						});
-
-						testEditor.setTheme("ace/theme/twilight");
-						testEditor.session.setMode("ace/mode/java");
-
-						testEditor.setOptions({
-							enableBasicAutocompletion: true,
-							enableLiveAutocompletion: true,
-							highlightActiveLine: true
-						});
-					}
-				}
-
-				editorLib.init();
-			</script>
-
 		</div>
 	</div>
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
+	<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
+	<!--    Ace Editor-->
+	<script type="text/javascript" th:src="@{js/ace/ace.js}" src="../static/js/ace/ace.js" charset="UTF-8"></script>
+	<script type="text/javascript" th:src="@{js/ace/ext-language_tools.js}" src="../static/js/ace/ext-language_tools.js" charset="UTF-8"></script>
+	<script>
+		ace.require("ace/ext/language_tools");
+		let startEditor = ace.edit("start_code");
+		let testEditor = ace.edit("test_code");
+
+		// Подключение редактора кода
+		let editorLib = {
+			init() {
+				startEditor.setTheme("ace/theme/twilight");
+				startEditor.session.setMode("ace/mode/java");
+
+				startEditor.setOptions({
+					enableBasicAutocompletion: true,
+					enableLiveAutocompletion: true,
+					highlightActiveLine: true
+				});
+
+				testEditor.setTheme("ace/theme/twilight");
+				testEditor.session.setMode("ace/mode/java");
+
+				testEditor.setOptions({
+					enableBasicAutocompletion: true,
+					enableLiveAutocompletion: true,
+					highlightActiveLine: true
+				});
+			}
+		}
+
+		editorLib.init();
+	</script>
+
+</div>
+</div>
 
 </body>
 </html>

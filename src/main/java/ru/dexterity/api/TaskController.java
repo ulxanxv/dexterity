@@ -23,8 +23,10 @@ public class TaskController {
     private final SelectedTask selectedTask;
 
     @GetMapping("/search_tasks")
-    public ResponseEntity<List<Task>> searchTasks(@RequestParam String query) {
-        return ResponseEntity.ok(taskComponent.findAllByQuery(query));
+    public ResponseEntity<List<Task>> searchTasks(@RequestParam String query,
+                                                  @RequestParam(required = false) Integer difficult
+    ) {
+        return ResponseEntity.ok(taskComponent.findAllByQuery(query, difficult));
     }
 
     @GetMapping("/task")

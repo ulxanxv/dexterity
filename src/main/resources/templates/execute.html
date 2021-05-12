@@ -2,140 +2,143 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<meta charset="UTF-8">
+	<title>Title</title>
 
-    <link rel="stylesheet" type="text/css" th:href="@{css/execute.css}" href="../static/css/execute.css">
-    <link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet">
-    <style th:inline="css" th:if="${userExist == true}">
-        .top_panel::before {
-            content: "";
+	<link rel="stylesheet" type="text/css" th:href="@{css/execute.css}" href="../static/css/execute.css">
+	<link rel="stylesheet" type="text/css" th:href="@{css/common.css}" href="../static/css/common.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200&display=swap" rel="stylesheet">
+	<style th:inline="css" th:if="${userExist == true}">
+      .top_panel::before {
+          content: "";
 
-            background: darkred;
-            position: absolute;
+          background: darkred;
+          position: absolute;
 
-            height: 2px;
-            width: /*[(${experience} % 1000 / 10 + '%')]*/ 0;
-        }
-    </style>
+          height: 2px;
+          width: /*[(${experience} % 1000 / 10 + '%')]*/ 0;
+      }
+	</style>
 </head>
 <body>
-    <div class="limiter">
-        <div class="wrapper">
-            <!--                Верхняя панель-->
-            <div class="top_panel">
-                <div class="panel_section">
-                    <!--                    Логотип в верхней панели-->
-                    <div class="logo_container">
-                        <a class="logo" th:href="@{/}" href="index.html">
-                            DEXTERITY
-                        </a>
-                    </div>
-                </div>
-                <div class="panel_section">
-                    <!--                    Фото профиля (выпадающий список)-->
-                    <span class="level_span" th:if="${userExist == true}" th:text="${level}"></span>
-                    <p class="profile_username">
-                        <th:block th:if="${userExist == true}" th:text="'- ' + ${username.toString()}"/>
-                    </p>
-                    <nav class="profile">
-                        <ul>
-                            <li>
-                                <img class="profile_photo" th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}"/>
-                                <img class="profile_photo" th:if="${userExist == false}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
-                                <ul>
-                                    <li>
-                                        <a th:if="${userExist == true}" th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a></li>
+<div class="limiter">
+	<div class="wrapper">
+		<!--                Верхняя панель-->
+		<div class="top_panel">
+			<div class="panel_section">
+				<!--                    Логотип в верхней панели-->
+				<div class="logo_container">
+					<a class="logo" th:href="@{/}" href="index.html">
+						DEXTERITY
+					</a>
+				</div>
+			</div>
+			<div class="panel_section">
+				<!--                    Фото профиля (выпадающий список)-->
+				<span class="level_span" th:if="${userExist == true}" th:text="${level}"></span>
+				<p class="profile_username">
+					<th:block th:if="${userExist == true}" th:text="'- ' + ${username.toString()}"/>
+				</p>
+				<nav class="profile">
+					<ul>
+						<li>
+							<img class="profile_photo" th:if="${userExist == true}" th:src="'images/' + ${filename.toString()}"/>
+							<img class="profile_photo" th:if="${userExist == false}" th:src="@{/images/anon.jpg}" src="../static/images/anon.jpg"/>
+							<ul>
+								<li>
+									<a th:if="${userExist == true}" th:href="@{/personal_area}" href="personal_area.html">Личный кабинет</a></li>
 
-                                    <li>
-                                        <a th:if="${userExist == true}" th:href="@{/rating}" href="rating.html">Рейтинг</a></li>
+								<li>
+									<a th:if="${userExist == true}" th:href="@{/rating}" href="rating.html">Рейтинг</a></li>
 
-                                    <li th:if="${#strings.equals(role, 'MODER')}">
-                                        <a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a></li>
+								<li th:if="${#strings.equals(role, 'MODER')}">
+									<a th:href="@{/moderation_list}" href="moderation_list.html">Модерация</a></li>
 
-                                    <li th:if="${#strings.equals(role, 'MODER')}">
-                                        <a style="cursor: pointer" onclick="updateRatingTable()">Обновить рейтинг-таблицу</a></li>
+								<li th:if="${#strings.equals(role, 'MODER')}">
+									<a style="cursor: pointer" onclick="updateRatingTable()">Обновить рейтинг-таблицу</a></li>
 
-                                    <li th:if="${userExist == true}">
-                                        <a th:href="@{/logout}">Выйти</a></li>
+								<li th:if="${userExist == true}">
+									<a th:href="@{/logout}">Выйти</a></li>
 
-                                    <li th:if="${userExist == false}">
-                                        <a th:href="@{/login}" href="login.html">Войти</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+								<li th:if="${userExist == false}">
+									<a th:href="@{/login}" href="login.html">Войти</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
 
-            <div class="execute_main">
-                <div id="e_dshort" class="block_header" th:text="${selectedTask.getShortDescription()}">Тестовое название</div>
-                <div class="execute_body">
-                    <div class="desc">
-                        <div class="block_header_code">
-                            Описание
-                        </div>
-                        <div class="ex_description" th:text="${selectedTask.getLongDescription()}"></div>
-                    </div>
-                    <div class="ex_code">
-                        <div class="block_header_code">
-                            Код
-                        </div>
-                        <div id="editor"></div>
-                        <div class="btn_container">
-                            <a id="run_code" class="btn">
-                                Протестировать
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="execute_main">
+			<div id="e_dshort" class="block_header" th:text="${selectedTask.getShortDescription()}">Тестовое название</div>
+			<div class="execute_body">
+				<div class="desc">
+					<div class="block_header_code">
+						Описание
+					</div>
+					<div class="ex_description">
+						<p class="db_text" th:text="${selectedTask.getLongDescription()}">
+						</p>
+					</div>
+				</div>
+				<div class="ex_code">
+					<div class="block_header_code">
+						Код
+					</div>
+					<div id="editor"></div>
+					<div class="btn_container">
+						<a id="run_code" class="btn">
+							Протестировать
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
-    <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
+<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 
 <!--    Ace Editor-->
-    <script type="text/javascript" th:src="@{js/ace/ace.js}" src="../static/js/ace/ace.js" charset="UTF-8"></script>
-    <script type="text/javascript" th:src="@{js/ace/ext-language_tools.js}" src="../static/js/ace/ext-language_tools.js" charset="UTF-8"></script>
-    <script>
-        ace.require("ace/ext/language_tools");
-        let editor = ace.edit("editor");
+<script type="text/javascript" th:src="@{js/ace/ace.js}" src="../static/js/ace/ace.js" charset="UTF-8"></script>
+<script type="text/javascript" th:src="@{js/ace/ext-language_tools.js}" src="../static/js/ace/ext-language_tools.js" charset="UTF-8"></script>
+<script>
+	ace.require("ace/ext/language_tools");
+	let editor = ace.edit("editor");
 
-        // Подключение редактора кода
-        let editorLib = {
-            init() {
-                editor.setTheme("ace/theme/twilight");
-                editor.session.setMode("ace/mode/java");
+	// Подключение редактора кода
+	let editorLib = {
+		init() {
+			editor.setTheme("ace/theme/twilight");
+			editor.session.setMode("ace/mode/java");
 
-                editor.setOptions({
-                    enableBasicAutocompletion: true,
-                    enableLiveAutocompletion: true,
-                    highlightActiveLine: true
-                });
-            }
-        }
+			editor.setOptions({
+				enableBasicAutocompletion: true,
+				enableLiveAutocompletion: true,
+				highlightActiveLine: true
+			});
+		}
+	}
 
-        editorLib.init();
+	editorLib.init();
 
-        $(document).ready(function (e) {
-            $.ajax({
-                type: 'GET',
-                url: '/selected_task',
+	$(document).ready(function (e) {
+		$.ajax({
+			type: 'GET',
+			url: '/selected_task',
 
-                success: function (data) {
-                    if (data.status === 'ok') {
-                        editor.setValue(data.taskInfo.startCode);
-                    }
-                }
-            })
-        });
-    </script>
+			success: function (data) {
+				if (data.status === 'ok') {
+					editor.setValue(data.taskInfo.startCode);
+				}
+			}
+		})
+	});
+</script>
 </body>
 </html>

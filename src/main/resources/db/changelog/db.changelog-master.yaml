@@ -180,87 +180,6 @@ databaseChangeLog:
               - column:
                   name: role
                   value: "ADMIN"
-        - insert:
-            tableName: task
-            columns:
-              - column:
-                  name: in_moderation
-                  value: false
-              - column:
-                  name: short_description
-                  value: "Перевести число в строку"
-              - column:
-                  name: long_description
-                  value: "Подробное описание перевода числа в строку"
-              - column:
-                  name: class_name
-                  value: "---"
-              - column:
-                  name: test_class_name
-                  value: "---"
-              - column:
-                  name: test_code
-                  value: "---"
-              - column:
-                  name: start_code
-                  value: "---"
-              - column:
-                  name: difficult
-                  value: 3
-        - insert:
-            tableName: task
-            columns:
-              - column:
-                  name: in_moderation
-                  value: false
-              - column:
-                  name: short_description
-                  value: "Вычислить палиндром"
-              - column:
-                  name: long_description
-                  value: "Подробное описание вычисления палиндрома"
-              - column:
-                  name: class_name
-                  value: "---"
-              - column:
-                  name: test_class_name
-                  value: "---"
-              - column:
-                  name: test_code
-                  value: "---"
-              - column:
-                  name: start_code
-                  value: "---"
-              - column:
-                  name: difficult
-                  value: 2
-        - insert:
-            tableName: task
-            columns:
-              - column:
-                  name: in_moderation
-                  value: true
-              - column:
-                  name: short_description
-                  value: "Удалить повторяющиеся элементы"
-              - column:
-                  name: long_description
-                  value: "Подробное описание удаления повторяющихся элементов"
-              - column:
-                  name: class_name
-                  value: "---"
-              - column:
-                  name: test_class_name
-                  value: "---"
-              - column:
-                  name: test_code
-                  value: "---"
-              - column:
-                  name: start_code
-                  value: "---"
-              - column:
-                  name: difficult
-                  value: 3
 
         - insert:
             tableName: task
@@ -292,12 +211,116 @@ databaseChangeLog:
 
                               @Test
                               public void testSomething() {
-                                 assertEquals(\"HELLO\",u.MakeUpperCase(\"hello\"));
+                                 assertEquals(\"HELLO\", u.MakeUpperCase(\"hello\"));
                               }
                           }"
               - column:
                   name: start_code
-                  value: "class Upper {\n\tpublic static String MakeUpperCase(String str) {\n\t\treturn str;\n\t}\n}"
+                  value: "class Upper {\n\n\tpublic static String MakeUpperCase(String str) {\n\t\treturn str;\n\t}\n\n}"
               - column:
                   name: difficult
                   value: 1
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: in_moderation
+                  value: false
+              - column:
+                  name: short_description
+                  value: "Разбиение camelCase"
+              - column:
+                  name: long_description
+                  value: "Необходимо написать функцию, которая разбивает camelCase на раздельные слова. Разделитель — пробел.
+                  \n\n\nПример:\n\n
+                  camelCasing => camel Casing\n
+                  identifier  => identifier\n
+                  \"\"          => \"\"
+                  "
+              - column:
+                  name: class_name
+                  value: "Solution"
+              - column:
+                  name: test_class_name
+                  value: "SolutionTest"
+              - column:
+                  name: test_code
+                  value: "
+                  import org.junit.Test;
+                  import static org.junit.Assert.assertEquals;
+                  import org.junit.runners.JUnit4;
+
+                  public class SolutionTest {
+                      @Test
+                      public void tests() {
+                        assertEquals( \"Incorrect\", \"camel Casing\", Solution.camelCase(\"camelCasing\"));
+                        assertEquals( \"Incorrect\", \"camel Casing Test\", Solution.camelCase(\"camelCasingTest\"));
+                        assertEquals( \"Incorrect\", \"camelcasingtest\", Solution.camelCase(\"camelcasingtest\"));
+                    }
+                  }
+                  "
+              - column:
+                  name: start_code
+                  value: "class Solution {\n
+
+                    \tpublic static String camelCase(String input) {\n
+                      \t\treturn null;\n
+                    \t}\n
+
+                  }"
+              - column:
+                  name: difficult
+                  value: 2
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: in_moderation
+                  value: false
+              - column:
+                  name: short_description
+                  value: "Проверка объединенных строк"
+              - column:
+                  name: long_description
+                  value: "На собеседовании вам предлагается написать алгоритм, который проверяет, может ли данная строка, s быть сформирована из двух других строк, part1 и part2.
+\n\nОграничение состоит в том, что символы в part1 и part2 должны располагаться в том же порядке, что и в s.
+\n\nИнтервьюер дает вам следующий пример и предлагает выяснить остальное из заданных тестовых примеров.
+\n\n\nНапример:
+\n\n'codewars' это слияние из 'cdw' и 'oears':
+\ns:      c o d e w a r s   = codewars\npart1:  c   d   w         = cdw\npart2:    o   e   a r s   = oears
+"
+              - column:
+                  name: class_name
+                  value: "StringMerger"
+              - column:
+                  name: test_class_name
+                  value: "StringMergerTest"
+              - column:
+                  name: test_code
+                  value: "
+                  import org.junit.Test;
+                  import static org.junit.Assert.*;
+
+                  public class StringMergerTest {
+
+                    @Test
+                    public void normalHappyFlow() {
+                      assertTrue(\"codewars can be created from code and wars\", StringMerger.isMerge(\"codewars\", \"code\", \"wars\"));
+                      assertTrue(\"codewars can be created from cdwr and oeas\", StringMerger.isMerge(\"codewars\", \"cdwr\", \"oeas\"));
+                      assertFalse(\"Codewars are not codwars\", StringMerger.isMerge(\"codewars\", \"cod\", \"wars\"));
+                    }
+
+                  }
+                  "
+              - column:
+                  name: start_code
+                  value: "public class StringMerger {\n
+
+                      \tpublic static boolean isMerge(String s, String part1, String part2) {\n
+                         \t\treturn false;\n
+                      \t}\n
+
+                  }"
+              - column:
+                  name: difficult
+                  value: 3

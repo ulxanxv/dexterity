@@ -71,53 +71,53 @@
 			</div>
 		</div>
 
-	<div class="rating_body">
-		<div class="table task_table">
-			<div class="block_header">
-				Выбор задачи
+		<div class="rating_body">
+			<div class="table task_table">
+				<div class="block_header">
+					Выбор задачи
+				</div>
+				<div class="search_task">
+					<input id="t_search" type="text" placeholder="Поиск">
+				</div>
+				<div class="task_list">
+					<th:block th:each="task : ${taskList}">
+						<div class="task">
+							<a class="tb_text" th:text="${task.getShortDescription()}" onclick="searchRatingList(event)"></a>
+							<th:block th:switch="${task.getDifficult()}">
+								<span th:case="1" style="color: #006400FF">Легко</span>
+								<span th:case="2" style="color: #646200">Средне</span>
+								<span th:case="3" style="color: #640000">Трудно</span>
+							</th:block>
+						</div>
+					</th:block>
+				</div>
 			</div>
-			<div class="search_task">
-				<input id="t_search" type="text" placeholder="Поиск задачи">
-			</div>
-			<div class="task_list">
-				<th:block th:each="task : ${taskList}">
-					<div class="task">
-						<a class="tb_text" th:text="${task.getShortDescription()}" onclick="searchRatingList(event)"></a>
-						<th:block th:switch="${task.getDifficult()}">
-							<span th:case="1" style="color: #006400FF">Легко</span>
-							<span th:case="2" style="color: #646200">Средне</span>
-							<span th:case="3" style="color: #640000">Трудно</span>
-						</th:block>
-					</div>
-				</th:block>
-			</div>
-		</div>
 
-		<div class="table rating_table">
-			<div class="block_header">
-				Рейтинг
-			</div>
-			<div class="rating">
-				<table>
-					<tr>
-						<th>Место</th>
-						<th>Логин пользователя</th>
-						<th>Задача</th>
-						<th>Скорость (нс.)</th>
-						<th>Краткость (симв.)</th>
-						<th>Оценка</th>
-					</tr>
-				</table>
+			<div class="table rating_table">
+				<div class="block_header">
+					Рейтинг
+				</div>
+				<div class="rating">
+					<table>
+						<tr>
+							<th>Место</th>
+							<th>Логин пользователя</th>
+							<th>Задача</th>
+							<th>Скорость (нс.)</th>
+							<th>Краткость (симв.)</th>
+							<th>Оценка</th>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
-	</div>
 
 	</div>
 </div>
 
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
-	<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
+<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 
 </body>
 </html>
