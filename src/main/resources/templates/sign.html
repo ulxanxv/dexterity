@@ -10,8 +10,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-
+<body onload="showError()">
 <div class="limiter">
 	<div class="wrapper">
 		<div class="form-content">
@@ -22,9 +21,9 @@
       </span>
 			<form action="/sign" method="post" th:object="${credential}">
 				<input th:field="*{email}" style="margin-bottom: 25px" type="email" placeholder="E-Mail"/>
-				<input th:field="*{login}" type="text" placeholder="Логин"/>
-				<input th:field="*{password}" type="password" placeholder="Пароль"/>
-				<input type="password" placeholder="Подтверждение пароля"/>
+				<input id="login" th:field="*{login}" type="text" placeholder="Логин"/>
+				<input id="password" th:field="*{password}" type="password" placeholder="Пароль"/>
+				<input id="confirm_password" th:field="*{confirmPassword}" type="password" placeholder="Подтверждение пароля"/>
 				<p th:if="${authError != null}" th:text="${authError.getDescription()}" class="error"></p>
 				<input class="btn" type="submit" value="Зарегистрироваться">
 				<div class="link">
@@ -40,7 +39,26 @@
 </div>
 
 <script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <script>
+
+	function showError() {
+		let $error = $('.error');
+
+		if ($error.length !== 0) {
+			swal({
+				title: "Ошибка",
+				text: $error.text(),
+				icon: "error",
+				className: "alert",
+				button: {
+					className: "alert_btn"
+				}
+			});
+		}
+	}
+
 	setTimeout(function () {
 		$('.error').css('opacity', '0');
 
@@ -48,7 +66,8 @@
 			$('.error').remove();
 		}, 1000);
 
-	}, 5000);
+	}, 3000);
+
 </script>
 </body>
 </html>

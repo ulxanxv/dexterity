@@ -18,15 +18,23 @@ public class AuthComponent {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public void registerUser(Credential credential) {
-        if (Strings.isEmpty(credential.getLogin()) || Strings.isEmpty(credential.getPassword())) {
-            throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Данные некорректны");
+        if (Strings.isEmpty(credential.getLogin()) || Strings.isEmpty(credential.getPassword()) || Strings.isEmpty(credential.getEmail())) {
+            throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Логин, E-Mail или пароль не заданы");
+        }
+
+        if (!credential.getPassword().equals(credential.getConfirmPassword())) {
+            throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Пароли не совпадают");
+        }
+
+        if (credential.getLogin().length() < 3) {
+            throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Логин должен быть не менее 3 символов");
         }
 
         if (credentialRepository.findByLogin(credential.getLogin()).isPresent()) {
             throw new AuthException(AuthError.CREDENTIAL_EXIST, "Такой пользователь уже существует");
         }
 
-        if ((credential.getEmail() != null && credentialRepository.findByEmail(credential.getEmail()).isPresent())) {
+        if (credentialRepository.findByEmail(credential.getEmail()).isPresent()) {
             throw new AuthException(AuthError.CREDENTIAL_EXIST, "Пользователь с таким E-Mail уже существует");
         }
 

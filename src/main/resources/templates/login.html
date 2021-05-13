@@ -10,7 +10,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="showError()">
 
 <div class="limiter">
 	<div class="wrapper">
@@ -37,7 +37,25 @@
 </div>
 
 <script type="text/javascript" th:src="@{js/jquery.js}" src="../static/js/jquery.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+
+	function showError() {
+		let $error = $('.error');
+
+		if ($error.length !== 0) {
+			swal({
+				title: "Ошибка",
+				text: $error.text(),
+				icon: "error",
+				className: "alert",
+				button: {
+					className: "alert_btn"
+				}
+			});
+		}
+	}
+
 	setTimeout(function () {
 		$('.error').css('opacity', '0');
 
@@ -46,6 +64,7 @@
 		}, 1000);
 
 	}, 5000);
+
 </script>
 </body>
 </html>

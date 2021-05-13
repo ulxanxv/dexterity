@@ -324,3 +324,105 @@ databaseChangeLog:
               - column:
                   name: difficult
                   value: 3
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: in_moderation
+                  value: false
+              - column:
+                  name: short_description
+                  value: "Сортировка массива"
+              - column:
+                  name: long_description
+                  value: "Создайте функцию, которая возвращает элементы массива в отсортированном по возрастанию виде."
+              - column:
+                  name: class_name
+                  value: "SortArray"
+              - column:
+                  name: test_class_name
+                  value: "SortArrayTests"
+              - column:
+                  name: test_code
+                  value: "import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import java.util.Random;
+
+public class SortArrayTests {
+
+  @Test
+  public void intArrayTests() {
+    int[] ai = { 1,2,3 };
+    int[] uai = { 2,3,1 };
+    assertEquals(ai[0], SortArray.sortArray(uai)[0]);
+    assertEquals(ai[1], SortArray.sortArray(uai)[1]);
+    assertEquals(ai[2], SortArray.sortArray(uai)[2]);
+  }
+
+}
+                  "
+              - column:
+                  name: start_code
+                  value: "public class SortArray {\n
+
+  \tpublic static int[] sortArray(int[] massive) {\n
+    \t\treturn massive;\n
+  \t}\n
+
+}"
+              - column:
+                  name: difficult
+                  value: 1
+        - insert:
+            tableName: task
+            columns:
+              - column:
+                  name: in_moderation
+                  value: false
+              - column:
+                  name: short_description
+                  value: "Факториальная декомпозиция"
+              - column:
+                  name: long_description
+                  value: "    Цель задания - разложить n! (факториал n) на его простые множители.\n\n    Примеры:\n\n    n = 12; decomp(12) -> \"2^10 * 3^5 * 5^2 * 7 * 11\"\n    n = 22; decomp(22) -> \"2^19 * 3^9 * 5^4 * 7^3 * 11^2 * 13 * 17 * 19\"\n    n = 25; decomp(25) -> \"2^22 * 3^10 * 5^6 * 7^3 * 11^2 * 13 * 17 * 19 * 23\"\n\n    Простые числа должны быть в порядке возрастания. Когда показатель простого числа равен 1, не ставьте показатель степени.\n\n    Заметки:\n\n    — функция есть decomp(n)и должна возвращать разложение n!на простые множители в порядке возрастания простых чисел в виде строки.\n    — факториал может быть очень большим числом ( 4000! has 12674 digitsn может быть от 300 до 4000).\n    — возвращаемая строка не может содержать лишних конечных пробелов"
+              - column:
+                  name: class_name
+                  value: "FactDecomp"
+              - column:
+                  name: test_class_name
+                  value: "FactDecompTest"
+              - column:
+                  name: test_code
+                  value: "import org.junit.Test;
+import org.junit.runners.JUnit4;
+import static org.junit.Assert.*;
+
+public class FactDecompTest {
+
+    private static void testing(int n, String expected) {
+        String actual = FactDecomp.decomp(n);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void test1() {
+        testing(17, \"2^15 * 3^6 * 5^3 * 7^2 * 11 * 13 * 17\");
+        testing(5, \"2^3 * 3 * 5\");
+        testing(22, \"2^19 * 3^9 * 5^4 * 7^3 * 11^2 * 13 * 17 * 19\");
+        testing(14, \"2^11 * 3^5 * 5^2 * 7^2 * 11 * 13\");
+        testing(25, \"2^22 * 3^10 * 5^6 * 7^3 * 11^2 * 13 * 17 * 19 * 23\");
+  }
+}
+  "
+              - column:
+                  name: start_code
+                  value: "class FactDecomp {\n
+
+    \tpublic static String decomp(int n) {\n
+        \t\t// your code\n
+    \t}\n\n
+}
+"
+              - column:
+                  name: difficult
+                  value: 3

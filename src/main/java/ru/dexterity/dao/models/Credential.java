@@ -26,6 +26,9 @@ public class Credential {
     @Column(nullable = false)
     private String password;
 
+    @Transient
+    private String confirmPassword;
+
     @Column(nullable = false)
     private String role;
 

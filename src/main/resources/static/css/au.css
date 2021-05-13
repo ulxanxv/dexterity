@@ -40,15 +40,18 @@
 }
 
 .error {
+    font-size: 14px;
     padding: 10px 30px;
     margin: 10px 0;
 
     background-color: darkred;
     color: white;
 
-    border-radius: 20px;
+    border-radius: 15px;
 
     transition: opacity 1s linear;
+
+    display: none;
 }
 
 input[type=button], input[type=submit], input[type=reset]  {

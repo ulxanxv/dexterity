@@ -39,8 +39,6 @@ public class AuthController {
           authComponent.registerUser(credential);
           return "redirect:/login";
       } catch (AuthException exception) {
-          log.error("USER registration :: {}", exception.getDescription());
-
           model.addAttribute("credential", credential);
           model.addAttribute("authError", exception);
           return "sign";
