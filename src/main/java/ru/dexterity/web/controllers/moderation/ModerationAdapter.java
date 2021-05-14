@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import ru.dexterity.web.controllers.compile.CompilationInfoRequest;
+import ru.dexterity.web.controllers.compile.CompileRequest;
 import ru.dexterity.web.controllers.moderation.domain.TaskOwner;
 import ru.dexterity.web.controllers.moderation.domain.UpdateTableResponse;
 
@@ -32,12 +32,12 @@ public class ModerationAdapter {
         this.restTemplate = templateBuilder.build();
     }
 
-    public UpdateTableResponse updateRatingTable(Map<TaskOwner, CompilationInfoRequest> compilationInfoDetail) {
+    public UpdateTableResponse updateRatingTable(Map<TaskOwner, CompileRequest> compilationInfoDetail) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-        HttpEntity<Map<TaskOwner, CompilationInfoRequest>> requestHttpEntity =
+        HttpEntity<Map<TaskOwner, CompileRequest>> requestHttpEntity =
             new HttpEntity<>(compilationInfoDetail, httpHeaders);
 
         ResponseEntity<UpdateTableResponse> responseEntity =

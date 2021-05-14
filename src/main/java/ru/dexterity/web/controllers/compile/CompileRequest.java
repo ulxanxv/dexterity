@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CompilationInfoRequest {
+public class CompileRequest {
 
     private String code;
     private String className;

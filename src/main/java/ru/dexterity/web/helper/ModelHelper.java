@@ -57,7 +57,7 @@ public class ModelHelper {
         model.addAttribute("moderationTaskList", taskComponent.findAllModeration());
     }
 
-    public List<TaskRating> decidedTaskList() {
+    private List<TaskRating> decidedTaskList() {
         Optional<List<TaskRating>> optionalRatingList = taskRatingRepository.findByCredentialId(
             authorizationAttributes.getCredential().getId()
         );

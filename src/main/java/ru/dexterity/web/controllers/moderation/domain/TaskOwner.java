@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.dexterity.web.deserializer.TaskOwnerKeyDeserializer;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

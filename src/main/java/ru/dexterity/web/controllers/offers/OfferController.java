@@ -2,7 +2,6 @@ package ru.dexterity.web.controllers.offers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,7 +33,7 @@ public class OfferController {
         try {
             offerComponent.saveModerationOffer(task);
             return ResponseEntity.ok(HttpStatus.OK);
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Такая задача уже существует");
         }
     }

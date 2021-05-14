@@ -2,6 +2,7 @@ package ru.dexterity.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.dexterity.dao.models.Task;
 import ru.dexterity.dao.models.TaskRating;
+import ru.dexterity.exception.TaskNotFoundException;
 import ru.dexterity.web.domain.SelectedTask;
 
 import java.util.List;
@@ -51,6 +53,7 @@ public class TaskController {
         return ResponseEntity.ok(taskComponent.ratingList(shortDescription));
     }
 
+    @Getter
     @JsonInclude(Include.NON_NULL)
     public static class TaskResponse {
 
@@ -66,13 +69,6 @@ public class TaskController {
             this.taskInfo = taskInfo;
         }
 
-        public String getStatus() {
-            return status;
-        }
-
-        public Task getTaskInfo() {
-            return taskInfo;
-        }
     }
 
 }

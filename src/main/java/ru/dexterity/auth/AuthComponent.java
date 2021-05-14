@@ -5,7 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import ru.dexterity.auth.AuthException.AuthError;
+import ru.dexterity.exception.AuthException;
+import ru.dexterity.exception.AuthException.AuthError;
 import ru.dexterity.dao.models.Credential;
 import ru.dexterity.dao.repositories.CredentialRepository;
 

@@ -6,7 +6,7 @@ import ru.dexterity.dao.models.Task;
 import ru.dexterity.dao.models.TaskRating;
 import ru.dexterity.dao.repositories.TaskRatingRepository;
 import ru.dexterity.dao.repositories.TaskRepository;
-import ru.dexterity.web.controllers.compile.CompilationInfoRequest;
+import ru.dexterity.web.controllers.compile.CompileRequest;
 import ru.dexterity.web.controllers.compile.CompileComponent;
 import ru.dexterity.web.controllers.compile.CompileComponent.AverageTaskMetrics;
 import ru.dexterity.web.controllers.compile.CompileResponse;
@@ -63,13 +63,13 @@ public class ModerationComponent {
                 .collect(Collectors.toList())
         );
 
-        Map<TaskOwner, CompilationInfoRequest> compilationInfoDetail = new HashMap<>();
+        Map<TaskOwner, CompileRequest> compilationInfoDetail = new HashMap<>();
         updatableList.forEach(each -> {
             TaskOwner taskOwner = new TaskOwner();
             taskOwner.setTaskId(each.getTask().getId());
             taskOwner.setCredentialId(each.getCredential().getId());
 
-            CompilationInfoRequest compilationInfoRequest = CompilationInfoRequest.builder()
+            CompileRequest compileRequest = CompileRequest.builder()
                 .code(each.getSolution())
                 .className(each.getTask().getClassName())
                 .testCode(each.getTask().getTestCode())
@@ -78,7 +78,7 @@ public class ModerationComponent {
                 .averageBrevity(metricsMap.get(each.getTask().getId()).getAverageBrevity())
                 .build();
 
-            compilationInfoDetail.put(taskOwner, compilationInfoRequest);
+            compilationInfoDetail.put(taskOwner, compileRequest);
         });
 
         Map<TaskOwner, CompileResponse> updatedTasks = moderationAdapter.updateRatingTable(compilationInfoDetail).getUpdatableList();

@@ -14,6 +14,7 @@ public class OfferComponent {
     public void saveModerationOffer(Task task) {
         task.setInModeration(true);
         task.setShortDescription(task.getShortDescription().trim());
+
         taskRepository.save(task);
     }
 

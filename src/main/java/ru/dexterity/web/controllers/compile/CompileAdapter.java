@@ -33,7 +33,7 @@ public class CompileAdapter {
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         httpHeaders.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-        CompilationInfoRequest compilationInfoRequest = CompilationInfoRequest.builder()
+        CompileRequest compileRequest = CompileRequest.builder()
             .code(code)
             .className(className)
             .testCode(testCode)
@@ -42,7 +42,7 @@ public class CompileAdapter {
             .averageBrevity(averageBrevity)
             .build();
 
-        HttpEntity<CompilationInfoRequest> requestHttpEntity = new HttpEntity<>(compilationInfoRequest, httpHeaders);
+        HttpEntity<CompileRequest> requestHttpEntity = new HttpEntity<>(compileRequest, httpHeaders);
 
         ResponseEntity<CompileResponse> responseEntity = restTemplate.postForEntity(compileUrl, requestHttpEntity, CompileResponse.class);
         return responseEntity.getBody();

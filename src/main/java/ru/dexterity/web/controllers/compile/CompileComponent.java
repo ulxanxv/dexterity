@@ -61,7 +61,7 @@ public class CompileComponent {
                 return response;
             }
 
-            this.updateExperience(task.getDifficult());
+            this.updateExperience(task.getDifficult(), response.getTotalScore());
             this.saveRating(response, task, code);
         }
 
@@ -105,8 +105,8 @@ public class CompileComponent {
         return averageTaskMetrics;
     }
 
-    private void updateExperience(int taskDifficult) {
-        int fullExperience = 100 * taskDifficult;
+    private void updateExperience(int taskDifficult, double totalScore) {
+        int fullExperience = ((int) (100 * taskDifficult + (100 * taskDifficult * totalScore / 100.0)));
 
         Credential credential = authorizationAttributes.getCredential();
         credential.setExperience(

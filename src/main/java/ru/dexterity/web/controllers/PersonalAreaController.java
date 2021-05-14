@@ -22,7 +22,8 @@ public class PersonalAreaController {
     @GetMapping("/personal_area")
     public String uploadFilePage(Model model) {
         modelHelper.setCredential(model);
-        model.addAttribute("decidedTaskList", modelHelper.decidedTaskList());
+        modelHelper.setDecidedTaskList(model);
+
         return "personal_area";
     }
 
@@ -30,11 +31,13 @@ public class PersonalAreaController {
     public String uploadFile(@RequestParam("file") MultipartFile multipartFile, Model model) {
         try {
             fileHelper.uploadFile(multipartFile);
+
             modelHelper.setCredential(model);
-            model.addAttribute("decidedTaskList", modelHelper.decidedTaskList());
+            modelHelper.setDecidedTaskList(model);
         } catch (IOException e) {
             return "redirect:/personal_area";
         }
+
         return "redirect:/personal_area";
     }
 
