@@ -30,8 +30,6 @@ public class CompileComponent {
     private final CredentialRepository credentialRepository;
     private final TaskRatingRepository taskRatingRepository;
 
-    private final Map<Long, AverageTaskMetrics> cacheMetrics = new HashMap<>();
-
     private static final double DEFAULT_SPEED = 1_000_000_000D;
     private static final double DEFAULT_BREVITY = 200D;
 
@@ -78,11 +76,6 @@ public class CompileComponent {
     }
 
     public AverageTaskMetrics averageTaskMetrics(Long taskId) {
-
-        if (cacheMetrics.containsKey(taskId)) {
-            return cacheMetrics.get(taskId);
-        }
-
         List<TaskRating> taskRatings = taskRatingRepository.findByTaskId(taskId);
         double averageSpeed = taskRatings.stream()
             .map(TaskRating::getRapidity)
@@ -99,8 +92,6 @@ public class CompileComponent {
         AverageTaskMetrics averageTaskMetrics = new AverageTaskMetrics();
         averageTaskMetrics.setAverageSpeed(averageSpeed);
         averageTaskMetrics.setAverageBrevity(averageBrevity);
-
-        cacheMetrics.put(taskId, averageTaskMetrics);
 
         return averageTaskMetrics;
     }

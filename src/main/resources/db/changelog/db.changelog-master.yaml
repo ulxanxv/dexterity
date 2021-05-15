@@ -251,12 +251,20 @@ databaseChangeLog:
                   import org.junit.runners.JUnit4;
 
                   public class SolutionTest {
-                      @Test
-                      public void tests() {
-                        assertEquals( \"Incorrect\", \"camel Casing\", Solution.camelCase(\"camelCasing\"));
-                        assertEquals( \"Incorrect\", \"camel Casing Test\", Solution.camelCase(\"camelCasingTest\"));
-                        assertEquals( \"Incorrect\", \"camelcasingtest\", Solution.camelCase(\"camelcasingtest\"));
-                    }
+	@Test
+	public void test1() {
+		assertEquals( \"Incorrect\", \"camel Casing\", Solution.camelCase(\"camelCasing\"));
+	}
+
+	@Test
+	public void test2() {
+		assertEquals( \"Incorrect\", \"camel Casing Test\", Solution.camelCase(\"camelCasingTest\"));
+	}
+
+	@Test
+	public void test3() {
+		assertEquals( \"Incorrect\", \"camelcasingtest\", Solution.camelCase(\"camelcasingtest\"));
+	}
                   }
                   "
               - column:
@@ -303,12 +311,20 @@ databaseChangeLog:
 
                   public class StringMergerTest {
 
-                    @Test
-                    public void normalHappyFlow() {
-                      assertTrue(\"codewars can be created from code and wars\", StringMerger.isMerge(\"codewars\", \"code\", \"wars\"));
-                      assertTrue(\"codewars can be created from cdwr and oeas\", StringMerger.isMerge(\"codewars\", \"cdwr\", \"oeas\"));
-                      assertFalse(\"Codewars are not codwars\", StringMerger.isMerge(\"codewars\", \"cod\", \"wars\"));
-                    }
+	@Test
+	public void test1() {
+		assertTrue(\"codewars can be created from code and wars\", StringMerger.isMerge(\"codewars\", \"code\", \"wars\"));
+	}
+
+	@Test
+	public void test2() {
+		assertTrue(\"codewars can be created from cdwr and oeas\", StringMerger.isMerge(\"codewars\", \"cdwr\", \"oeas\"));
+	}
+
+	@Test
+	public void test3() {
+		assertFalse(\"Codewars are not codwars\", StringMerger.isMerge(\"codewars\", \"cod\", \"wars\"));
+	}
 
                   }
                   "
@@ -346,19 +362,40 @@ databaseChangeLog:
                   name: test_code
                   value: "import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertArrayEquals;
 import java.util.Random;
 
 public class SortArrayTests {
 
-  @Test
-  public void intArrayTests() {
-    int[] ai = { 1,2,3 };
-    int[] uai = { 2,3,1 };
-    assertEquals(ai[0], SortArray.sortArray(uai)[0]);
-    assertEquals(ai[1], SortArray.sortArray(uai)[1]);
-    assertEquals(ai[2], SortArray.sortArray(uai)[2]);
-  }
+    @Test
+    public void intArrayTests() {
+        int[] ai = { 1, 2, 3 };
+        int[] uai = { 2, 3, 1 };
+
+        SortArray.sortArray(uai);
+
+        assertArrayEquals(ai, uai);
+    }
+
+    @Test
+    public void intArrayTests2() {
+        int[] ai = { 4, 5, 6, 7, 8, 10 };
+        int[] uai = { 10, 4, 6, 5, 8, 7 };
+
+        SortArray.sortArray(uai);
+
+        assertArrayEquals(ai, uai);
+    }
+
+    @Test
+    public void intArrayTests3() {
+        int[] ai = { 132, 134, 514, 644, 677, 1231, 4123 };
+        int[] uai = { 4123, 1231, 677, 644, 514, 134, 132 };
+
+        SortArray.sortArray(uai);
+
+        assertArrayEquals(ai, uai);
+    }
 
 }
                   "
@@ -404,16 +441,33 @@ public class FactDecompTest {
         String actual = FactDecomp.decomp(n);
         assertEquals(expected, actual);
     }
+
     @Test
     public void test1() {
         testing(17, \"2^15 * 3^6 * 5^3 * 7^2 * 11 * 13 * 17\");
-        testing(5, \"2^3 * 3 * 5\");
-        testing(22, \"2^19 * 3^9 * 5^4 * 7^3 * 11^2 * 13 * 17 * 19\");
-        testing(14, \"2^11 * 3^5 * 5^2 * 7^2 * 11 * 13\");
-        testing(25, \"2^22 * 3^10 * 5^6 * 7^3 * 11^2 * 13 * 17 * 19 * 23\");
-  }
-}
-  "
+    }
+
+	@Test
+    public void test2() {
+		testing(5, \"2^3 * 3 * 5\");
+    }
+
+	@Test
+    public void test3() {
+		testing(22, \"2^19 * 3^9 * 5^4 * 7^3 * 11^2 * 13 * 17 * 19\");
+    }
+
+	@Test
+    public void test4() {
+		testing(14, \"2^11 * 3^5 * 5^2 * 7^2 * 11 * 13\");
+    }
+
+	@Test
+    public void test5() {
+		testing(25, \"2^22 * 3^10 * 5^6 * 7^3 * 11^2 * 13 * 17 * 19 * 23\");
+    }
+
+}"
               - column:
                   name: start_code
                   value: "class FactDecomp {\n
