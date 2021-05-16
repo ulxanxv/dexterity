@@ -1,4 +1,4 @@
-package ru.dexterity.auth;
+package ru.dexterity.web.auth;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +19,14 @@ public class AuthComponent {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public void registerUser(Credential credential) {
+        if (credentialRepository.findByEmail(credential.getEmail()).isPresent()) {
+            throw new AuthException(AuthError.CREDENTIAL_EXIST, "Пользователь с таким E-Mail уже существует");
+        }
+
+        if (credentialRepository.findByLogin(credential.getLogin()).isPresent()) {
+            throw new AuthException(AuthError.CREDENTIAL_EXIST, "Такой пользователь уже существует");
+        }
+
         if (Strings.isEmpty(credential.getLogin()) || Strings.isEmpty(credential.getPassword()) || Strings.isEmpty(credential.getEmail())) {
             throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Логин, E-Mail или пароль не заданы");
         }
@@ -29,14 +37,6 @@ public class AuthComponent {
 
         if (credential.getLogin().length() < 3) {
             throw new AuthException(AuthError.CREDENTIAL_INCORRECT, "Логин должен быть не менее 3 символов");
-        }
-
-        if (credentialRepository.findByLogin(credential.getLogin()).isPresent()) {
-            throw new AuthException(AuthError.CREDENTIAL_EXIST, "Такой пользователь уже существует");
-        }
-
-        if (credentialRepository.findByEmail(credential.getEmail()).isPresent()) {
-            throw new AuthException(AuthError.CREDENTIAL_EXIST, "Пользователь с таким E-Mail уже существует");
         }
 
         credential.setRole("USER");

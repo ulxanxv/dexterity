@@ -1,4 +1,4 @@
-package ru.dexterity.web.controllers;
+package ru.dexterity.web.controllers.personalarea;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ public class PersonalAreaController {
     private final ModelHelper modelHelper;
 
     @GetMapping("/personal_area")
-    public String uploadFilePage(Model model) {
+    public String personalArea(Model model) {
         modelHelper.setCredential(model);
         modelHelper.setDecidedTaskList(model);
 

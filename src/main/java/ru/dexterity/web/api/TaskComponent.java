@@ -1,4 +1,4 @@
-package ru.dexterity.api;
+package ru.dexterity.web.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -79,7 +79,7 @@ public class ModerationController {
     }
 
     @ResponseBody
-    @PostMapping("/select_moderation")
+    @PostMapping("/select_moderation_task")
     public ResponseEntity<?> selectModeration(@RequestParam String shortDescription) {
         if (!authorizationAttributes.getRole().equals("MODER")) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();

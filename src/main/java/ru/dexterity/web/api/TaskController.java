@@ -1,4 +1,4 @@
-package ru.dexterity.api;
+package ru.dexterity.web.api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -31,8 +31,8 @@ public class TaskController {
         return ResponseEntity.ok(taskComponent.findAllByQuery(query, difficult));
     }
 
-    @GetMapping("/task")
-    public TaskResponse taskByShortDescription(@RequestParam(name = "short_description") String shortDescription) {
+    @GetMapping("/select_task")
+    public TaskResponse selectTask(@RequestParam(name = "short_description") String shortDescription) {
         try {
             Task task = taskComponent.findByShortDescription(shortDescription);
             selectedTask.setSelectedTask(task.getId());
@@ -44,13 +44,8 @@ public class TaskController {
     }
 
     @GetMapping("/selected_task")
-    public TaskResponse selectedUserTask() {
+    public TaskResponse getSelectedTask() {
         return new TaskResponse("ok", taskComponent.findById(selectedTask.getSelectedTask()));
-    }
-
-    @GetMapping("/task_rating_list")
-    public ResponseEntity<List<TaskRating>> taskRatingList(@RequestParam String shortDescription) {
-        return ResponseEntity.ok(taskComponent.ratingList(shortDescription));
     }
 
     @Getter

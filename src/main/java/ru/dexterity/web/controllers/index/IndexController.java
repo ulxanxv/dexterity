@@ -1,4 +1,4 @@
-package ru.dexterity.web.controllers;
+package ru.dexterity.web.controllers.index;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

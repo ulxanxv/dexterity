@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ru.dexterity.dao.models.Task;
 import ru.dexterity.web.helper.ModelHelper;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class OfferController {

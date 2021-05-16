@@ -13,7 +13,7 @@ $('#offer_task').on('click', function () {
 		data: JSON.stringify({
 			shortDescription: $('#short').val(),
 			longDescription: $('#long').val(),
-			difficult: getDifficult(),
+			difficult: getDifficult($('#difficult').val()),
 			startCode: startEditor.getValue(),
 			testCode: testEditor.getValue()
 		}),
@@ -52,6 +52,85 @@ $('#offer_task').on('click', function () {
 })
 
 /**
+ * Одобрить задачу — moderation.html
+ */
+$('#accept').on('click', function () {
+	if (checkData() === false) {
+		return;
+	}
+
+	swal({
+		title: "Подтверждение",
+		text: "Вы уверены в принятии данной задачи?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	}).then((willAccept) => {
+
+		if (willAccept) {
+			$.ajax({
+				type: "POST",
+				url: "/accept",
+				contentType: "application/json",
+				data: JSON.stringify({
+					shortDescription: $('#short').val(),
+					longDescription: $('#long').val(),
+					difficult: getDifficult($('#difficult').val()),
+					className: $('#sc_name').val(),
+					testClassName: $('#tc_name').val(),
+					startCode: startEditor.getValue(),
+					testCode: testEditor.getValue()
+				}),
+
+				success: function (data) {
+					swal("Отлично! Задача успешно одобрена!", {
+						icon: "success",
+					});
+
+					setTimeout(function () {
+						document.location.href = "/moderation_list";
+					}, 2000)
+				}
+			})
+		}
+
+	});
+
+});
+
+/**
+ * Отклонить задачу — moderation.html
+ */
+$('#decline').on('click', function () {
+	swal({
+		title: "Подтверждение",
+		text: "Вы уверены, что хотите отклонить данную задачу?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	}).then((willDecline) => {
+
+		if (willDecline) {
+			$.ajax({
+				type: "POST",
+				url: "/decline",
+
+				success: function () {
+					swal("Задача отклонена!", {
+						icon: "error",
+					});
+
+					setTimeout(function () {
+						document.location.href = "/moderation_list";
+					}, 2000)
+				}
+			})
+		}
+
+	});
+});
+
+/**
  * Получение подробного описания задачи
  */
 function loadDescription(e) {
@@ -60,7 +139,7 @@ function loadDescription(e) {
 
 	$.ajax({
 		type: 'GET',
-		url: '/task',
+		url: '/select_task',
 		data: {
 			short_description: e.currentTarget.innerText.replace(/\s+/g, ' ').trim()
 		},
@@ -86,7 +165,6 @@ function updateRatingTable() {
 		buttons: true,
 		dangerMode: true,
 	}).then((willAccept) => {
-
 		if (willAccept) {
 			$.ajax({
 				type: "PATCH",
@@ -112,7 +190,6 @@ function updateRatingTable() {
 
 			})
 		}
-
 	});
 
 }
@@ -186,85 +263,6 @@ $('#run_code').on('click', function () {
 })
 
 /**
- * Одобрить задачу
- */
-$('#accept').on('click', function () {
-	if (checkData() === false) {
-		return;
-	}
-
-	swal({
-		title: "Подтверждение",
-		text: "Вы уверены в принятии данной задачи?",
-		icon: "warning",
-		buttons: true,
-		dangerMode: true,
-	}).then((willAccept) => {
-
-		if (willAccept) {
-			$.ajax({
-				type: "POST",
-				url: "/accept",
-				contentType: "application/json",
-				data: JSON.stringify({
-					shortDescription: $('#short').val(),
-					longDescription: $('#long').val(),
-					difficult: getDifficult(),
-					className: $('#sc_name').val(),
-					testClassName: $('#tc_name').val(),
-					startCode: startEditor.getValue(),
-					testCode: testEditor.getValue()
-				}),
-
-				success: function (data) {
-					swal("Отлично! Задача успешно одобрена!", {
-						icon: "success",
-					});
-
-					setTimeout(function () {
-						document.location.href = "/moderation_list";
-					}, 2000)
-				}
-			})
-		}
-
-	});
-
-});
-
-/**
- * Отклонить задачу
- */
-$('#decline').on('click', function () {
-	swal({
-		title: "Подтверждение",
-		text: "Вы уверены, что хотите отклонить данную задачу?",
-		icon: "warning",
-		buttons: true,
-		dangerMode: true,
-	}).then((willDecline) => {
-
-		if (willDecline) {
-			$.ajax({
-				type: "POST",
-				url: "/decline",
-
-				success: function () {
-					swal("Задача отклонена!", {
-						icon: "error",
-					});
-
-					setTimeout(function () {
-						document.location.href = "/moderation_list";
-					}, 2000)
-				}
-			})
-		}
-
-	});
-});
-
-/**
  * Открытие выбранных вкладок — offers.html & moderation.html
  * @param evt
  * @param tabName
@@ -295,12 +293,12 @@ function moderation(element) {
 
 	$.ajax({
 		type: 'POST',
-		url: '/select_moderation',
+		url: '/select_moderation_task',
 		data: {
 			shortDescription: element.target.innerText
 		},
 
-		success: function (data) {
+		success: function () {
 			document.location.href = "/moderation"
 		}
 
@@ -354,8 +352,7 @@ function checkData() {
 	return true;
 }
 
-function getDifficult() {
-	let difficult = $('#difficult').val();
+function getDifficult(difficult) {
 
 	switch (difficult) {
 		case "Легко":
@@ -438,24 +435,13 @@ $('#search_task').on('input', function () {
 
 function searchTask_Index() {
 	let taskName = $('#search_task').val();
-	let difficult = $('#difficult_search').val();
-
-	if (difficult === 'Все') {
-		difficult = 0;
-	} else if (difficult === 'Легко') {
-		difficult = 1;
-	} else if (difficult === 'Средне') {
-		difficult = 2;
-	} else {
-		difficult = 3;
-	}
 
 	$.ajax({
 		type: 'GET',
 		url: '/search_tasks',
 		data: {
 			query: taskName,
-			difficult: difficult
+			difficult: getDifficult($('#difficult_search').val())
 		},
 
 		success: function (data) {
