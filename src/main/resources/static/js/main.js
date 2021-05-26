@@ -168,12 +168,18 @@ $('.btn_delete').on('click', function () {
 						if (confirm) {
 							swal("Задача была полностью удалена вместе с рейтинг-таблицей!", {
 								icon: "success",
-								className: 'alert'
+								className: 'alert',
+								button: {
+									className: 'alert_btn'
+								}
 							});
 						} else {
 							swal("Задача больше не доступна для решения, но рейтинг-таблица сохранена", {
 								icon: "success",
-								className: 'alert'
+								className: 'alert',
+								button: {
+									className: 'alert_btn'
+								}
 							});
 						}
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.dexterity.dao.models.Task;
 import ru.dexterity.dao.models.TaskRating;
 import ru.dexterity.exception.TaskNotFoundException;
+import ru.dexterity.security.AuthorizationAttributes;
 import ru.dexterity.web.domain.SelectedTask;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class TaskController {
 
     private final TaskComponent taskComponent;
     private final SelectedTask selectedTask;
+    private final AuthorizationAttributes authorizationAttributes;
 
     @GetMapping("/search_tasks")
     public ResponseEntity<List<Task>> searchTasks(@RequestParam String query,
@@ -52,6 +54,10 @@ public class TaskController {
 
     @DeleteMapping("/delete_task")
     public TaskResponse deleteTask(@RequestParam String reason, @RequestParam Boolean completeRemoval) {
+        if (!authorizationAttributes.getRole().equals("MODER")) {
+            return new TaskResponse("not_enough_rights");
+        }
+        
         try {
             Task task =
                 taskComponent.findById(selectedTask.getSelectedTask());
