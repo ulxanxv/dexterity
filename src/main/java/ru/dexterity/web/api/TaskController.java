@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.dexterity.dao.models.Task;
@@ -35,8 +38,29 @@ public class TaskController {
     public TaskResponse selectTask(@RequestParam(name = "short_description") String shortDescription) {
         try {
             Task task = taskComponent.findByShortDescription(shortDescription);
-            selectedTask.setSelectedTask(task.getId());
 
+            if (task.isDeleted()) {
+                return new TaskResponse("deleted", task);
+            }
+
+            selectedTask.setSelectedTask(task.getId());
+            return new TaskResponse("ok", task);
+        } catch (TaskNotFoundException exception) {
+            return new TaskResponse("not_found");
+        }
+    }
+
+    @DeleteMapping("/delete_task")
+    public TaskResponse deleteTask(@RequestParam String reason, @RequestParam Boolean completeRemoval) {
+        try {
+            Task task =
+                taskComponent.findById(selectedTask.getSelectedTask());
+
+            taskComponent.deleteTask(
+                task, reason, completeRemoval
+            );
+
+            selectedTask.setSelectedTask(null);
             return new TaskResponse("ok", task);
         } catch (TaskNotFoundException exception) {
             return new TaskResponse("not_found");

@@ -2,6 +2,7 @@ package ru.dexterity.web.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import ru.dexterity.exception.TaskNotFoundException;
 import ru.dexterity.exception.TaskNotFoundException.TaskErrorCode;
@@ -10,6 +11,7 @@ import ru.dexterity.dao.models.TaskRating;
 import ru.dexterity.dao.repositories.TaskRatingRepository;
 import ru.dexterity.dao.repositories.TaskRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -56,6 +58,18 @@ public class TaskComponent {
         return taskRepository
                 .findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(TaskErrorCode.TASK_NOT_FOUND));
+    }
+
+    public void deleteTask(Task task, String reason, Boolean completeRemoval) {
+        if (completeRemoval) {
+            taskRatingRepository.deleteAll(taskRatingRepository.findByTaskId(task.getId()));
+            taskRepository.delete(task);
+            return;
+        }
+
+        task.setDeleted(true);
+        task.setDeletionReason(reason);
+        taskRepository.save(task);
     }
 
 }

@@ -96,7 +96,10 @@ public class CompileComponent {
     }
 
     private void updateExperience(int taskDifficult, double totalScore) {
-        int fullExperience = ((int) (100 * taskDifficult + (100 * taskDifficult * totalScore / 100.0)));
+        int additionalExp =
+            Math.min(((int) (100 * taskDifficult * totalScore / 100.0)), 1000);
+
+        int fullExperience = 100 * taskDifficult + additionalExp;
 
         Credential credential = authorizationAttributes.getCredential();
         credential.setExperience(

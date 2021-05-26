@@ -18,8 +18,7 @@ $('#offer_task').on('click', function () {
 			testCode: testEditor.getValue()
 		}),
 
-		success: function (data) {
-			console.log(data);
+		success: function () {
 			swal({
 				title: "Успех",
 				text: "Ваша задача успешно отправлена...",
@@ -36,7 +35,6 @@ $('#offer_task').on('click', function () {
 		},
 
 		error: function (data) {
-			console.log(data)
 			swal({
 				title: "Ошибка",
 				text: data.responseText,
@@ -65,6 +63,8 @@ $('#accept').on('click', function () {
 		icon: "warning",
 		buttons: true,
 		dangerMode: true,
+		className: 'alert',
+		closeOnClickOutside: false
 	}).then((willAccept) => {
 
 		if (willAccept) {
@@ -82,9 +82,10 @@ $('#accept').on('click', function () {
 					testCode: testEditor.getValue()
 				}),
 
-				success: function (data) {
+				success: function () {
 					swal("Отлично! Задача успешно одобрена!", {
 						icon: "success",
+						className: 'alert'
 					});
 
 					setTimeout(function () {
@@ -99,6 +100,98 @@ $('#accept').on('click', function () {
 });
 
 /**
+ * Удаление задачи — index.html
+ */
+$('.btn_delete').on('click', function () {
+
+	swal({
+		title: "Подтверждение",
+		text: "Вы уверены, что хотите удалить данную задачу?",
+		icon: "warning",
+		buttons: true,
+		className: 'alert',
+		dangerMode: true,
+		closeOnClickOutside: false
+	}).then(willDeleted => {
+		if (!willDeleted) { return; }
+
+		swal({
+			title: 'Удаление',
+			text: 'Пожалуйста, введите в поле ниже причину удаления данной задачи',
+			content: 'input',
+			icon: 'warning',
+			className: 'alert',
+			button: {
+				text: "OK",
+				className: 'alert_btn'
+			},
+			closeOnClickOutside: false
+		}).then(reason => {
+			if (reason === undefined || reason === null || reason === "") {
+				swal("Поле причины удаления не может быть пустым!", {
+					icon: "error",
+					className: 'alert'
+				})
+
+				return;
+			}
+
+			swal({
+				title: 'Удаление',
+				text: 'Укажите, полностью ли вы хотите удалить задачу или оставить рейтинг-таблицу?',
+				icon: 'warning',
+				className: 'alert',
+				buttons: [
+					'Нет, рейтинг оставить',
+					'Да, полностью'
+				],
+				dangerMode: true,
+				closeOnClickOutside: false
+			}).then(function (confirm) {
+				if (confirm === null) {
+					confirm = false;
+				}
+
+				$.ajax({
+					type: "DELETE",
+					url: "/delete_task?reason=" + reason + '&completeRemoval=' + confirm,
+
+					success: function (data) {
+						if (data.status !== 'ok') {
+							swal("Произошла ошибка: " + data.status, {
+								icon: "error",
+								className: 'alert'
+							});
+						}
+
+
+						if (confirm) {
+							swal("Задача была полностью удалена вместе с рейтинг-таблицей!", {
+								icon: "success",
+								className: 'alert'
+							});
+						} else {
+							swal("Задача больше не доступна для решения, но рейтинг-таблица сохранена", {
+								icon: "success",
+								className: 'alert'
+							});
+						}
+
+						setTimeout(function () {
+							document.location.href = "/";
+						}, 5000)
+					}
+				})
+			})
+
+		})
+
+
+	})
+
+})
+
+/**
  * Отклонить задачу — moderation.html
  */
 $('#decline').on('click', function () {
@@ -108,6 +201,8 @@ $('#decline').on('click', function () {
 		icon: "warning",
 		buttons: true,
 		dangerMode: true,
+		className: 'alert',
+		closeOnClickOutside: false
 	}).then((willDecline) => {
 
 		if (willDecline) {
@@ -118,6 +213,7 @@ $('#decline').on('click', function () {
 				success: function () {
 					swal("Задача отклонена!", {
 						icon: "error",
+						className: 'alert'
 					});
 
 					setTimeout(function () {
@@ -134,9 +230,6 @@ $('#decline').on('click', function () {
  * Получение подробного описания задачи
  */
 function loadDescription(e) {
-
-	console.log("Here");
-
 	$.ajax({
 		type: 'GET',
 		url: '/select_task',
@@ -147,6 +240,22 @@ function loadDescription(e) {
 		success: function (data) {
 			if (data.status === 'ok') {
 				$('#long_description').text(data.taskInfo.longDescription);
+
+				$('#index_buttons').css('display', '');
+			}
+
+			if (data.status === 'deleted') {
+				swal({
+					title: "Задача недоступна",
+					text: "Задача была удалена по причине: " + data.taskInfo.deletionReason +
+							". Но вы всегда сможете просматривать свой рейтинг по данной задаче в таблице, " +
+							"просто теперь её решение не доступно.",
+					icon: 'info',
+					className: 'alert',
+					buttons: [
+							"OK"
+					]
+				})
 			}
 		}
 	})
@@ -162,6 +271,7 @@ function updateRatingTable() {
 		title: "Подтверждение",
 		text: "Эта процедура может занимать большое количество времени. Вы уверены?",
 		icon: "warning",
+		className: 'alert',
 		buttons: true,
 		dangerMode: true,
 	}).then((willAccept) => {
@@ -220,6 +330,7 @@ $('#run_code').on('click', function () {
 					title: "Поздравляем!",
 					text: data.message + ". Перенаправление на страницу рейтинга...",
 					icon: "success",
+					className: 'alert',
 					showCancelButton: false,
 					showConfirmButton: false
 				});
@@ -289,8 +400,6 @@ function openTab(evt, tabName) {
  * @param element
  */
 function moderation(element) {
-	console.log(element.target.innerText);
-
 	$.ajax({
 		type: 'POST',
 		url: '/select_moderation_task',
@@ -385,6 +494,7 @@ function searchRatingList(element) {
 		},
 
 		success: function (data) {
+			console.log(data);
 			let $ratingTable = $('.rating')
 			let ratingHtml = "";
 
@@ -406,7 +516,7 @@ function searchRatingList(element) {
 							"<td>" + (i + 1) + "</td>" +
 							"<td>" + data[i].credential.login + "</td>" +
 							"<td>" + data[i].task.shortDescription + "</td>" +
-							"<td>" + data[i].rapidity + "</td>" +
+							"<td>" + Math.trunc(data[i].rapidity) + "</td>" +
 							"<td>" + data[i].brevity + "</td>" +
 							"<td>" + data[i].totalScore.toFixed(3) + "</td>" +
 						"</tr>"
@@ -457,11 +567,20 @@ function searchTask_Index() {
 				let difficult =
 						data[i].difficult === 1 ? "Легко" : data[i].difficult === 2 ? "Средне" : "Трудно";
 
-				let task =
-						"<div class='task'>" +
-							"<a class='tb_text' onclick='loadDescription(event)'>" + data[i].shortDescription + "</a>" +
-							"<span style='color: " + color + "'>" + difficult + "</span>" +
-						"</div>";
+				let task;
+				if (data[i].deleted === true) {
+					task =
+							"<div class='task' style='opacity: 0.5'>" +
+								"<a class='tb_text' onclick='loadDescription(event)'>" + data[i].shortDescription + "</a>" +
+								"<span style='color: " + color + "'>" + difficult + "</span>" +
+							"</div>";
+				} else {
+					task =
+							"<div class='task'>" +
+								"<a class='tb_text' onclick='loadDescription(event)'>" + data[i].shortDescription + "</a>" +
+								"<span style='color: " + color + "'>" + difficult + "</span>" +
+							"</div>";
+				}
 
 				taskHtml += task;
 			}
@@ -496,11 +615,20 @@ $('#t_search').on('input', function () {
 				let difficult =
 						data[i].difficult === 1 ? "Легко" : data[i].difficult === 2 ? "Средне" : "Трудно";
 
-				let task =
-						"<div class='task'>" +
-						"<a class='tb_text' onclick=\"searchRatingList(event)\">" + data[i].shortDescription + "</a>" +
-						"<span style='color: " + color + "'>" + difficult + "</span>" +
-						"</div>";
+				let task;
+				if (data[i].deleted === true) {
+					task =
+							"<div class='task' style='opacity: 0.5'>" +
+								"<a class='tb_text' onclick=\"searchRatingList(event)\">" + data[i].shortDescription + "</a>" +
+								"<span style='color: " + color + "'>" + difficult + "</span>" +
+							"</div>";
+				} else {
+					task =
+							"<div class='task'>" +
+								"<a class='tb_text' onclick=\"searchRatingList(event)\">" + data[i].shortDescription + "</a>" +
+								"<span style='color: " + color + "'>" + difficult + "</span>" +
+							"</div>";
+				}
 
 				taskListInHtml += task;
 			}

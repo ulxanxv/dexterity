@@ -95,7 +95,15 @@
 			<!--                        Блок самого задания-->
 			<div class="task_body">
 				<th:block th:each="task : ${taskList}">
-					<div class="task">
+					<div th:if="${task.isDeleted() == false}" class="task">
+						<a class="tb_text" onclick="loadDescription(event)" th:text="${task.getShortDescription()}"></a>
+						<th:block th:switch="${task.getDifficult()}">
+							<span th:case="1" style="color: #006400FF">Легко</span>
+							<span th:case="2" style="color: #646200">Средне</span>
+							<span th:case="3" style="color: #640000">Трудно</span>
+						</th:block>
+					</div>
+					<div th:if="${task.isDeleted() == true}" class="task" style="opacity: 0.5">
 						<a class="tb_text" onclick="loadDescription(event)" th:text="${task.getShortDescription()}"></a>
 						<th:block th:switch="${task.getDifficult()}">
 							<span th:case="1" style="color: #006400FF">Легко</span>
@@ -125,9 +133,13 @@
 					</p>
 				</div>
 			</div>
-			<div class="btn_container">
+			<div id="index_buttons" class="btn_container" style="display: none">
 				<a th:href="@{/execute}" href="../templates/execute.html" class="btn" th:if="${!username.toString().equals('anonymousUser')}">
 					Приступить к выполнению
+				</a>
+
+				<a class="btn btn_delete" th:if="${!username.toString().equals('anonymousUser') && #strings.equals(role, 'MODER')}">
+					Удалить
 				</a>
 			</div>
 		</div>

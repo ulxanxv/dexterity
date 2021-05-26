@@ -21,6 +21,10 @@ public class Task {
     @Column(nullable = false)
     private boolean inModeration;
 
+    private boolean isDeleted;
+
+    private String deletionReason;
+
     @Column(unique = true, nullable = false)
     private String shortDescription;
 
