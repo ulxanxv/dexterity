@@ -32,12 +32,17 @@ public class TaskComponent {
         return taskRepository.findAllByInModerationTrue();
     }
 
-    public List<Task> findAllByQuery(String query, Integer difficult) {
+    public List<Task> findAllByQuery(String query, Integer difficult, Boolean showDeleted) {
         List<Task> allByQuery = taskRepository.findAllByQuery(query.toLowerCase(Locale.ROOT));
-
         if (difficult != null && difficult != 0) {
             allByQuery = allByQuery.stream()
                 .filter(each -> each.getDifficult() == difficult)
+                .collect(Collectors.toList());
+        }
+
+        if (!showDeleted) {
+            allByQuery = allByQuery.stream()
+                .filter(each -> !each.isDeleted())
                 .collect(Collectors.toList());
         }
 

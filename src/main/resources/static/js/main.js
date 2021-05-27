@@ -117,85 +117,93 @@ $('.btn_delete').on('click', function () {
 
 		swal({
 			title: 'Удаление',
-			text: 'Пожалуйста, введите в поле ниже причину удаления данной задачи',
-			content: 'input',
+			text: 'Укажите, полностью ли вы хотите удалить задачу или оставить рейтинг-таблицу?',
 			icon: 'warning',
 			className: 'alert',
-			button: {
-				text: "OK",
-				className: 'alert_btn'
-			},
+			buttons: [
+				'Нет, рейтинг оставить',
+				'Да, полностью'
+			],
+			dangerMode: true,
 			closeOnClickOutside: false
-		}).then(reason => {
-			if (reason === undefined || reason === null || reason === "") {
-				swal("Поле причины удаления не может быть пустым!", {
-					icon: "error",
-					className: 'alert'
-				})
-
+		}).then(function (confirm) {
+			if (confirm === true) {
+				ajaxDeleteTask("complete_removal", confirm);
 				return;
 			}
 
+			confirm = false;
+
 			swal({
 				title: 'Удаление',
-				text: 'Укажите, полностью ли вы хотите удалить задачу или оставить рейтинг-таблицу?',
+				text: 'Пожалуйста, введите в поле ниже причину удаления данной задачи',
+				content: 'input',
 				icon: 'warning',
 				className: 'alert',
-				buttons: [
-					'Нет, рейтинг оставить',
-					'Да, полностью'
-				],
-				dangerMode: true,
+				button: {
+					text: "OK",
+					className: 'alert_btn'
+				},
 				closeOnClickOutside: false
-			}).then(function (confirm) {
-				if (confirm === null) {
-					confirm = false;
+			}).then(reason => {
+				if (reason === undefined || reason === null || reason === "") {
+					swal("Поле причины удаления не может быть пустым!", {
+						icon: "error",
+						className: 'alert'
+					})
+
+					return;
 				}
 
-				$.ajax({
-					type: "DELETE",
-					url: "/delete_task?reason=" + reason + '&completeRemoval=' + confirm,
+				ajaxDeleteTask(reason, confirm);
 
-					success: function (data) {
-						if (data.status !== 'ok') {
-							swal("Произошла ошибка: " + data.status, {
-								icon: "error",
-								className: 'alert'
-							});
-						}
-
-
-						if (confirm) {
-							swal("Задача была полностью удалена вместе с рейтинг-таблицей!", {
-								icon: "success",
-								className: 'alert',
-								button: {
-									className: 'alert_btn'
-								}
-							});
-						} else {
-							swal("Задача больше не доступна для решения, но рейтинг-таблица сохранена", {
-								icon: "success",
-								className: 'alert',
-								button: {
-									className: 'alert_btn'
-								}
-							});
-						}
-
-						setTimeout(function () {
-							document.location.href = "/";
-						}, 5000)
-					}
-				})
 			})
-
 		})
-
 
 	})
 
 })
+
+function ajaxDeleteTask(reason, confirm) {
+
+	$.ajax({
+		type: "DELETE",
+		url: "/delete_task?reason=" + reason + '&completeRemoval=' + confirm,
+
+		success: function (data) {
+			if (data.status !== 'ok') {
+				swal("Произошла ошибка: " + data.status, {
+					icon: "error",
+					className: 'alert'
+				});
+			}
+
+
+			if (confirm) {
+				swal("Задача была полностью удалена вместе с рейтинг-таблицей!", {
+					icon: "success",
+					className: 'alert',
+					button: {
+						className: 'alert_btn'
+					}
+				});
+			} else {
+				swal("Задача больше не доступна для решения, но рейтинг-таблица сохранена", {
+					icon: "success",
+					className: 'alert',
+					button: {
+						className: 'alert_btn'
+					}
+				});
+			}
+
+			setTimeout(function () {
+				document.location.href = "/";
+			}, 3000)
+		}
+	})
+
+}
 
 /**
  * Отклонить задачу — moderation.html
@@ -549,6 +557,10 @@ $('#search_task').on('input', function () {
 	searchTask_Index();
 })
 
+$('#deleted_check').on('change', function () {
+	searchTask_Index();
+})
+
 function searchTask_Index() {
 	let taskName = $('#search_task').val();
 
@@ -557,7 +569,8 @@ function searchTask_Index() {
 		url: '/search_tasks',
 		data: {
 			query: taskName,
-			difficult: getDifficult($('#difficult_search').val())
+			difficult: getDifficult($('#difficult_search').val()),
+			showDeleted: $('#deleted_check').prop('checked')
 		},
 
 		success: function (data) {

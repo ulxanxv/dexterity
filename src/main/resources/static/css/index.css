@@ -219,3 +219,17 @@
 .difficult select option::selection {
     opacity: 0.5;
 }
+
+.deleted_check {
+    font-size: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: -30px;
+
+    user-select: none;
+
+    text-transform: uppercase;
+}
