@@ -259,6 +259,8 @@
     text-decoration: none;
     transition: all .1s linear;
 
+    user-select: none;
+
     cursor: pointer;
 }
 
@@ -268,6 +270,8 @@
 
 .alert {
     border-radius: 25px;
+
+    user-select: none;
 }
 
 .alert_btn {
