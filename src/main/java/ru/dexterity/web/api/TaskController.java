@@ -32,7 +32,7 @@ public class TaskController {
     @GetMapping("/search_tasks")
     public ResponseEntity<List<Task>> searchTasks(@RequestParam String query,
                                                   @RequestParam(required = false) Integer difficult,
-                                                  @RequestParam Boolean showDeleted
+                                                  @RequestParam(required = false) Boolean showDeleted
     ) {
         return ResponseEntity.ok(taskComponent.findAllByQuery(query, difficult, showDeleted));
     }

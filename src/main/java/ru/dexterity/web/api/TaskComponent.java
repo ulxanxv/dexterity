@@ -40,7 +40,7 @@ public class TaskComponent {
                 .collect(Collectors.toList());
         }
 
-        if (!showDeleted) {
+        if (showDeleted != null && !showDeleted) {
             allByQuery = allByQuery.stream()
                 .filter(each -> !each.isDeleted())
                 .collect(Collectors.toList());
