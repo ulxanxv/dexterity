@@ -76,7 +76,7 @@
 		<div class="personal_main">
 			<div class="personal_info">
 				<div class="personal_photo">
-					<img class="profile_photo" th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'../images/' + ${filename.toString()}"/>
+					<img id="profile_photo_id" class="profile_photo" th:if="${!#strings.equals(username, 'anonymousUser')}" th:src="'../images/' + ${filename.toString()}"/>
 					<img th:if="${#strings.equals(username, 'anonymousUser')}" th:src="@{images/anon.jpg}" src="../static/images/anon.jpg"/>
 				</div>
 				<span th:text="${username}">Ulxanxv</span>

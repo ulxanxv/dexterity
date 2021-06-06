@@ -657,3 +657,19 @@ $('#t_search').on('input', function () {
 	})
 
 })
+
+
+/**
+ * Предзагрузка фотографии
+ */
+$('#input').on('change', function () {
+	if (this.files[0]) {
+		let fr = new FileReader();
+
+		fr.addEventListener('load', function () {
+			$('#profile_photo_id').attr('src', fr.result);
+		}, false);
+
+		fr.readAsDataURL(this.files[0]);
+	}
+})
